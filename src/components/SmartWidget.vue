@@ -1,10 +1,7 @@
 <template>
-  <div
-    class="smartwidget"
+  <div class="smartwidget"
     :class="smartWidgetClass"
-    :id="smartWidgetId"
-    :draggable="sortable"
-  >
+    :id="smartWidgetId">
     <div class="widget-header">
       <h2>
         <i class="widget-header__prefix"></i>
@@ -15,7 +12,7 @@
       </h4>
       <div class="widget-header__toolbar">
         <!-- collapse icon -->
-        <a href="#" v-if="collapse && !isFullScreen" @click="isCollapsed = !isCollapsed"><i :class="isCollapsed ? 'el-icon-plus' : 'el-icon-minus'"></i></a>
+        <a href="#" v-if="!isHasGroup && collapse && !isFullScreen" @click="isCollapsed=!isCollapsed"><i :class="isCollapsed ? 'el-icon-plus' : 'el-icon-minus'"></i></a>
         <!-- fullscreen icon -->
         <a href="#" v-if="fullscreen" @click="handleScreenfull"><i class="el-icon-rank"></i></a>
         <!-- refresh icon -->
@@ -24,19 +21,17 @@
       </div>
     </div>
     <!-- widget body -->
-    <div
-      class="widget-body"
-      :style="{'height': isCollapsed ? '0px' : widgetBodyHeight}"
-      ref="widgetBody"
-    >
+    <!-- <div class="widget-body" -->
+    <div class="widget-body" :style="{'height': isCollapsed ? '0px' : widgetBodyHeight}"
+      ref="widgetBody">
       <!-- widget edit box -->
       <div class="widget-body__editbox">
-        <slot name="toolbox"></slot>
+        <slot name="editbox"></slot>
       </div>
       <!-- end widget edit box -->
       <!-- widget content -->
       <div class="widget-body__content" :class="{'no-padding': noPadding}">
-        <slot></slot>
+        <slot :widget-h="widgetH"></slot>
       </div>
       <!-- end widget content -->
       <!-- widget footer -->
@@ -63,6 +58,11 @@ export default {
   components: {
     LoadingMask
   },
+  inject: {
+    layout: {
+      default: []
+    }
+  },
   props: {
     title: { type: String, required: true },
     subTitle: { type: String, default: '' },
@@ -75,28 +75,41 @@ export default {
     // toogle collapse button
     collapse: { type: Boolean, default: false },
     // toogle refresh button
-    refresh: { type: Boolean, default: false },
-    // toogle refresh button
-    sortable: { type: Boolean, default: false }
+    refresh: { type: Boolean, default: false }
   },
   data () {
     return {
       isFullScreen: false,
       isCollapsed: false,
       isFullScreenCollapsed: false, // control collapsed state when click fullscreen button
-      widgetBodyHeight: 'auto'
+      widgetBodyOffsetHeight: 'auto'
     }
   },
   computed: {
     smartWidgetClass () {
       return {
         'smartwidget-fullscreen': this.isFullScreen,
-        'smartwidget-collapsed': this.isCollapsed,
-        'smartwidget-sortable': this.sortable
+        'smartwidget-collapsed': this.isCollapsed
       }
     },
     smartWidgetId () {
-      return `smart-widget-${generateUUID()}`
+      return `smart-widget-${this.$parent.i}-${generateUUID()}`
+    },
+    childLayout () {
+      return this.layout.find(v => v.i === this.$parent.i)
+    },
+    widgetBodyHeight () {
+      return this.isHasGroup
+        ? `calc(100% - 48px)`
+        : this.widgetBodyOffsetHeight
+    },
+    widgetH () {
+      const { innerH, rowHeight } = this.$parent
+      // calculate widget height, grid row default height = (48 + 10) * innerH - 10
+      return (rowHeight + 10) * innerH - 10 || rowHeight
+    },
+    isHasGroup () {
+      return Boolean(this.$parent.i)
     }
   },
   methods: {
@@ -122,7 +135,9 @@ export default {
     }
   },
   mounted () {
-    this.widgetBodyHeight = `${this.$refs.widgetBody.offsetHeight}px`
+    this.widgetBodyOffsetHeight = `${this.$refs.widgetBody.offsetHeight}px`
+    console.log(this.$parent.i)
+    console.log(this.$refs.widgetBody.offsetHeight)
   }
 }
 </script>
@@ -135,7 +150,6 @@ export default {
   border: 1px solid #ebeef5;
   width: 100%;
   .widget-header {
-    cursor: move;
     height: 48px;
     line-height: 48px;
     border-bottom: 1px solid #ebeef5;
@@ -194,10 +208,16 @@ export default {
         padding: 0;
       }
     }
+    .widget-body__footer {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+    }
   }
   &.smartwidget-fullscreen {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     position: fixed;
     top: 0;
     left: 0;

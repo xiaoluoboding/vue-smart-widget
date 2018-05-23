@@ -23,9 +23,10 @@
           title="Default Widget"
           :loading="loading"
           refresh
+          collapse
           @on-refresh="handleRefresh"
         >
-          <template slot="toolbox">
+          <template slot="editbox">
             <el-alert
               title="成功提示的文案"
               type="success">
@@ -44,7 +45,9 @@
       <el-col :span="12">
         <smart-widget title="自定义ToolBar">
           <template slot="toolbar">
-            <el-button type="primary" size="mini" @click="handleRoute">跳转</el-button>
+            <el-button type="primary" size="mini" @click="$router.push('/shopify-draggable')">Shopify</el-button>
+            <el-button type="success" size="mini" @click="$router.push('/draggable-grid')">Grid</el-button>
+            <el-button type="danger" size="mini" @click="$router.push('/smart-group')">Group</el-button>
           </template>
           <p>
             Widget comes with a default 10 padding to the body which can be removed by adding the class <code>.no-padding</code>
@@ -75,9 +78,6 @@ export default {
       setTimeout(() => {
         this.loading = false
       }, 2000)
-    },
-    handleRoute () {
-      this.$router.push('/shopify-draggable')
     }
   },
   created () {

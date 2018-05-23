@@ -18,8 +18,8 @@
     "screenfull": "^3.3.2",
     "ve-charts": "^0.6.2",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1",
-    "vuedraggable": "^2.16.0"
+    "vue-grid-layout": "^2.1.13",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
