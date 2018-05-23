@@ -8,9 +8,11 @@ import App from './App.vue'
 
 import 've-charts/lib/common'
 import VeBarChart from 've-charts/lib/VeBarChart'
+import VeDonutChart from 've-charts/lib/VeDonutChart'
 import 've-charts/lib/ve-charts.min.css'
 
 Vue.component('VeBarChart', VeBarChart)
+Vue.component('VeDonutChart', VeDonutChart)
 
 Vue.use(ElementUI, {
   size: 'small'
