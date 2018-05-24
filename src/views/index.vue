@@ -4,9 +4,7 @@
       <el-col :span="12">
         <smart-widget title="Default Widget">
           <p>
-            Widget comes with a default 10 padding to the body which can be removed by adding the class <code>.no-padding</code>
-            to the <code>.widget-body</code> class. The default widget also comes with 5 widget buttons as displayed on top right
-            corner of the widget header.
+            Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
           </p>
         </smart-widget>
       </el-col>
@@ -28,31 +26,32 @@
         >
           <template slot="editbox">
             <el-alert
-              title="成功提示的文案"
+              title="I am Editbox slot"
               type="success">
             </el-alert>
           </template>
           <p>
-            Widget comes with a default 10 padding to the body which can be removed by adding the class <code>.no-padding</code>
-            to the <code>.widget-body</code> class. The default widget also comes with 5 widget buttons as displayed on top right
-            corner of the widget header.
+            Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
           </p>
           <template slot="footer">
-            <el-button>Footer</el-button>
+            <el-alert
+              title="I am Footer slot"
+              type="success">
+            </el-alert>
           </template>
         </smart-widget>
       </el-col>
       <el-col :span="12">
         <smart-widget title="自定义ToolBar">
           <template slot="toolbar">
-            <el-button type="primary" size="mini" @click="$router.push('/shopify-draggable')">Shopify</el-button>
-            <el-button type="success" size="mini" @click="$router.push('/draggable-grid')">Grid</el-button>
-            <el-button type="danger" size="mini" @click="$router.push('/smart-group')">Group</el-button>
+            <div style="margin: 0 12px;">
+              <el-button type="primary" size="mini" @click="$router.push('/shopify-draggable')">Shopify</el-button>
+              <el-button type="success" size="mini" @click="$router.push('/draggable-grid')">Grid</el-button>
+              <el-button type="danger" size="mini" @click="$router.push('/smart-group')">Group</el-button>
+            </div>
           </template>
           <p>
-            Widget comes with a default 10 padding to the body which can be removed by adding the class <code>.no-padding</code>
-            to the <code>.widget-body</code> class. The default widget also comes with 5 widget buttons as displayed on top right
-            corner of the widget header.
+            Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
           </p>
         </smart-widget>
       </el-col>

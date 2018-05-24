@@ -2,7 +2,7 @@
   <div class="smartwidget"
     :class="smartWidgetClass"
     :id="smartWidgetId">
-    <div class="widget-header">
+    <div class="widget-header" :style="widgetHeaderHeight" v-if="!simple">
       <h2>
         <i class="widget-header__prefix"></i>
         <span class="widget-header__title" v-text="title"></span>
@@ -25,17 +25,19 @@
     <div class="widget-body" :style="{'height': isCollapsed ? '0px' : widgetBodyHeight}"
       ref="widgetBody">
       <!-- widget edit box -->
-      <div class="widget-body__editbox">
+      <div class="widget-body__editbox" ref="widgetBodyEditbox">
         <slot name="editbox"></slot>
       </div>
       <!-- end widget edit box -->
       <!-- widget content -->
-      <div class="widget-body__content" :class="{'no-padding': noPadding}">
-        <slot :widget-h="widgetH"></slot>
+      <div class="widget-body__content"
+        :class="{'fixed-height': fixedHeight}"
+        :style="{'padding': bodyContentPadding}">
+        <slot :content-h="contentH"></slot>
       </div>
       <!-- end widget content -->
       <!-- widget footer -->
-      <div class="widget-body__footer">
+      <div class="widget-body__footer" :class="{'has-group': isHasGroup}" ref="widgetBodyFooter">
         <slot name="footer"></slot>
       </div>
       <!-- end widget footer -->
@@ -64,10 +66,12 @@ export default {
     }
   },
   props: {
-    title: { type: String, required: true },
-    subTitle: { type: String, default: '' },
-    // toggle `widget-body__content` no-padding style
-    noPadding: { type: Boolean, default: false },
+    title: String,
+    subTitle: String,
+    // toggle `widget-body__content` padding style
+    padding: { type: [Number, Array], default: () => [12, 20] },
+    // toggle
+    simple: { type: Boolean, default: false },
     // toggle loading mask
     loading: { type: Boolean, default: false },
     // toogle fullscreen button
@@ -75,7 +79,8 @@ export default {
     // toogle collapse button
     collapse: { type: Boolean, default: false },
     // toogle refresh button
-    refresh: { type: Boolean, default: false }
+    refresh: { type: Boolean, default: false },
+    fixedHeight: { type: Boolean, default: false }
   },
   data () {
     return {
@@ -93,20 +98,38 @@ export default {
       }
     },
     smartWidgetId () {
-      return `smart-widget-${this.$parent.i}-${generateUUID()}`
+      return `smart-widget-${generateUUID()}`
+    },
+    bodyContentPadding () {
+      const padding = typeof (this.padding) === 'number' ? Array.of(this.padding) : this.padding
+      const joinPadding = padding.join('px ')
+      return joinPadding.padEnd(joinPadding.length + 2, 'px')
     },
     childLayout () {
       return this.layout.find(v => v.i === this.$parent.i)
     },
+    widgetHeaderHeight () {
+      return {
+        'height': `${this.$parent.rowHeight}px`,
+        'line-height': `${this.$parent.rowHeight}px`
+      }
+    },
     widgetBodyHeight () {
       return this.isHasGroup
-        ? `calc(100% - 48px)`
-        : this.widgetBodyOffsetHeight
+        ? this.simple ? '100%' : `calc(100% - ${this.$parent.rowHeight}px)`
+        : `${this.widgetBodyOffsetHeight}px`
     },
-    widgetH () {
-      const { innerH, rowHeight } = this.$parent
-      // calculate widget height, grid row default height = (48 + 10) * innerH - 10
-      return (rowHeight + 10) * innerH - 10 || rowHeight
+    contentH () {
+      let [contentH, rowHeight] = [0, 0]
+      if (this.isHasGroup) {
+        const { innerH, margin, rowHeight } = this.$parent
+        const [firstMargin] = margin
+        // calculate widget height, grid row default height = (rowHeight + firstMargin) * innerH - firstMargin
+        const widgetH = (rowHeight + firstMargin) * innerH - firstMargin
+        const paddingH = this.getPaddingH()
+        contentH = widgetH - rowHeight - paddingH
+      }
+      return contentH || rowHeight
     },
     isHasGroup () {
       return Boolean(this.$parent.i)
@@ -122,6 +145,21 @@ export default {
         this.isCollapsed = this.isFullScreenCollapsed
       }
       screenfull.enabled && screenfull.toggle(this.$el)
+    },
+    getPaddingH () {
+      let paddingH = 0
+      const padding = typeof (this.padding) === 'number' ? Array.of(this.padding) : this.padding
+      switch (padding.length) {
+        case 1:
+        case 2:
+          paddingH = padding[0] * 2
+          break
+        case 3:
+        case 4:
+          paddingH = padding[0] + padding[2]
+          break
+      }
+      return paddingH
     }
   },
   created () {
@@ -135,9 +173,8 @@ export default {
     }
   },
   mounted () {
-    this.widgetBodyOffsetHeight = `${this.$refs.widgetBody.offsetHeight}px`
+    this.widgetBodyOffsetHeight = this.$refs.widgetBody.offsetHeight
     console.log(this.$parent.i)
-    console.log(this.$refs.widgetBody.offsetHeight)
   }
 }
 </script>
@@ -150,7 +187,7 @@ export default {
   border: 1px solid #ebeef5;
   width: 100%;
   .widget-header {
-    height: 48px;
+    display: flex;
     line-height: 48px;
     border-bottom: 1px solid #ebeef5;
     h2,
@@ -163,7 +200,12 @@ export default {
       letter-spacing: 0;
     }
     h2 {
+      display: flex;
+      align-items: center;
       font-size: 16px;
+      .widget-header__title {
+        padding: 0 10px;
+      }
     }
     h4 {
       font-size: 12px;
@@ -173,19 +215,20 @@ export default {
       background: #0076db;
       width: 2px;
       height: 16px;
-      margin: 16px 12px;
-      float: left;
+      margin-left: 10px;
     }
     .widget-header__toolbar {
-      width: auto;
-      float: right;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-end;
       padding: 0;
-      padding-right: 12px;
+      // padding-right: 12px;
       margin: 0;
       a {
+        display: inline-block;
         text-decoration: none;
         text-align: center;
-        display: inline-block;
         height: 24px;
         line-height: 24px;
         padding: 0;
@@ -203,16 +246,18 @@ export default {
     overflow: hidden;
     transition: height .3s;
     .widget-body__content {
-      padding: 12px 20px;
-      &.no-padding {
-        padding: 0;
+      &.fixed-height {
+        overflow-y: scroll
       }
     }
     .widget-body__footer {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
+      position: relative;
+      &.has-group {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+      }
     }
   }
   &.smartwidget-fullscreen {
