@@ -1,51 +1,100 @@
 <template>
   <div>
-    <smart-widget-group :layout="layout" :margin="[15, 15]">
-      <smart-widget slot="0" title="Default Widget">
-        <p>
-          Widget comes with a default 10 padding to the body which can be removed by adding the class <code>.no-padding</code>
-          to the <code>.widget-body</code> class. The default widget also comes with 5 widget buttons as displayed on top right
-          corner of the widget header.
-        </p>
+    <smart-widget-group :layout="layout" :row-height="48" :margin="[15, 15]" @layout-updated="handleLayoutUpdated">
+      <smart-widget slot="0" simple>
+        <div class="layout-center">
+          <h3>Simple Widget</h3>
+        </div>
       </smart-widget>
       <smart-widget slot="1" title="Default Widget">
+        <div class="layout-center">
+          <h3>Widget with Header</h3>
+        </div>
+      </smart-widget>
+      <smart-widget slot="2" title="Full Screen" fullscreen>
+        <div class="layout-center">
+          <h3>Make any widget full screen</h3>
+        </div>
+      </smart-widget>
+      <smart-widget slot="3" title="Refresh & Loading" refresh :loading="loading" @on-refresh="handleRefresh">
+        <div class="layout-center">
+          <h3>Widget with Refresh button and loading mask</h3>
+        </div>
+      </smart-widget>
+      <smart-widget slot="4" title="Editbox">
         <template slot="editbox">
           <el-alert
-            title="成功提示的文案"
+            title="I am Editbox slot"
             type="success">
           </el-alert>
         </template>
-        <p>
-          Widget comes with a default 10 padding to the body which can be removed by adding the class <code>.no-padding</code>
-          to the <code>.widget-body</code> class. The default widget also comes with 5 widget buttons as displayed on top right
-          corner of the widget header.
-        </p>
+        <p>Widget with Editbox</p>
+      </smart-widget>
+      <smart-widget slot="5" title="Footer">
         <template slot="footer">
-          <el-button>Footer</el-button>
+          <el-alert
+            title="I am Footer slot"
+            type="success">
+          </el-alert>
         </template>
+        <p>Widget with Footer</p>
       </smart-widget>
-      <smart-widget slot="2" title="自定义ToolBar">
+      <smart-widget slot="6" title="Table" fixed-height>
+        <el-table
+          :data="tableData"
+          style="width: 100%">
+          <el-table-column
+            prop="date"
+            label="日期"
+            width="150">
+          </el-table-column>
+          <el-table-column
+            prop="name"
+            label="姓名"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="address"
+            label="地址">
+          </el-table-column>
+        </el-table>
+      </smart-widget>
+      <smart-widget slot="7" title="Custom ToolBar">
         <template slot="toolbar">
-          <el-button type="primary" size="mini" @click="$router.push('/shopify-draggable')">Shopify</el-button>
-          <el-button type="success" size="mini" @click="$router.push('/draggable-grid')">Grid</el-button>
-          <el-button type="danger" size="mini" @click="$router.push('/home')">Index</el-button>
+          <div style="margin: 0 12px;">
+            <el-button type="primary" size="mini" @click="$router.push('/shopify-draggable')">Shopify</el-button>
+            <el-button type="success" size="mini" @click="$router.push('/draggable-grid')">Grid</el-button>
+            <el-button type="danger" size="mini" @click="$router.push('/home')">Index</el-button>
+          </div>
         </template>
-        <p>
-          Widget comes with a default 10 padding to the body which can be removed by adding the class <code>.no-padding</code>
-          to the <code>.widget-body</code> class. The default widget also comes with 5 widget buttons as displayed on top right
-          corner of the widget header.
-        </p>
+        <el-table
+          :data="tableData"
+          style="width: 100%">
+          <el-table-column
+            prop="date"
+            label="日期"
+            width="150">
+          </el-table-column>
+          <el-table-column
+            prop="name"
+            label="姓名"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="address"
+            label="地址">
+          </el-table-column>
+        </el-table>
       </smart-widget>
-      <smart-widget slot="3"
-        title="2017前端热门框架对比"
+      <smart-widget slot="8" title="2017前端热门框架对比"
         fullscreen
         :loading="loading"
         refresh
         @on-refresh="handleRefresh">
-        <ve-bar-chart :data="barData" :height="widgetH-72" slot-scope="{widgetH}" />
+        <ve-bar-chart :data="barData" :height="contentH" slot-scope="{contentH}" />
       </smart-widget>
-      <smart-widget slot="4" title="各平台PV占比" fullscreen>
-        <ve-donut-chart :data="donutData" :height="widgetH-72" slot-scope="{widgetH}" />
+      <smart-widget slot="9" title="各平台PV占比" fullscreen>
+        <ve-donut-chart :data="donutData" :settings="donutSetting" :height="contentH" slot-scope="{contentH}" />
       </smart-widget>
     </smart-widget-group>
   </div>
@@ -64,17 +113,17 @@ export default {
     return {
       loading: false,
       layout: [
-        { x: 0, y: 0, w: 4, h: 6, i: '0' },
-        { x: 4, y: 0, w: 4, h: 6, i: '1' },
-        { x: 8, y: 0, w: 4, h: 6, i: '2' },
-        { x: 0, y: 0, w: 8, h: 8, i: '3' },
-        { x: 8, y: 0, w: 4, h: 8, i: '4' }
+        { x: 0, y: 0, w: 2, h: 3, i: '0' },
+        { x: 2, y: 0, w: 2, h: 3, i: '1' },
+        { x: 4, y: 0, w: 2, h: 3, i: '2' },
+        { x: 6, y: 0, w: 2, h: 3, i: '3' },
+        { x: 8, y: 0, w: 2, h: 3, i: '4' },
+        { x: 10, y: 0, w: 2, h: 3, i: '5' },
+        { x: 0, y: 3, w: 6, h: 5, i: '6' },
+        { x: 6, y: 3, w: 6, h: 5, i: '7' },
+        { x: 0, y: 8, w: 7, h: 7, i: '8' },
+        { x: 7, y: 8, w: 5, h: 7, i: '9' }
       ]
-    }
-  },
-  watch: {
-    layout (val) {
-      console.log(val)
     }
   },
   methods: {
@@ -84,8 +133,8 @@ export default {
         this.loading = false
       }, 2000)
     },
-    layoutUpdatedEvent (newLayout) {
-      console.log(newLayout)
+    handleLayoutUpdated (newLayout) {
+      console.log(JSON.stringify(newLayout))
     },
     handleMove (params) {
       console.log(params)
@@ -121,10 +170,37 @@ export default {
         data: [40000, 27800, 22000, 20200, 15600, 13600]
       }]
     }
+    this.tableData = [{
+      date: '2016-05-02',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }, {
+      date: '2016-05-04',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1517 弄'
+    }, {
+      date: '2016-05-01',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1519 弄'
+    }, {
+      date: '2016-05-03',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1516 弄'
+    }]
+    this.donutSetting = {
+      offsetY: '60%'
+    }
   }
 }
 </script>
 
-<style>
-
+<style lang="less">
+.footer {
+  display: flex;
+  padding: 5px;
+  border-top: 1px solid #ebeef1;
+}
+.layout-center {
+  text-align: center;
+}
 </style>
