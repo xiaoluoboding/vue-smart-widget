@@ -22,7 +22,7 @@
     </div>
     <!-- widget body -->
     <!-- <div class="widget-body" -->
-    <div class="widget-body" :style="{'height': isCollapsed ? '0px' : widgetBodyHeight}"
+    <div :class="simple ? 'widget-body-simple' : 'widget-body'" :style="{'height': isCollapsed ? '0px' : widgetBodyHeight}"
       ref="widgetBody">
       <!-- widget edit box -->
       <div class="widget-body__editbox" ref="widgetBodyEditbox">

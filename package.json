@@ -5,7 +5,6 @@
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "main": "lib/vue-smart-widget.min.js",
   "unpkg": "lib/vue-smart-widget.min.js",
-  "private": true,
   "scripts": {
     "clean": "rimraf lib/*",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
