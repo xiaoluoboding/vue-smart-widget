@@ -101,14 +101,7 @@
 </template>
 
 <script>
-import SmartWidgetGroup from '@/components/SmartWidgetGroup'
-import SmartWidget from '@/components/SmartWidget'
-
 export default {
-  components: {
-    SmartWidgetGroup,
-    SmartWidget
-  },
   data () {
     return {
       loading: false,

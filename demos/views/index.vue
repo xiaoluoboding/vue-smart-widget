@@ -60,12 +60,7 @@
 </template>
 
 <script>
-import SmartWidget from '@/components/SmartWidget'
-
 export default {
-  components: {
-    SmartWidget
-  },
   data () {
     return {
       loading: false
