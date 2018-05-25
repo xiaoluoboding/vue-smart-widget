@@ -1,6 +1,6 @@
 # vue-smart-widget
 
-> Smart widget Component for Vue2.x.
+> Smart widget component for Vue2.x.
 
 ## Build Setup
 

@@ -6,6 +6,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import App from './App.vue'
 
+import { SmartWidget, SmartWidgetGroup } from '../src/index' // 调试开发
+// import '../lib/vue-smart-widget.min.css'
+
 import 've-charts/lib/common'
 import VeBarChart from 've-charts/lib/VeBarChart'
 import VeDonutChart from 've-charts/lib/VeDonutChart'
@@ -13,6 +16,8 @@ import 've-charts/lib/ve-charts.min.css'
 
 Vue.component('VeBarChart', VeBarChart)
 Vue.component('VeDonutChart', VeDonutChart)
+Vue.component('SmartWidget', SmartWidget)
+Vue.component('SmartWidgetGroup', SmartWidgetGroup)
 
 Vue.use(ElementUI, {
   size: 'small'
