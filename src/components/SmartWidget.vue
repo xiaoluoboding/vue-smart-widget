@@ -12,11 +12,17 @@
       </h4>
       <div class="widget-header__toolbar">
         <!-- collapse icon -->
-        <a href="#" v-if="!isHasGroup && collapse && !isFullScreen" @click="isCollapsed=!isCollapsed"><i :class="isCollapsed ? 'el-icon-plus' : 'el-icon-minus'"></i></a>
+        <a href="#" v-if="!isHasGroup && collapse && !isFullScreen" @click="isCollapsed=!isCollapsed">
+          <img :src="isCollapsed ? require('../assets/img/expand.svg') : require('../assets/img/collapse.svg')">
+        </a>
         <!-- fullscreen icon -->
-        <a href="#" v-if="fullscreen" @click="handleScreenfull"><i class="el-icon-rank"></i></a>
+        <a href="#" v-if="fullscreen" @click="handleScreenfull">
+          <img :src="isFullScreen ? require('../assets/img/unfullscreen.svg') : require('../assets/img/fullscreen.svg')">
+        </a>
         <!-- refresh icon -->
-        <a href="#" v-if="refresh && !isFullScreen" @click="$emit('on-refresh')"><i class="el-icon-refresh"></i></a>
+        <a href="#" v-if="refresh && !isFullScreen" @click="$emit('on-refresh')">
+          <img :src="require('../assets/img/refresh.svg')" alt="">
+        </a>
         <slot name="toolbar"></slot>
       </div>
     </div>
@@ -32,7 +38,8 @@
       <!-- widget content -->
       <div class="widget-body__content"
         :class="{'fixed-height': fixedHeight}"
-        :style="{'padding': bodyContentPadding}">
+        :style="widgetBodyContentStyle"
+        ref="widgetBodyContent">
         <slot :content-h="contentH"></slot>
       </div>
       <!-- end widget content -->
@@ -87,7 +94,9 @@ export default {
       isFullScreen: false,
       isCollapsed: false,
       isFullScreenCollapsed: false, // control collapsed state when click fullscreen button
-      widgetBodyOffsetHeight: 'auto'
+      widgetBodyOffsetHeight: 'auto',
+      widgetBodyEditBoxH: 0,
+      widgetBodyFooterH: 0
     }
   },
   computed: {
@@ -116,23 +125,25 @@ export default {
     },
     widgetBodyHeight () {
       return this.isHasGroup
-        ? this.simple ? '100%' : `calc(100% - ${this.$parent.rowHeight}px)`
+        ? this.simple ? '100%' : `${this.getWidgetBodyH()}px`
         : `${this.widgetBodyOffsetHeight}px`
     },
-    contentH () {
-      let [contentH, rowHeight] = [0, 0]
-      if (this.isHasGroup) {
-        const { innerH, margin, rowHeight } = this.$parent
-        const [firstMargin] = margin
-        // calculate widget height, grid row default height = (rowHeight + firstMargin) * innerH - firstMargin
-        const widgetH = (rowHeight + firstMargin) * innerH - firstMargin
-        const paddingH = this.getPaddingH()
-        contentH = widgetH - rowHeight - paddingH
+    widgetBodyContentStyle () {
+      return {
+        padding: this.bodyContentPadding,
+        height: `${this.contentH}px`
+        // position: 'absolute',
+        // top: `${this.widgetBodyEditBoxH}px`,
+        // right: 0,
+        // bottom: `${this.widgetBodyFooterH}px`,
+        // left: 0
       }
-      return contentH || rowHeight
     },
     isHasGroup () {
       return Boolean(this.$parent.i)
+    },
+    contentH () {
+      return this.getContentH()
     }
   },
   methods: {
@@ -160,6 +171,24 @@ export default {
           break
       }
       return paddingH
+    },
+    getWidgetBodyH () {
+      let [widgetBodyH, rowHeight] = [0, 0]
+      if (this.isHasGroup) {
+        const { innerH, margin, rowHeight } = this.$parent
+        const [firstMargin] = margin
+        // calculate widget height, grid row default height = (rowHeight + firstMargin) * innerH - firstMargin
+        const widgetH = (rowHeight + firstMargin) * innerH - firstMargin
+        widgetBodyH = widgetH - rowHeight
+      }
+      return widgetBodyH > 0 ? widgetBodyH : rowHeight
+    },
+    getContentH () {
+      let contentH = 0
+      if (this.isHasGroup) {
+        contentH = this.getWidgetBodyH() - this.getPaddingH() - this.widgetBodyEditBoxH - this.widgetBodyFooterH - 1
+      }
+      return contentH > 0 ? contentH : this.$parent.rowHeight
     }
   },
   created () {
@@ -174,12 +203,23 @@ export default {
   },
   mounted () {
     this.widgetBodyOffsetHeight = this.$refs.widgetBody.offsetHeight
-    console.log(this.$parent.i)
+    this.widgetBodyEditBoxH = this.$slots.editbox ? this.$refs.widgetBodyEditbox.offsetHeight : 0
+    this.widgetBodyFooterH = this.$slots.footer ? this.$refs.widgetBodyFooter.offsetHeight : 0
+    // console.log(`${this.$parent.i}: ${this.getContentH()}`)
+    // this.$nextTick(() => {
+    // })
   }
 }
 </script>
 
 <style lang="less">
+.vue-grid-item.vue-grid-placeholder {
+  background: #7CBEFF;
+  opacity: .2;
+  transition-duration: .1s;
+  z-index: 2;
+  user-select: none;
+}
 // vue-smartwidget styles
 .smartwidget {
   background: #fff;
@@ -230,7 +270,7 @@ export default {
         text-decoration: none;
         text-align: center;
         height: 24px;
-        line-height: 24px;
+        line-height: 28px;
         padding: 0;
         margin: 0;
         color: #333;

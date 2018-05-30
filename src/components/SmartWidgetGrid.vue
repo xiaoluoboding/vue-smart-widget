@@ -1,27 +1,12 @@
 <template>
   <grid-layout
-    auto-size
-    :layout="layout"
-    :col-num="colNum"
-    :row-height="rowHeight"
-    :margin="margin"
-    :is-draggable="draggable"
-    :is-resizable="resizable"
-    :is-mirrored="false"
-    vertical-compact
-    use-css-transforms
+    v-bind="layoutAttribute"
     @layout-updated="layoutUpdatedEvent"
   >
     <grid-item
       v-for="item in layout"
-      :x="item.x"
-      :y="item.y"
-      :w="item.w"
-      :h="item.h"
-      :i="item.i"
       :key="item.i"
-      :is-draggable="item.draggable"
-      :is-resizable="item.resizable"
+      v-bind="item"
       dragIgnoreFrom=".widget-body"
       @move="moveEvent"
       @resize="resizeEvent"
@@ -37,7 +22,7 @@
 import { GridLayout, GridItem } from 'vue-grid-layout'
 
 export default {
-  name: 'SmartWidgetGroup',
+  name: 'SmartWidgetGrid',
   components: {
     GridLayout,
     GridItem
@@ -71,6 +56,22 @@ export default {
     rowHeight: {
       type: Number,
       default: 48
+    }
+  },
+  data () {
+    return {
+      layoutAttribute: {
+        autoSize: true,
+        layout: this.layout,
+        colNum: this.colNum,
+        rowHeight: this.rowHeight,
+        margin: this.margin,
+        isDraggable: this.draggable,
+        isResizable: this.resizable,
+        isMirrored: false,
+        verticalCompact: true,
+        useCssTransforms: true
+      }
     }
   },
   methods: {

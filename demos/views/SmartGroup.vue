@@ -1,6 +1,6 @@
 <template>
   <div>
-    <smart-widget-group :layout="layout" :row-height="48" :margin="[15, 15]" @layout-updated="handleLayoutUpdated">
+    <smart-widget-grid :layout="layout" :row-height="48" :margin="[15, 15]" @layout-updated="handleLayoutUpdated">
       <smart-widget slot="0" simple>
         <div class="layout-center">
           <h3>Simple Widget</h3>
@@ -16,9 +16,9 @@
           <h3>Make any widget full screen</h3>
         </div>
       </smart-widget>
-      <smart-widget slot="3" title="Refresh & Loading" refresh :loading="loading" @on-refresh="handleRefresh">
+      <smart-widget slot="3" title="Widget with Loader" :loading="true">
         <div class="layout-center">
-          <h3>Widget with Refresh button and loading mask</h3>
+          <h3>Widget with loading mask</h3>
         </div>
       </smart-widget>
       <smart-widget slot="4" title="Editbox">
@@ -39,7 +39,7 @@
         </template>
         <p>Widget with Footer</p>
       </smart-widget>
-      <smart-widget slot="6" title="Table" fixed-height>
+      <smart-widget slot="6" title="Widget body content's height is fixed" fixed-height>
         <el-table
           :data="tableData"
           style="width: 100%">
@@ -59,12 +59,10 @@
           </el-table-column>
         </el-table>
       </smart-widget>
-      <smart-widget slot="7" title="Custom ToolBar">
+      <smart-widget slot="7" title="Widget with custom toolbar">
         <template slot="toolbar">
           <div style="margin: 0 12px;">
-            <el-button type="primary" size="mini" @click="$router.push('/shopify-draggable')">Shopify</el-button>
-            <el-button type="success" size="mini" @click="$router.push('/draggable-grid')">Grid</el-button>
-            <el-button type="danger" size="mini" @click="$router.push('/home')">Index</el-button>
+            <el-button type="success" size="mini" @click="$router.push('/home')">Index</el-button>
           </div>
         </template>
         <el-table
@@ -86,17 +84,17 @@
           </el-table-column>
         </el-table>
       </smart-widget>
-      <smart-widget slot="8" title="2017前端热门框架对比"
+      <smart-widget slot="8" title="2017 Hotest Frontend Project"
         fullscreen
         :loading="loading"
         refresh
         @on-refresh="handleRefresh">
         <ve-bar-chart :data="barData" :height="contentH" slot-scope="{contentH}" />
       </smart-widget>
-      <smart-widget slot="9" title="各平台PV占比" fullscreen>
+      <smart-widget slot="9" title="Diffrent Platforms PV" fullscreen collapse>
         <ve-donut-chart :data="donutData" :settings="donutSetting" :height="contentH" slot-scope="{contentH}" />
       </smart-widget>
-    </smart-widget-group>
+    </smart-widget-grid>
   </div>
 </template>
 
@@ -112,10 +110,10 @@ export default {
         { x: 6, y: 0, w: 2, h: 3, i: '3' },
         { x: 8, y: 0, w: 2, h: 3, i: '4' },
         { x: 10, y: 0, w: 2, h: 3, i: '5' },
-        { x: 0, y: 10, w: 6, h: 5, i: '6' },
-        { x: 6, y: 10, w: 6, h: 5, i: '7' },
-        { x: 0, y: 3, w: 7, h: 7, i: '8' },
-        { x: 7, y: 3, w: 5, h: 7, i: '9' }
+        { x: 0, y: 9, w: 6, h: 5, i: '6' },
+        { x: 6, y: 9, w: 6, h: 5, i: '7' },
+        { x: 0, y: 3, w: 8, h: 6, i: '8' },
+        { x: 8, y: 3, w: 4, h: 6, i: '9' }
       ]
     }
   },
@@ -164,21 +162,33 @@ export default {
       }]
     }
     this.tableData = [{
+      date: '2016-05-03',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }, {
       date: '2016-05-02',
       name: '王小虎',
       address: '上海市普陀区金沙江路 1518 弄'
     }, {
       date: '2016-05-04',
       name: '王小虎',
-      address: '上海市普陀区金沙江路 1517 弄'
+      address: '上海市普陀区金沙江路 1518 弄'
     }, {
       date: '2016-05-01',
       name: '王小虎',
-      address: '上海市普陀区金沙江路 1519 弄'
+      address: '上海市普陀区金沙江路 1518 弄'
     }, {
-      date: '2016-05-03',
+      date: '2016-05-08',
       name: '王小虎',
-      address: '上海市普陀区金沙江路 1516 弄'
+      address: '上海市普陀区金沙江路 1518 弄'
+    }, {
+      date: '2016-05-06',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }, {
+      date: '2016-05-07',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
     }]
     this.donutSetting = {
       offsetY: '60%'
