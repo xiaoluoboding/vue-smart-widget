@@ -12,11 +12,17 @@
       </h4>
       <div class="widget-header__toolbar">
         <!-- collapse icon -->
-        <a href="#" v-if="collapse && !isFullScreen" @click="isCollapsed=!isCollapsed"><i :class="isCollapsed ? 'el-icon-plus' : 'el-icon-minus'"></i></a>
+        <a href="#" v-if="!isHasGroup && collapse && !isFullScreen" @click="isCollapsed=!isCollapsed">
+          <img :src="isCollapsed ? require('../assets/img/expand.svg') : require('../assets/img/collapse.svg')">
+        </a>
         <!-- fullscreen icon -->
-        <a href="#" v-if="fullscreen" @click="handleScreenfull"><i class="el-icon-rank"></i></a>
+        <a href="#" v-if="fullscreen" @click="handleScreenfull">
+          <img :src="isFullScreen ? require('../assets/img/unfullscreen.svg') : require('../assets/img/fullscreen.svg')">
+        </a>
         <!-- refresh icon -->
-        <a href="#" v-if="refresh && !isFullScreen" @click="$emit('on-refresh')"><i class="el-icon-refresh"></i></a>
+        <a href="#" v-if="refresh && !isFullScreen" @click="$emit('on-refresh')">
+          <img :src="require('../assets/img/refresh.svg')" alt="">
+        </a>
         <slot name="toolbar"></slot>
       </div>
     </div>
@@ -208,7 +214,7 @@ export default {
 
 <style lang="less">
 .vue-grid-item.vue-grid-placeholder {
-  background: red;
+  background: #7CBEFF;
   opacity: .2;
   transition-duration: .1s;
   z-index: 2;
@@ -264,7 +270,7 @@ export default {
         text-decoration: none;
         text-align: center;
         height: 24px;
-        line-height: 24px;
+        line-height: 28px;
         padding: 0;
         margin: 0;
         color: #333;

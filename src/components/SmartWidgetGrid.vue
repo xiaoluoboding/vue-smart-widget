@@ -22,7 +22,7 @@
 import { GridLayout, GridItem } from 'vue-grid-layout'
 
 export default {
-  name: 'SmartWidgetGroup',
+  name: 'SmartWidgetGrid',
   components: {
     GridLayout,
     GridItem

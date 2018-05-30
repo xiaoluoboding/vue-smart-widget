@@ -1,6 +1,6 @@
 # vue-smart-widget
 
-> Smart widget component for Vue2.x.
+> Smart widget component for Vue2.5+.
 
 ## Installation
 
@@ -10,6 +10,8 @@ npm i vue-smart-widget -S
 
 ## Import
 
+Install all the components:
+
 ```bash
 import Vue from 'vue'
 import VueSmartWidget from 'vue-smart-widget'
@@ -17,7 +19,25 @@ import VueSmartWidget from 'vue-smart-widget'
 Vue.use(VueSmartWidget)
 ```
 
+Use widget only:
+
+```bash
+import Vue from 'vue'
+import { SmartWidget } from 'vue-smart-widget'
+
+Vue.component('SmartWidget', SmartWidget)
+```
+
+A css file is included when importing the package:
+
+```js
+import 'vue-smart-widget/lib/vue-smart-widget.css'
+```
+
 ## Usage
+
+The SmartWidget is heavily base on [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout), maybe you already use in your project.
+
 
 ### Use widget only
 
@@ -31,7 +51,7 @@ Vue.use(VueSmartWidget)
 </smart-widget>
 ```
 
-### Use widget with group
+### Use widget with grid
 
 ** Script **
 
@@ -52,7 +72,7 @@ new Vue({
 ** Html **
 
 ```html
-<smart-widget-group :layout="layout" >
+<smart-widget-grid :layout="layout" >
   <smart-widget slot="0" simple>
     <div class="layout-center">
       <h3>Simple Widget</h3>
@@ -68,14 +88,14 @@ new Vue({
       <h3>Make any widget full screen</h3>
     </div>
   </smart-widget>
-</smart-widget-group>
+</smart-widget-grid>
 ```
 
 ## SmartWidget Props
 
 | Attribute | Description | Type | Accepted values | Default |
 |:--------:|:--------:|:--------:|:--------:|:--------:|
-| slot | Widget slot, the unique identifier of the widget. refer to `SmartWidgetGroup Props` | String | - | - |
+| slot | Widget slot, the unique identifier of the widget. refer to `SmartWidgetGrid Props` | String | - | - |
 | title | Widget Header Title | String | - | - |
 | subTitle | Widget Header Sub Title | String | - | - |
 | padding | padding in Widget Body | [Number, Array] | - | `[12, 20]` |
@@ -87,19 +107,27 @@ new Vue({
 | fixedHeight | determine whether widget body's height is fixed, only support `smart-widget` | Boolean | `true` or `false` | `false` |
 
 
+## SmartWidget slot-scope
+
+> Each widget in the grid is resizable, `slot-scope` provide the widget attribute to the children component.
+
+| Name | Description | Type |
+|:--------:|:--------:|:--------:|
+| contentH | Provide the widget body content(`widget-body__content`) height | Number |
+
 ## SmartWidget Methods
 
 | Name | Description | Parameters |
 |:--------:|:--------:|:--------:|
-| on-refresh | used in the widget need fetching data from ajax methods, usually used with `loading` attribute | - |
+| on-refresh | Used when the widget need fetching data from ajax methods, usually used with `loading` attribute | - |
 | move | Every time an item is being moved and changes position | `(i, newX, newY)` |
 | moved | Every time an item is finished being moved and changes position | `(i, newX, newY)` |
 | resize | Every time an item is being resized and changes size | `(i, newH, newW, newHPx, newWPx)` |
 | resized | Every time an item is finished being moved and changes position | `(i, newH, newW, newHPx, newWPx)` |
 
-## SmartWidgetGroup Props
+## SmartWidgetGrid Props
 
-> it's similar with [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout). Care about the attribute `layout`, The value of layout must be an Array of Object items. Each item must have i, x, y, w and h proprties. especially, the i proprties, it's the unique identifier of the widget item, euqal with widget slot.
+> it's similar with [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout). Care about the attribute `layout`, The value of layout must be an Array of Object items. Each item must have i, x, y, w and h proprties. especially, the i proprties, it's the unique identifier of the widget item, euqal with widget slot.
 
 | Attribute | Description | Type | Accepted values | Default |
 |:--------:|:--------:|:--------:|:--------:|:--------:|
@@ -110,7 +138,7 @@ new Vue({
 | isDraggable | Says if the grids items are draggable. | Boolean | `true` or `false` | `true` |
 | isResizable | Says if the grids items are resizable. | Boolean | `true` or `false` | `true` |
 
-## SmartWidgetGroup Methods
+## SmartWidgetGrid Methods
 
 | Name | Description | Parameters |
 |:--------:|:--------:|:--------:|

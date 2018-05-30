@@ -1,8 +1,8 @@
-import SmartWidgetGroup from './components/SmartWidgetGroup'
+import SmartWidgetGrid from './components/SmartWidgetGrid'
 import SmartWidget from './components/SmartWidget'
 
 const components = [
-  SmartWidgetGroup,
+  SmartWidgetGrid,
   SmartWidget
 ]
 
@@ -15,7 +15,7 @@ function install (Vue, _) {
 export default install
 
 export {
-  SmartWidgetGroup,
+  SmartWidgetGrid,
   SmartWidget
 }
 
