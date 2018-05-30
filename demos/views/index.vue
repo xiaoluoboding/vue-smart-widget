@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding: 15px;">
     <el-row type="flex" :gutter="32">
       <el-col :span="12">
         <smart-widget title="Default Widget">
