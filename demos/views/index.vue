@@ -42,10 +42,10 @@
         </smart-widget>
       </el-col>
       <el-col :span="12">
-        <smart-widget title="Custom ToolBar">
+        <smart-widget title="Widget with custom toolbar">
           <template slot="toolbar">
             <div style="margin: 0 12px;">
-              <el-button type="primary" size="mini" @click="$router.push('/smart-group')">Grid</el-button>
+              <el-button type="primary" size="mini" @click="$router.push('/widget-with-grid')">Grid</el-button>
             </div>
           </template>
           <p>

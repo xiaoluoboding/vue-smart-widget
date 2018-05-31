@@ -61,7 +61,7 @@
     <smart-widget slot="7" title="Widget with custom toolbar">
       <template slot="toolbar">
         <div style="margin: 0 12px;">
-          <el-button type="success" size="mini" @click="$router.push('/home')">Index</el-button>
+          <el-button type="success" size="mini" @click="$router.push('/widget-only')">Index</el-button>
         </div>
       </template>
       <el-table
