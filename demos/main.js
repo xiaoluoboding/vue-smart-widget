@@ -6,8 +6,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import App from './App.vue'
 
-import { SmartWidget, SmartWidgetGrid } from '../src/index' // 调试开发
-// import '../lib/vue-smart-widget.min.css'
+// import { SmartWidget, SmartWidgetGrid } from '../src/index' // 调试开发
+import { SmartWidget, SmartWidgetGrid } from '../lib/vue-smart-widget.js' // 调试线上
+import '../lib/vue-smart-widget.css'
 
 import 've-charts/lib/common'
 import VeBarChart from 've-charts/lib/VeBarChart'
