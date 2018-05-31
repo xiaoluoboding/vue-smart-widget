@@ -1,10 +1,10 @@
 {
   "name": "vue-smart-widget",
   "version": "0.1.0",
-  "description": "Smart widget component for Vue2.x.",
+  "description": "Smart widget component for Vue2.5+.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
-  "main": "lib/vue-smart-widget.min.js",
-  "unpkg": "lib/vue-smart-widget.min.js",
+  "main": "lib/vue-smart-widget.js",
+  "unpkg": "lib/vue-smart-widget.js",
   "scripts": {
     "clean": "rimraf lib/*",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
