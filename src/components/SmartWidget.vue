@@ -214,7 +214,7 @@ export default {
 
 <style lang="less">
 .vue-grid-item.vue-grid-placeholder {
-  background: #7CBEFF;
+  background: #7CBEFF !important;
   opacity: .2;
   transition-duration: .1s;
   z-index: 2;
