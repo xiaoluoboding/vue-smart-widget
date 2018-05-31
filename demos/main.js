@@ -7,7 +7,7 @@ import router from './router'
 import App from './App.vue'
 
 import { SmartWidget, SmartWidgetGrid } from '../src/index' // 调试开发
-// import '../lib/vue-smart-widget.min.css'
+import '../lib/vue-smart-widget.css'
 
 import 've-charts/lib/common'
 import VeBarChart from 've-charts/lib/VeBarChart'
