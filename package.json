@@ -1,6 +1,6 @@
 {
   "name": "vue-smart-widget",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Smart widget component for Vue2.x.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "main": "lib/vue-smart-widget.min.js",
