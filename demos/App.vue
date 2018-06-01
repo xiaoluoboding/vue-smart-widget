@@ -3,13 +3,13 @@
     <el-container class="app-container">
       <el-header class="app-header">
         <el-container class="sub-container sub-header">
-          <h1>vue-smart-widget</h1>
-          <el-menu :default-active="activeIndex" class="app-menu" mode="horizontal">
-            <el-menu-item index="1">
-              <router-link to="/widget-only">Use Widget Only</router-link>
+          <h1 @click="activeIndex='home'"><router-link to="/home"><span style="color: #40b883">vue-smart-widget</span></router-link></h1>
+          <el-menu :default-active="activeIndex" class="app-menu" mode="horizontal" router @select="key => activeIndex = key">
+            <el-menu-item index="widget-only">
+              Use Widget Only
             </el-menu-item>
-            <el-menu-item index="2">
-              <router-link to="/widget-with-grid">Use Widget with Grid</router-link>
+            <el-menu-item index="widget-with-grid">
+              Use Widget with Grid
             </el-menu-item>
           </el-menu>
           <div class="open-in-github">
@@ -35,15 +35,17 @@ export default {
   name: 'App',
   data () {
     return {
-      activeIndex: '1'
+      activeIndex: 'home'
     }
   }
 }
 </script>
 
 <style lang="less">
+html,
 body {
   margin: 0;
+  height: 100%;
 }
 
 #app {
