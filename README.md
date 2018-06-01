@@ -59,9 +59,9 @@ new Vue({
   data () {
     return {
       layout: [
-        { x: 0, y: 0, w: 4, h: 6, i: '0' },
-        { x: 4, y: 0, w: 4, h: 6, i: '1' },
-        { x: 8, y: 0, w: 4, h: 6, i: '2' }
+        { x: 0, y: 0, w: 4, h: 4, i: '0' },
+        { x: 4, y: 0, w: 4, h: 4, i: '1' },
+        { x: 8, y: 0, w: 4, h: 4, i: '2' }
       ]
     }
   }
@@ -71,15 +71,15 @@ new Vue({
 **Html**
 
 ```html
-<smart-widget-grid :layout="layout" >
+<smart-widget-grid :layout="layout">
   <smart-widget slot="0" simple>
     <div class="layout-center">
-      <h3>Simple Widget</h3>
+      <h3>Simple Widget Without Header</h3>
     </div>
   </smart-widget>
   <smart-widget slot="1" title="Default Widget">
     <div class="layout-center">
-      <h3>Widget with Header</h3>
+      <h3>Default Widget With Header</h3>
     </div>
   </smart-widget>
   <smart-widget slot="2" title="Full Screen" fullscreen>
