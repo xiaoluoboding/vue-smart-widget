@@ -1,6 +1,6 @@
 # vue-smart-widget
 
-> Smart widget component for Vue2.5+.
+> Smart widget is a flexible and extensible content container component. It includes options for headers and footers, a wide variety of content. If you use with grid, it also have a draggable and resizable grid layout, base on [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout). 
 
 ## Installation
 
@@ -36,12 +36,11 @@ import 'vue-smart-widget/lib/vue-smart-widget.css'
 
 ## Usage
 
-The SmartWidget is heavily base on [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout), maybe you already use in your project.
-
+The SmartWidget is heavily base on [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout), you can know about `vue-grid-layout` first, maybe you already use in your project.
 
 ### Use widget only
 
-** Html **
+**Html**
 
 ```html
 <smart-widget title="Default Widget">
@@ -53,7 +52,7 @@ The SmartWidget is heavily base on [vue-grid-layout](https://github.com/jbaysolu
 
 ### Use widget with grid
 
-** Script **
+**Script**
 
 ```js
 new Vue({
@@ -69,7 +68,7 @@ new Vue({
 })
 ```
 
-** Html **
+**Html**
 
 ```html
 <smart-widget-grid :layout="layout" >
@@ -94,7 +93,7 @@ new Vue({
 ## SmartWidget Props
 
 | Attribute | Description | Type | Accepted values | Default |
-|:--------:|:--------:|:--------:|:--------:|:--------:|
+|:--------:|--------|--------|:--------:|:--------:|
 | slot | Widget slot, the unique identifier of the widget. refer to `SmartWidgetGrid Props` | String | - | - |
 | title | Widget Header Title | String | - | - |
 | subTitle | Widget Header Sub Title | String | - | - |
@@ -106,19 +105,10 @@ new Vue({
 | refresh | determine whether have refresh button | Boolean | `true` or `false` | `false` |
 | fixedHeight | determine whether widget body's height is fixed, only support `smart-widget` | Boolean | `true` or `false` | `false` |
 
-
-## SmartWidget slot-scope
-
-> Each widget in the grid is resizable, `slot-scope` provide the widget attribute to the children component.
-
-| Name | Description | Type |
-|:--------:|:--------:|:--------:|
-| contentH | Provide the widget body content(`widget-body__content`) height | Number |
-
 ## SmartWidget Methods
 
 | Name | Description | Parameters |
-|:--------:|:--------:|:--------:|
+|:--------:|--------|:--------|
 | on-refresh | Used when the widget need fetching data from ajax methods, usually used with `loading` attribute | - |
 | move | Every time an item is being moved and changes position | `(i, newX, newY)` |
 | moved | Every time an item is finished being moved and changes position | `(i, newX, newY)` |
@@ -130,7 +120,7 @@ new Vue({
 > it's similar with [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout). Care about the attribute `layout`, The value of layout must be an Array of Object items. Each item must have i, x, y, w and h proprties. especially, the i proprties, it's the unique identifier of the widget item, euqal with widget slot.
 
 | Attribute | Description | Type | Accepted values | Default |
-|:--------:|:--------:|:--------:|:--------:|:--------:|
+|:--------:|--------|:--------:|:--------:|:--------:|
 | layout | This is the initial layout of the grid. | Array | - | `required` |
 | colNum | Says how many columns the grid has. | Number | - | `12` |
 | rowHeight | Says what is a height of a single row in pixels. | Number | - | `48` |
@@ -138,10 +128,18 @@ new Vue({
 | isDraggable | Says if the grids items are draggable. | Boolean | `true` or `false` | `true` |
 | isResizable | Says if the grids items are resizable. | Boolean | `true` or `false` | `true` |
 
+## Slot scope
+
+> Each widget in the grid is resizable, `slot-scope` provide the widget attribute to the children component.
+
+| Name | Description | Type |
+|:--------|:--------|:--------:|
+| contentH | Provide the widget body content(`widget-body__content`) height | Number |
+
 ## SmartWidgetGrid Methods
 
 | Name | Description | Parameters |
-|:--------:|:--------:|:--------:|
+|:--------|:--------|:--------:|
 | layout-updated | Every time the layout has finished updating and positions of all grid-items are recalculated | `newLayout` |
 
 ## License

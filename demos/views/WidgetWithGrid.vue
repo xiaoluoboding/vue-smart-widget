@@ -2,7 +2,7 @@
   <smart-widget-grid :layout="layout" :row-height="48" :margin="[15, 15]" @layout-updated="handleLayoutUpdated">
     <smart-widget slot="0" simple>
       <div class="layout-center">
-        <h3>Simple Widget</h3>
+        <h3>Simple Widget Without Header</h3>
       </div>
     </smart-widget>
     <smart-widget slot="1" title="Default Widget">

@@ -75,18 +75,19 @@ export default {
   props: {
     title: String,
     subTitle: String,
-    // toggle `widget-body__content` padding style
+    // set `widget-body__content` padding style
     padding: { type: [Number, Array], default: () => [12, 20] },
     // toggle widget mode
     simple: { type: Boolean, default: false },
     // toggle loading mask
     loading: { type: Boolean, default: false },
-    // toogle fullscreen button
+    // toggle fullscreen button
     fullscreen: { type: Boolean, default: false },
-    // toogle collapse button
+    // toggle collapse button
     collapse: { type: Boolean, default: false },
-    // toogle refresh button
+    // toggle refresh button
     refresh: { type: Boolean, default: false },
+    // toggle `widget-body__content` fixed height
     fixedHeight: { type: Boolean, default: false }
   },
   data () {
@@ -106,16 +107,10 @@ export default {
         'smartwidget-collapsed': this.isCollapsed
       }
     },
-    smartWidgetId () {
-      return `smart-widget-${generateUUID()}`
-    },
     bodyContentPadding () {
       const padding = typeof (this.padding) === 'number' ? Array.of(this.padding) : this.padding
       const joinPadding = padding.join('px ')
       return joinPadding.padEnd(joinPadding.length + 2, 'px')
-    },
-    childLayout () {
-      return this.layout.find(v => v.i === this.$parent.i)
     },
     widgetHeaderHeight () {
       return {
@@ -132,19 +127,12 @@ export default {
       return {
         padding: this.bodyContentPadding,
         height: `${this.contentH}px`
-        // position: 'absolute',
-        // top: `${this.widgetBodyEditBoxH}px`,
-        // right: 0,
-        // bottom: `${this.widgetBodyFooterH}px`,
-        // left: 0
       }
     },
-    isHasGroup () {
-      return Boolean(this.$parent.i)
-    },
-    contentH () {
-      return this.getContentH()
-    }
+    smartWidgetId: _ => `smart-widget-${generateUUID()}`,
+    childLayout: vm => vm.layout.find(v => v.i === vm.$parent.i),
+    isHasGroup: vm => Boolean(vm.$parent.i),
+    contentH: vm => vm.getContentH()
   },
   methods: {
     handleScreenfull () {
@@ -223,7 +211,8 @@ export default {
 // vue-smartwidget styles
 .smartwidget {
   background: #fff;
-  box-shadow: 0 0 10px 0 #e9e9e9;
+  // box-shadow: 0 0 10px 0 #e9e9e9;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   border: 1px solid #ebeef5;
   width: 100%;
   .widget-header {
@@ -300,6 +289,7 @@ export default {
       }
     }
   }
+  // screenfull
   &.smartwidget-fullscreen {
     width: 100% !important;
     height: 100% !important;
@@ -311,5 +301,18 @@ export default {
       cursor: default;
     }
   }
+  // fullscreen
+  // &.smartwidget-fullscreen {
+  //   position: fixed;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   margin: 0;
+  //   z-index: 1050;
+  //   .widget-header {
+  //     cursor: default;
+  //   }
+  // }
 }
 </style>
