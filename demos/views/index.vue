@@ -1,29 +1,51 @@
 <template>
   <div style="padding: 15px;">
     <el-row type="flex" :gutter="32">
-      <el-col :span="12">
-        <smart-widget title="Default Widget">
+      <el-col :span="8">
+        <smart-widget simple>
+          <h3>Simple Widget Without Header</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
+            {{placeholder}}
           </p>
         </smart-widget>
       </el-col>
-      <el-col :span="12">
-        <smart-widget title="2017 Hotest Frontend Project" fullscreen collapse>
-          <ve-bar-chart :data="chartData" />
+      <el-col :span="8">
+        <smart-widget title="Default Widget">
+          <p>
+            {{placeholder}}
+          </p>
+        </smart-widget>
+      </el-col>
+      <el-col :span="8">
+        <smart-widget title="With additional fullscreen button" fullscreen>
+          <p>
+            {{placeholder}}
+          </p>
         </smart-widget>
       </el-col>
     </el-row>
     <br>
     <el-row type="flex" :gutter="32">
-      <el-col :span="12">
-        <smart-widget
-          title="Default Widget"
-          :loading="loading"
-          refresh
+      <el-col :span="16">
+        <smart-widget title="2017 Hotest Frontend Project" sub-title="Use ve-charts components."
+          fullscreen
           collapse
-          @on-refresh="handleRefresh"
-        >
+          refresh
+          :loading="loading"
+          @on-refresh="handleRefresh">
+          <ve-bar-chart :data="barData" :height="300" />
+        </smart-widget>
+      </el-col>
+      <el-col :span="8">
+        <smart-widget title="Diffrent Platforms PV" fullscreen collapse>
+          <ve-donut-chart :data="donutData" :settings="donutSetting" :height="300" />
+        </smart-widget>
+      </el-col>
+    </el-row>
+    <br>
+    <el-row type="flex" :gutter="32">
+      <el-col :span="8">
+        <smart-widget title="Widget with Editbox">
           <template slot="editbox">
             <el-alert
               title="I am Editbox slot"
@@ -31,7 +53,14 @@
             </el-alert>
           </template>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
+            {{placeholder}}
+          </p>
+        </smart-widget>
+      </el-col>
+      <el-col :span="8">
+        <smart-widget title="Widget with Footer">
+          <p>
+            {{placeholder}}
           </p>
           <template slot="footer">
             <el-alert
@@ -41,7 +70,7 @@
           </template>
         </smart-widget>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="8">
         <smart-widget title="Widget with custom toolbar">
           <template slot="toolbar">
             <div style="margin: 0 12px;">
@@ -49,7 +78,7 @@
             </div>
           </template>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
+            {{placeholder}}
           </p>
         </smart-widget>
       </el-col>
@@ -61,7 +90,8 @@
 export default {
   data () {
     return {
-      loading: false
+      loading: false,
+      placeholder: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!'
     }
   },
   methods: {
@@ -73,7 +103,7 @@ export default {
     }
   },
   created () {
-    this.chartData = {
+    this.barData = {
       dimensions: {
         name: 'Year',
         data: [
@@ -91,6 +121,19 @@ export default {
         name: 'Angular',
         data: [827, 949, 1400, 1000, 884, 911, 983, 989, 925, 1100, 1200, 930]
       }]
+    }
+    this.donutData = {
+      dimensions: {
+        name: '渠道',
+        data: ['APP', 'PC', 'M端', '微信', '手Q', '小程序']
+      },
+      measures: [{
+        name: 'PV',
+        data: [40000, 27800, 22000, 20200, 15600, 13600]
+      }]
+    }
+    this.donutSetting = {
+      offsetY: '60%'
     }
   }
 }
