@@ -1,13 +1,13 @@
 <template>
-  <smart-widget title="Document" simple class="document">
+  <div class="document">
     <div class="document-header">
       <h2 style="padding: 0;">Document</h2>
       <blockquote>
         <p>
           Smart widget is a flexible and extensible content container component.
-          It includes options for headers and footers, a wide variety of content.
+          It includes header and body part, and widget body includes <em>editbox</em>、<em>content</em>、<em>footer</em>.
           If you use with grid, it also have a draggable and resizable grid layout,
-          base on <strong>vue-grid-layout</strong> & <strong>Vue2.5.+</strong>.
+          base on <strong>Vue2.5.+</strong> & <strong>vue-grid-layout</strong>.
         </p>
       </blockquote>
     </div>
@@ -43,17 +43,19 @@
           <el-col :span="8">
             <smart-widget title="Widget with Editbox & Footer">
               <template slot="editbox">
-                <el-alert
-                  title="I am Editbox slot"
-                  type="success">
-                </el-alert>
+                <div class="widget-alert">
+                  <div class="widget-alert__content">
+                    <span class="el-alert__title">I am Editbox slot</span>
+                  </div>
+                </div>
               </template>
               <p>I am content</p>
               <template slot="footer">
-                <el-alert
-                  title="I am Footer slot"
-                  type="success">
-                </el-alert>
+                <div class="widget-alert">
+                  <div class="widget-alert__content">
+                    <span class="el-alert__title">I am Footer slot</span>
+                  </div>
+                </div>
               </template>
             </smart-widget>
           </el-col>
@@ -61,7 +63,7 @@
             <smart-widget title="Widget with custom toolbar">
               <template slot="toolbar">
                 <div style="margin: 0 12px;">
-                  <el-button type="primary" size="mini">Action</el-button>
+                  <button class="widget-button">Action</button>
                 </div>
               </template>
               <p>{{placeholder}}</p>
@@ -111,7 +113,7 @@
         </el-row>
       </div>
     </section>
-  </smart-widget>
+  </div>
 </template>
 
 <script>
@@ -151,6 +153,9 @@ export default {
 <style lang="less">
 .document {
   margin: 1.25rem 0;
+  padding: 20px;
+  border: 1px solid #ebeef5;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   .document-header {
     padding: 0 20px;
   }
@@ -184,5 +189,21 @@ export default {
       }
     }
   }
+}
+
+// widget alert
+.widget-alert {
+  background-color: #f0f9eb;
+  color: #67c23a;
+  padding: 8px 16px;
+}
+
+.widget-button {
+  font-size: 12px;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #409EFF;
+  border-color: #409EFF;
+  padding: 7px 15px;
 }
 </style>

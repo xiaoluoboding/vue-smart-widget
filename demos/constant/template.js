@@ -19,13 +19,21 @@ const advanedWidget = `// 1. With additional fullscreen button
 </smart-widget>
 
 // 2. Widget with Editbox & Footer
-<smart-widget title="Widget with Editbox">
+<smart-widget title="Widget with Editbox & Footer">
   <template slot="editbox">
-    <el-alert title="I am Editbox slot" type="success"></el-alert>
+    <div class="widget-alert">
+      <div class="widget-alert__content">
+        <span class="el-alert__title">I am Editbox slot</span>
+      </div>
+    </div>
   </template>
   <p>I am content</p>
   <template slot="footer">
-    <el-alert title="I am Footer slot" type="success"></el-alert>
+    <div class="widget-alert">
+      <div class="widget-alert__content">
+        <span class="el-alert__title">I am Footer slot</span>
+      </div>
+    </div>
   </template>
 </smart-widget>
 
@@ -33,7 +41,7 @@ const advanedWidget = `// 1. With additional fullscreen button
 <smart-widget title="Widget with custom toolbar">
   <template slot="toolbar">
     <div style="margin: 0 12px;">
-      <el-button type="primary" size="mini">Action</el-button>
+      <button class="widget-button">Action</button>
     </div>
   </template>
   <p>
