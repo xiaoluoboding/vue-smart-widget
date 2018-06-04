@@ -15,6 +15,10 @@ import VeBarChart from 've-charts/lib/VeBarChart'
 import VeDonutChart from 've-charts/lib/VeDonutChart'
 import 've-charts/lib/ve-charts.min.css'
 
+import VTooltip from 'v-tooltip'
+
+Vue.use(VTooltip)
+
 Vue.component('VeBarChart', VeBarChart)
 Vue.component('VeDonutChart', VeDonutChart)
 Vue.component('SmartWidget', SmartWidget)

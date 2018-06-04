@@ -23,6 +23,11 @@
         </el-row>
       </div>
       <div class="example-code">
+        <div class="example-link">
+          <a href="https://jsfiddle.net/xiaoluoboding/u8yy1s5w/" target="_blank">
+            <img :src="require('@/assets/img/jsfiddle.svg')" alt="View On Jsfiddle" v-tooltip="tooltipOptions">
+          </a>
+        </div>
         <code-block lang="html" :sourcecode="defaultWidget" />
       </div>
     </section>
@@ -70,6 +75,11 @@
         </el-row>
       </div>
       <div class="example-code">
+        <div class="example-link">
+          <a href="https://jsfiddle.net/xiaoluoboding/g87pkf3s/" target="_blank">
+            <img :src="require('@/assets/img/jsfiddle.svg')" alt="View On Jsfiddle" v-tooltip="tooltipOptions">
+          </a>
+        </div>
         <code-block lang="html" :sourcecode="advanedWidget" />
       </div>
     </section>
@@ -87,12 +97,12 @@
               <h3>Simple Widget Without Header</h3>
             </div>
           </smart-widget>
-          <smart-widget slot="1" title="Default Widget">
+          <smart-widget slot="1" title="Default Widget" sub-title="Drag on me">
             <div class="layout-center">
               <h3>Default Widget With Header</h3>
             </div>
           </smart-widget>
-          <smart-widget slot="2" title="Full Screen" fullscreen>
+          <smart-widget slot="2" title="Full Screen" sub-title="Drag on me" fullscreen>
             <div class="layout-center">
               <h3>Make any widget full screen</h3>
             </div>
@@ -100,6 +110,11 @@
         </smart-widget-grid>
       </div>
       <div class="example-code">
+        <div class="example-link">
+          <a href="https://jsfiddle.net/xiaoluoboding/kuxq1fb8/" target="_blank">
+            <img :src="require('@/assets/img/jsfiddle.svg')" alt="View On Jsfiddle" v-tooltip="tooltipOptions">
+          </a>
+        </div>
         <el-row>
           <el-col :span="12">
             <code-block lang="js" :sourcecode="widgetWithGridJS" />
@@ -110,6 +125,9 @@
           </el-col>
         </el-row>
       </div>
+    </section>
+    <section class="much-more">
+      For <a href="https://github.com/xiaoluoboding/vue-smart-widget#usage" target="_black">More</a> Details.
     </section>
   </smart-widget>
 </template>
@@ -135,7 +153,17 @@ export default {
         { x: 0, y: 0, w: 4, h: 4, i: '0' },
         { x: 4, y: 0, w: 4, h: 4, i: '1' },
         { x: 8, y: 0, w: 4, h: 4, i: '2' }
-      ]
+      ],
+      tooltipOptions: {
+        content: 'View On Jsfiddle',
+        placement: 'left-start',
+        classes: ['stand'],
+        offset: 6,
+        delay: {
+          show: 300,
+          hide: 300
+        }
+      }
     }
   },
   created () {
@@ -169,6 +197,7 @@ export default {
       border-radius: 3px 3px 0 0;
     }
     .example-code {
+      position: relative;
       background: #f8f8f8;
       border: 1px solid rgba(0, 40, 100, 0.12);
       border-top: none;
@@ -182,7 +211,125 @@ export default {
         width: 1px;
         background: rgba(0, 40, 100, 0.12);
       }
+      .example-link {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 14px;
+        padding: 4px 8px;
+        z-index: 2;
+        a {
+          text-decoration: none;
+        }
+        img {
+          height: 24px;
+          width: 24px;
+        }
+      }
     }
+  }
+  .much-more {
+    background: #f5f7fb;
+    margin: 20px;
+    padding: 1.5rem 2.5rem;
+    text-align: center;
+  }
+}
+
+.tooltip {
+  display: block !important;
+  z-index: 10000;
+
+  .tooltip-inner {
+    background: #616161;
+    opacity: .9;
+    color: white;
+    font-size: 12px;
+    border-radius: 3px;
+    padding: 4px 10px;
+  }
+
+  .tooltip-arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: 6px;
+    border-color: #616161;
+    opacity: .9;
+    z-index: 1;
+  }
+
+  &[x-placement^="top"] {
+    margin-bottom: 5px;
+
+    .tooltip-arrow {
+      border-width: 5px 5px 0 5px;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      border-bottom-color: transparent !important;
+      bottom: -5px;
+      left: calc(50% - 5px);
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  &[x-placement^="bottom"] {
+    margin-top: 5px;
+
+    .tooltip-arrow {
+      border-width: 0 5px 5px 5px;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      border-top-color: transparent !important;
+      top: -5px;
+      left: calc(50% - 5px);
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  &[x-placement^="right"] {
+    margin-left: 5px;
+
+    .tooltip-arrow {
+      border-width: 5px 5px 5px 0;
+      border-left-color: transparent !important;
+      border-top-color: transparent !important;
+      border-bottom-color: transparent !important;
+      left: -5px;
+      top: calc(50% - 5px);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &[x-placement^="left"] {
+    margin-right: 5px;
+
+    .tooltip-arrow {
+      border-width: 5px 0 5px 5px;
+      border-top-color: transparent !important;
+      border-right-color: transparent !important;
+      border-bottom-color: transparent !important;
+      right: -5px;
+      top: calc(50% - 5px);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .15s, visibility .15s;
+  }
+
+  &[aria-hidden='false'] {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .15s;
   }
 }
 </style>

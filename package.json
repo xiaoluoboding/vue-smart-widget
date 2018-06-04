@@ -6,7 +6,12 @@
   "main": "lib/vue-smart-widget.min.js",
   "unpkg": "lib/vue-smart-widget.min.js",
   "keywords": [
-    "widget", "card", "panel", "vue", "draggable", "resizable"
+    "widget",
+    "card",
+    "panel",
+    "vue",
+    "draggable",
+    "resizable"
   ],
   "scripts": {
     "clean": "rimraf lib/*",
@@ -66,6 +71,7 @@
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "v-tooltip": "^2.0.0-rc.32",
     "ve-charts": "^0.6.2",
     "vue": "^2.5.2",
     "vue-loader": "^13.3.0",
