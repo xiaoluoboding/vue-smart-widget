@@ -28,7 +28,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.bundle.assetsRoot,
     publicPath: config.bundle.assetsPublicRoot,
-    filename: '[name].js',
+    filename: '[name].min.js',
     library: 'vue-smart-widget',
     libraryTarget: 'umd',
   },
