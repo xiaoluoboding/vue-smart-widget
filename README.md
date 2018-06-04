@@ -1,5 +1,12 @@
 # vue-smart-widget
 
+<p align="left">
+  <a href="https://travis-ci.org/xiaoluoboding/vue-smart-widget"><img src="https://travis-ci.org/xiaoluoboding/vue-smart-widget.svg?branch=dev"></a>
+  <a href="https://travis-ci.org/xiaoluoboding/vue-smart-widget"><img src="https://img.shields.io/npm/v/vue-smart-widget.svg"></a>
+  <a href="https://travis-ci.org/xiaoluoboding/vue-smart-widget"><img src="https://img.shields.io/github/stars/xiaoluoboding/vue-smart-widget.svg"></a>
+  <a href="https://travis-ci.org/xiaoluoboding/vue-smart-widget"><img src="https://img.shields.io/github/license/xiaoluoboding/vue-smart-widget.svg"></a>
+</p>
+
 > Smart widget is a flexible and extensible content container component. It includes options for headers and footers, a wide variety of content. If you use with grid, it also have a draggable and resizable grid layout, base on [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout). 
 
 ## Installation
