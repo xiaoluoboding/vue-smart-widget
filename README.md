@@ -1,6 +1,16 @@
 # vue-smart-widget
 
-> Smart widget is a flexible and extensible content container component. It includes options for headers and footers, a wide variety of content. If you use with grid, it also have a draggable and resizable grid layout, base on [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout). 
+<p align="left">
+  <a href="https://travis-ci.org/xiaoluoboding/vue-smart-widget"><img src="https://travis-ci.org/xiaoluoboding/vue-smart-widget.svg?branch=dev"></a>
+  <a href="https://www.npmjs.com/package/vue-smart-widget" target="_blank"><img src="https://img.shields.io/npm/v/vue-smart-widget.svg"></a>
+  <a href="https://github.com/xiaoluoboding/vue-smart-widget"><img src="https://img.shields.io/github/stars/xiaoluoboding/vue-smart-widget.svg"></a>
+  <a href="https://github.com/xiaoluoboding/vue-smart-widget"><img src="https://img.shields.io/github/license/xiaoluoboding/vue-smart-widget.svg"></a>
+</p>
+
+> Smart widget is a flexible and extensible content container component.
+It includes header and body part, and widget body includes <em>editbox</em>、<em>content</em>、<em>footer</em>.
+If you use with grid, it also have a draggable and resizable grid layout,
+base on <strong>Vue2.5.+</strong> & <strong>[vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout)</strong>.
 
 ## Installation
 
@@ -128,7 +138,7 @@ new Vue({
 | isDraggable | Says if the grids items are draggable. | Boolean | `true` or `false` | `true` |
 | isResizable | Says if the grids items are resizable. | Boolean | `true` or `false` | `true` |
 
-## Slot scope
+## Slot scopes
 
 > Each widget in the grid is resizable, `slot-scope` provide the widget attribute to the children component.
 

@@ -1,10 +1,18 @@
 {
   "name": "vue-smart-widget",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Smart widget component for Vue2.5+.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
-  "main": "lib/vue-smart-widget.js",
-  "unpkg": "lib/vue-smart-widget.js",
+  "main": "lib/vue-smart-widget.min.js",
+  "unpkg": "lib/vue-smart-widget.min.js",
+  "keywords": [
+    "widget",
+    "card",
+    "panel",
+    "vue",
+    "draggable",
+    "resizable"
+  ],
   "scripts": {
     "clean": "rimraf lib/*",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -63,6 +71,7 @@
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "v-tooltip": "^2.0.0-rc.32",
     "ve-charts": "^0.6.2",
     "vue": "^2.5.2",
     "vue-loader": "^13.3.0",
