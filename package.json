@@ -21,6 +21,9 @@
     "build": "node build/build.js",
     "bundle": "npm run clean && node build/bundle.js"
   },
+  "peerDependencies": {
+    "vue": "^2.5.0"
+  },
   "dependencies": {
     "screenfull": "^3.3.2",
     "vue-grid-layout": "^2.1.13"
