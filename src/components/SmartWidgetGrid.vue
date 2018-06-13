@@ -101,6 +101,10 @@ export default {
   .smartwidget {
     height: inherit;
     width: inherit;
+    &.smartwidget-fullscreen {
+      height: 100%;
+      width: 100%;
+    }
   }
 }
 </style>

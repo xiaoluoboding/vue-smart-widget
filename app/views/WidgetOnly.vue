@@ -33,12 +33,12 @@
           refresh
           :loading="loading"
           @on-refresh="handleRefresh">
-          <ve-bar-chart :data="barData" :height="300" />
+          <ve-bar-chart :data="barData" :height="contentH" slot-scope="{contentH}" />
         </smart-widget>
       </el-col>
       <el-col :span="8">
         <smart-widget title="Diffrent Platforms PV" fullscreen collapse>
-          <ve-donut-chart :data="donutData" :settings="donutSetting" :height="300" />
+          <ve-donut-chart :data="donutData" :settings="donutSetting" :height="contentH" slot-scope="{contentH}" />
         </smart-widget>
       </el-col>
     </el-row>
@@ -139,6 +139,5 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less">
 </style>
