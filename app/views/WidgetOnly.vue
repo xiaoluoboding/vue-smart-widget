@@ -32,13 +32,14 @@
           collapse
           refresh
           :loading="loading"
-          @on-refresh="handleRefresh">
-          <ve-bar-chart :data="barData" :height="300" />
+          @on-refresh="handleRefresh"
+          @on-fullscreen="handleFullscreen">
+          <ve-bar-chart :data="barData" :height="contentH" slot-scope="{contentH}" />
         </smart-widget>
       </el-col>
       <el-col :span="8">
         <smart-widget title="Diffrent Platforms PV" fullscreen collapse>
-          <ve-donut-chart :data="donutData" :settings="donutSetting" :height="300" />
+          <ve-donut-chart :data="donutData" :settings="donutSetting" :height="contentH" slot-scope="{contentH}" />
         </smart-widget>
       </el-col>
     </el-row>
@@ -83,6 +84,27 @@
         </smart-widget>
       </el-col>
     </el-row>
+    <br>
+    <el-row type="flex" :gutter="32">
+      <el-col>
+        <smart-widget title="Wiget with Table" collapse>
+          <el-table :data="tableData" style="width: 100%">
+            <el-table-column fixed prop="date" label="日期">
+            </el-table-column>
+            <el-table-column prop="name" label="姓名">
+            </el-table-column>
+            <el-table-column prop="province" label="省份">
+            </el-table-column>
+            <el-table-column prop="city" label="市区">
+            </el-table-column>
+            <el-table-column prop="address" label="地址">
+            </el-table-column>
+            <el-table-column prop="zip" label="邮编">
+            </el-table-column>
+          </el-table>
+        </smart-widget>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -91,7 +113,57 @@ export default {
   data () {
     return {
       loading: false,
-      placeholder: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!'
+      placeholder: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!',
+      tableData: [{
+        date: '2016-05-03',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }, {
+        date: '2016-05-02',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }, {
+        date: '2016-05-08',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }, {
+        date: '2016-05-06',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }, {
+        date: '2016-05-07',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }]
     }
   },
   methods: {
@@ -100,6 +172,11 @@ export default {
       setTimeout(() => {
         this.loading = false
       }, 2000)
+    },
+    handleFullscreen (val) {
+      if (val) {
+        console.log(val)
+      }
     }
   },
   created () {
@@ -139,6 +216,5 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less">
 </style>
