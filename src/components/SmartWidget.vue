@@ -169,6 +169,7 @@ export default {
         this.isFullScreenCollapsed = this.isFullScreen
         document.body.removeAttribute('class', 'no-overflow')
       }
+      this.$emit('on-fullscreen', this.isFullScreen)
     },
     handleScreenfull () {
       if (this.isCollapsed) {
@@ -224,9 +225,11 @@ export default {
     }
   },
   mounted () {
-    this.widgetBodyOffsetHeight = this.$refs.widgetBody.offsetHeight
-    this.widgetBodyEditBoxH = this.$slots.editbox ? this.$refs.widgetBodyEditbox.offsetHeight : 0
-    this.widgetBodyFooterH = this.$slots.footer ? this.$refs.widgetBodyFooter.offsetHeight : 0
+    this.$nextTick(_ => {
+      this.widgetBodyOffsetHeight = this.$refs.widgetBody.offsetHeight
+      this.widgetBodyEditBoxH = this.$slots.editbox ? this.$refs.widgetBodyEditbox.offsetHeight : 0
+      this.widgetBodyFooterH = this.$slots.footer ? this.$refs.widgetBodyFooter.offsetHeight : 0
+    })
   }
 }
 </script>
@@ -310,7 +313,7 @@ body.no-overflow {
   .widget-body {
     position: relative;
     overflow: hidden;
-    transition: height .3s;
+    transition: all .45s cubic-bezier(.23, 1, .32, 1);
     .widget-body__content {
       &.fixed-height {
         overflow-y: scroll
@@ -328,9 +331,9 @@ body.no-overflow {
   }
   // screenfull
   &.smartwidget-fullscreen {
-    width: 100%;
-    height: 100%;
     position: fixed;
+    height: 100%;
+    width: 100%;
     top: 0;
     left: 0;
     z-index: 1050;
