@@ -3,13 +3,17 @@
     :class="smartWidgetClass"
     :id="smartWidgetId">
     <div class="widget-header" :style="widgetHeaderHeight" v-if="!simple">
-      <h2>
-        <i class="widget-header__prefix"></i>
-        <span class="widget-header__title" v-text="title"></span>
-      </h2>
-      <h4 v-if="subTitle!==''">
-        <span class="widget-header__subtitle" v-text="subTitle"></span>
-      </h4>
+      <div v-if="$slots.title">
+        <slot name="title"></slot>
+      </div>
+      <template v-else>
+        <h2>
+          <span class="widget-header__title" v-text="title"></span>
+        </h2>
+        <h4 v-if="subTitle!==''">
+          <span class="widget-header__subtitle" v-text="subTitle"></span>
+        </h4>
+      </template>
       <div class="widget-header__toolbar">
         <!-- collapse icon -->
         <a href="#" v-if="!isHasGroup && collapse && !isFullScreen" @click="isCollapsed=!isCollapsed">
