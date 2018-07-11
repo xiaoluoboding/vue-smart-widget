@@ -1,6 +1,6 @@
 {
   "name": "vue-smart-widget",
-  "version": "0.2.0",
+  "version": "0.2.6",
   "description": "Smart widget component for Vue2.5+.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "main": "lib/vue-smart-widget.min.js",
@@ -20,6 +20,9 @@
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
     "bundle": "npm run clean && node build/bundle.js"
+  },
+  "peerDependencies": {
+    "vue": "^2.5.0"
   },
   "dependencies": {
     "screenfull": "^3.3.2",
