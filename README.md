@@ -114,6 +114,8 @@ new Vue({
 | collapse | determine whether have collapse button, only support `smart-widget` | Boolean | `true` or `false` | `false` |
 | refresh | determine whether have refresh button | Boolean | `true` or `false` | `false` |
 | fixedHeight | determine whether widget body's height is fixed, only support `smart-widget` | Boolean | `true` or `false` | `false` |
+| shadow | when to show card shadows | String | `always`、`hover`、`never` | `always` |
+| translateY | the length of vertically transform | Number | - | 0 |
 
 ## SmartWidget Methods
 

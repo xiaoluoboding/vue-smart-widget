@@ -10,14 +10,14 @@
         </smart-widget>
       </el-col>
       <el-col :span="8">
-        <smart-widget title="Default Widget">
+        <smart-widget title="Default Widget" shadow="hover" :translateY="10">
           <p>
             {{placeholder}}
           </p>
         </smart-widget>
       </el-col>
       <el-col :span="8">
-        <smart-widget title="With additional fullscreen button" fullscreen>
+        <smart-widget title="With additional fullscreen button" fullscreen shadow="never">
           <p>
             {{placeholder}}
           </p>

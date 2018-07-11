@@ -1,7 +1,10 @@
 <template>
   <div class="smartwidget"
     :class="smartWidgetClass"
-    :id="smartWidgetId">
+    :style="smartWidgetStyle"
+    :id="smartWidgetId"
+    @mouseover="handleMouseover"
+    @mouseout="smartWidgetStyle={}">
     <div class="widget-header" :style="widgetHeaderHeight" v-if="!simple">
       <div v-if="$slots.title">
         <slot name="title"></slot>
@@ -90,7 +93,11 @@ export default {
     // toggle refresh button
     refresh: { type: Boolean, default: false },
     // toggle `widget-body__content` fixed height
-    fixedHeight: { type: Boolean, default: false }
+    fixedHeight: { type: Boolean, default: false },
+    // when to show card shadows
+    shadow: { type: String, default: 'always' },
+    // the card translateY style
+    translateY: { type: Number, default: 0 }
   },
   data () {
     return {
@@ -100,14 +107,18 @@ export default {
       widgetBodyOffsetHeight: 'auto',
       widgetBodyOldHeight: 0,
       widgetBodyEditBoxH: 0,
-      widgetBodyFooterH: 0
+      widgetBodyFooterH: 0,
+      smartWidgetStyle: {}
     }
   },
   computed: {
     smartWidgetClass () {
       return {
         'smartwidget-fullscreen': this.isFullScreen,
-        'smartwidget-collapsed': this.isCollapsed
+        'smartwidget-collapsed': this.isCollapsed,
+        'is-always-shadow': this.shadow === 'always',
+        'is-hover-shadow': this.shadow === 'hover',
+        'is-never-shadow': this.shadow === 'never'
       }
     },
     bodyContentPadding () {
@@ -216,6 +227,11 @@ export default {
     getContentH () {
       const contentH = this.getWidgetBodyH() - this.getPaddingH() - this.widgetBodyEditBoxH - this.widgetBodyFooterH - 1
       return contentH > 0 ? contentH : this.$parent.rowHeight
+    },
+    handleMouseover () {
+      this.smartWidgetStyle = {
+        'transform': `translateY(${-this.translateY}px)`
+      }
     }
   },
   created () {
@@ -255,10 +271,19 @@ body.no-overflow {
 }
 .smartwidget {
   background: #fff;
-  // box-shadow: 0 0 10px 0 #e9e9e9;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   border: 1px solid #ebeef5;
   width: 100%;
+  transition: .3s;
+  &.is-always-shadow {
+    box-shadow: 0 0 10px 0 #e9e9e9;
+  }
+  &.is-hover-shadow:hover {
+    box-shadow: 0 0 10px 0 #e9e9e9;
+  }
+  &.is-never-shadow {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
   .widget-header {
     display: flex;
     line-height: 48px;
