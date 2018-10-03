@@ -336,7 +336,6 @@ body.no-overflow {
       align-items: center;
       justify-content: flex-end;
       padding: 0;
-      // padding-right: 12px;
       margin: 0;
       a {
         display: inline-block;
