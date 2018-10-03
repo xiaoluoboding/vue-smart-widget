@@ -34,27 +34,30 @@
       </div>
     </div>
     <!-- widget body -->
-    <div :class="simple ? 'widget-body-simple' : 'widget-body'" :style="{'height': isCollapsed ? '0px' : widgetBodyHeight}" ref="widgetBody">
-      <!-- widget edit box -->
-      <div class="widget-body__editbox" ref="widgetBodyEditbox">
-        <slot name="editbox"></slot>
+    <collapse-transition>
+      <div v-show="!isCollapsed" :class="simple ? 'widget-body-simple' : 'widget-body'" ref="widgetBody">
+        <!-- widget edit box -->
+        <div class="widget-body__editbox" ref="widgetBodyEditbox">
+          <slot name="editbox"></slot>
+        </div>
+        <!-- end widget edit box -->
+        <!-- widget content -->
+        <div
+          class="widget-body__content"
+          :class="{'fixed-height': fixedHeight}"
+          :style="widgetBodyContentStyle"
+          ref="widgetBodyContent">
+          <slot :content-h="contentH"></slot>
+        </div>
+        <!-- end widget content -->
+        <!-- widget footer -->
+        <div class="widget-body__footer" :class="{'has-group': isHasGroup}" ref="widgetBodyFooter">
+          <slot name="footer"></slot>
+        </div>
+        <!-- end widget footer -->
+        <loading-mask v-if="loading" />
       </div>
-      <!-- end widget edit box -->
-      <!-- widget content -->
-      <div class="widget-body__content"
-        :class="{'fixed-height': fixedHeight}"
-        :style="widgetBodyContentStyle"
-        ref="widgetBodyContent">
-        <slot :content-h="contentH"></slot>
-      </div>
-      <!-- end widget content -->
-      <!-- widget footer -->
-      <div class="widget-body__footer" :class="{'has-group': isHasGroup}" ref="widgetBodyFooter">
-        <slot name="footer"></slot>
-      </div>
-      <!-- end widget footer -->
-      <loading-mask v-if="loading" />
-    </div>
+    </collapse-transition>
     <!-- end widget body -->
   </div>
   <!-- end widget -->
@@ -63,9 +66,17 @@
 <script>
 import screenfull from 'screenfull'
 
-import { generateUUID } from '@/public/utils'
+import { generateUUID } from '../utils'
 
 import LoadingMask from './LoadingMask'
+// import CollapseTransition from '../transitions/collapse-transition'
+
+// collapse 展开折叠
+import 'element-ui/lib/theme-chalk/base.css'
+import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
+import Vue from 'vue'
+
+Vue.component('CollapseTransition', CollapseTransition)
 
 export default {
   name: 'SmartWidget',
@@ -132,11 +143,11 @@ export default {
         'line-height': `${this.rowHeight}px`
       }
     },
-    widgetBodyHeight () {
-      return this.isHasGroup
-        ? this.simple ? '100%' : `${this.getWidgetBodyH()}px`
-        : `${this.widgetBodyOffsetHeight}px`
-    },
+    // widgetBodyHeight () {
+    //   return this.isHasGroup
+    //     ? this.simple ? '100%' : `${this.getWidgetBodyH()}px`
+    //     : `${this.widgetBodyOffsetHeight}px`
+    // },
     widgetBodyContentStyle () {
       return {
         padding: this.bodyContentPadding,
@@ -302,7 +313,11 @@ body.no-overflow {
       align-items: center;
       font-size: 16px;
       .widget-header__title {
-        padding: 0 10px;
+        padding: 0 20px;
+        overflow: hidden;
+        word-break: break-all;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
     h4 {
@@ -340,9 +355,9 @@ body.no-overflow {
     }
   }
   .widget-body {
+    will-change: height;
     position: relative;
     overflow: hidden;
-    transition: all .45s cubic-bezier(.23, 1, .32, 1);
     .widget-body__content {
       &.fixed-height {
         overflow-y: scroll
@@ -351,7 +366,6 @@ body.no-overflow {
     .widget-body__footer {
       position: relative;
       &.has-group {
-        position: absolute;
         left: 0;
         bottom: 0;
         width: 100%;

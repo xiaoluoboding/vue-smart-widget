@@ -152,11 +152,11 @@ export default {
     this.donutData = {
       dimensions: {
         name: '渠道',
-        data: ['APP', 'PC', 'M端', '微信', '手Q', '小程序']
+        data: ['APP', 'PC', 'M端', '微信', '小程序']
       },
       measures: [{
         name: 'PV',
-        data: [40000, 27800, 22000, 20200, 15600, 13600]
+        data: [40000, 27800, 22000, 20200, 13600]
       }]
     }
     this.tableData = [{
