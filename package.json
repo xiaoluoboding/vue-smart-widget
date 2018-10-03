@@ -1,6 +1,6 @@
 {
   "name": "vue-smart-widget",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Smart widget component for Vue2.5+.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "main": "lib/vue-smart-widget.min.js",
@@ -22,11 +22,11 @@
     "bundle": "npm run clean && node build/bundle.js"
   },
   "peerDependencies": {
-    "vue": "^2.5.0"
+    "vue": "^2.5.0",
+    "vue-grid-layout": "^2.1.13"
   },
   "dependencies": {
-    "screenfull": "^3.3.2",
-    "vue-grid-layout": "^2.1.13"
+    "screenfull": "^3.3.2"
   },
   "devDependencies": {
     "@shopify/draggable": "^1.0.0-beta.7",

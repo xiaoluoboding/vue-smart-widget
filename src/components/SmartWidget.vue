@@ -64,17 +64,16 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import screenfull from 'screenfull'
 
 import { generateUUID } from '../utils'
 
 import LoadingMask from './LoadingMask'
-// import CollapseTransition from '../transitions/collapse-transition'
 
 // collapse 展开折叠
 import 'element-ui/lib/theme-chalk/base.css'
 import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
-import Vue from 'vue'
 
 Vue.component('CollapseTransition', CollapseTransition)
 
