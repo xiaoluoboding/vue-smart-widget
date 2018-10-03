@@ -71,7 +71,7 @@ body {
     color: #333;
     text-align: center;
     line-height: 60px;
-    z-index: 2;
+    z-index: 3;
     background: #fff;
     border-bottom: 1px solid #ebeef5;
     h1 {
