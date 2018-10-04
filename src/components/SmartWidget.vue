@@ -142,15 +142,10 @@ export default {
         'line-height': `${this.rowHeight}px`
       }
     },
-    // widgetBodyHeight () {
-    //   return this.isHasGroup
-    //     ? this.simple ? '100%' : `${this.getWidgetBodyH()}px`
-    //     : `${this.widgetBodyOffsetHeight}px`
-    // },
     widgetBodyContentStyle () {
       return {
         padding: this.bodyContentPadding,
-        height: `${this.contentH}px`
+        height: this.isHasGroup ? `${this.contentH}px` : ''
       }
     },
     rowHeight () {
