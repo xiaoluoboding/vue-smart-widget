@@ -11,7 +11,7 @@
       </div>
       <template v-else>
         <h2>
-          <span class="widget-header__title" v-text="title"></span>
+          <span class="widget-header__title" :style="widgetTitleStyle" v-text="title"></span>
         </h2>
         <h4 v-if="subTitle!==''">
           <span class="widget-header__subtitle" v-text="subTitle"></span>
@@ -146,6 +146,13 @@ export default {
       return {
         padding: this.bodyContentPadding,
         height: this.isHasGroup ? `${this.contentH}px` : ''
+      }
+    },
+    widgetTitleStyle () {
+      const padding = typeof (this.padding) === 'number' ? Array.of(this.padding) : this.padding
+      const offset = padding[padding.length - 1]
+      return {
+        padding: `0 ${offset / 2}px 0 ${offset}px`
       }
     },
     rowHeight () {
@@ -307,7 +314,6 @@ body.no-overflow {
       align-items: center;
       font-size: 16px;
       .widget-header__title {
-        padding: 0 20px;
         overflow: hidden;
         word-break: break-all;
         text-overflow: ellipsis;
