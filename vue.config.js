@@ -4,13 +4,18 @@ const isProd = process.env.NODE_ENV === 'production'
 const resolve = dir => path.join(__dirname, dir)
 
 const setChainWebpack = config => {
-  // 移除 eslint 对 src/plugins 目录校验
-  // config.module
-  //   .rule('eslint')
-  //   .exclude
-  //   .add('/src/plugins')
-  //   .end()
-  //   .end()
+  // 目录简写对应
+  config.resolve.alias
+    .set('@', path.resolve('app'))
+    .set('~', path.resolve('src'))
+  // 添加对 app 目录的支持
+  config.module
+    .rule('js')
+    .include
+      .add('/app')
+      .end()
+    .use('babel')
+    .loader('babel-loader')
   /**
    * 清除性能警告
    * entrypoint size limit (244 KiB)
@@ -32,10 +37,20 @@ const setConfigureWebpack = config => {
 
 module.exports = {
   outputDir: resolve('/lib'),
+  pages: {
+    index: {
+      entry: 'app/main.js',
+      template: 'public/index.html',
+      filename: 'index.html'
+    }
+  },
   lintOnSave: true,
   productionSourceMap: false,
   chainWebpack: config => setChainWebpack(config),
   // configureWebpack: config => setConfigureWebpack(config),
+  css: {
+    extract: false
+  },
   devServer: {
     port: 8181,
     open: true

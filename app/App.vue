@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <el-container class="app-container">
-      <el-header class="app-header">
+      <el-header class="app-header" height="61px">
         <el-container class="sub-container sub-header">
-          <h1 @click="activeIndex='home'"><router-link to="/home"><span style="color: #40b883">vue-smart-widget</span></router-link></h1>
+          <h1 @click="activeIndex='home'">
+            <router-link to="/home"><span style="color: #40b883">vue-smart-widget</span></router-link>
+          </h1>
           <el-menu :default-active="activeIndex" class="app-menu" mode="horizontal" router @select="key => activeIndex = key">
             <el-menu-item index="widget-only">
               Use Widget Only
@@ -84,7 +86,10 @@ body {
       text-decoration: none;
     }
     .app-menu {
-      margin-left: 20px;
+      border-bottom: none;
+    }
+    .el-menu.el-menu--horizontal {
+      border-bottom: none;
     }
     .open-in-github {
       display: flex;

@@ -1,17 +1,22 @@
 {
   "name": "vue-smart-widget",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.3.3",
+  "description": "Smart widget component for Vue2.5+.",
+  "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
+  "main": "lib/vue-smart-widget.umd.min.js",
+  "unpkg": "lib/vue-smart-widget.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:lib": "vue-cli-service build --target lib --dest lib src/index.js",
     "lint": "vue-cli-service lint"
   },
+  "peerDependencies": {
+    "vue": "^2.5.0",
+    "vue-grid-layout": "^2.1.13"
+  },
   "dependencies": {
-    "core-js": "^2.6.5",
-    "vue": "^2.6.10",
-    "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
+    "screenfull": "^4.2.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",
@@ -19,10 +24,21 @@
     "@vue/cli-service": "^3.9.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
+    "core-js": "^2.6.5",
+    "echarts": "^4.2.1",
+    "element-ui": "^2.11.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
-    "vue-template-compiler": "^2.6.10"
+    "postcss-import": "^12.0.1",
+    "postcss-url": "^8.0.0",
+    "v-tooltip": "^2.0.2",
+    "ve-charts": "^0.8.1",
+    "vue": "^2.6.10",
+    "vue-grid-layout": "^2.3.4",
+    "vue-router": "^3.0.3",
+    "vue-template-compiler": "^2.6.10",
+    "vuex": "^3.0.1"
   }
 }
