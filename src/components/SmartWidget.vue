@@ -34,8 +34,15 @@
       </div>
     </div>
     <!-- widget body -->
-    <!-- <collapse-transition> -->
-      <div v-show="!isCollapsed" :class="simple ? 'widget-body-simple' : 'widget-body'" ref="widgetBody">
+    <collapse-transition>
+      <div
+        v-show="!isCollapsed"
+        :class="[
+          simple ? 'widget-body-simple': 'widget-body',
+          { 'is-collapse': isCollapsed }
+        ]"
+        ref="widgetBody"
+      >
         <!-- widget edit box -->
         <div class="widget-body__editbox" ref="widgetBodyEditbox">
           <slot name="editbox"></slot>
@@ -57,24 +64,27 @@
         <!-- end widget footer -->
         <loading-mask v-if="loading" />
       </div>
-    <!-- </collapse-transition> -->
+    </collapse-transition>
     <!-- end widget body -->
   </div>
   <!-- end widget -->
 </template>
 
 <script>
-import Vue from 'vue'
 import screenfull from 'screenfull'
 
 import { generateUUID } from '../utils'
 
+// loading mask
 import LoadingMask from './LoadingMask'
+// collapse transition
+import CollapseTransition from './collapse-transition'
 
 export default {
   name: 'SmartWidget',
   components: {
-    LoadingMask
+    LoadingMask,
+    CollapseTransition
   },
   inject: {
     layout: {
@@ -363,6 +373,9 @@ body.no-overflow {
         bottom: 0;
         width: 100%;
       }
+    }
+    &.is-collapse {
+      transition: .3s height ease-in-out, .3s padding-top ease-in-out, .3s padding-bottom ease-in-out;
     }
   }
   // screenfull
