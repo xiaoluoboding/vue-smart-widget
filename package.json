@@ -5,10 +5,19 @@
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "main": "lib/vue-smart-widget.umd.min.js",
   "unpkg": "lib/vue-smart-widget.umd.min.js",
+  "keywords": [
+    "widget",
+    "card",
+    "panel",
+    "vue",
+    "draggable",
+    "resizable"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:lib": "vue-cli-service build --target lib --dest lib src/index.js",
+    "build:lib": "vue-cli-service build --mode lib --target lib --dest lib src/index.js",
+    "report": "vue-cli-service build --mode lib --target lib --dest lib --report src/index.js",
     "lint": "vue-cli-service lint"
   },
   "peerDependencies": {

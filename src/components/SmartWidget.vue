@@ -34,7 +34,7 @@
       </div>
     </div>
     <!-- widget body -->
-    <collapse-transition>
+    <!-- <collapse-transition> -->
       <div v-show="!isCollapsed" :class="simple ? 'widget-body-simple' : 'widget-body'" ref="widgetBody">
         <!-- widget edit box -->
         <div class="widget-body__editbox" ref="widgetBodyEditbox">
@@ -57,7 +57,7 @@
         <!-- end widget footer -->
         <loading-mask v-if="loading" />
       </div>
-    </collapse-transition>
+    <!-- </collapse-transition> -->
     <!-- end widget body -->
   </div>
   <!-- end widget -->
@@ -70,12 +70,6 @@ import screenfull from 'screenfull'
 import { generateUUID } from '../utils'
 
 import LoadingMask from './LoadingMask'
-
-// collapse 展开折叠
-import 'element-ui/lib/theme-chalk/base.css'
-import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
-
-Vue.component('CollapseTransition', CollapseTransition)
 
 export default {
   name: 'SmartWidget',
