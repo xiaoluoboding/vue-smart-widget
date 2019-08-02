@@ -1,9 +1,9 @@
 {
   "name": "vue-smart-widget",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Smart widget component for Vue2.5+.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
-  "main": "lib/vue-smart-widget.umd.min.js",
+  "main": "lib/vue-smart-widget.common.js",
   "unpkg": "lib/vue-smart-widget.umd.min.js",
   "keywords": [
     "widget",

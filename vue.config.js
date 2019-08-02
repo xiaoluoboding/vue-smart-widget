@@ -34,7 +34,7 @@ const setConfigureWebpack = config => {
   // 将 Vue & vue-grid-layout 设置为外部依赖
   let externals = [
     {
-      vue: 'Vue'
+      vue: 'vue'
     }
   ]
   return isProd ? { externals } : {}
