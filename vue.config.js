@@ -35,9 +35,6 @@ const setConfigureWebpack = config => {
   let externals = [
     {
       vue: 'Vue'
-    },
-    {
-      'vue-grid-layout': 'vue-grid-layout'
     }
   ]
   return isProd ? { externals } : {}
