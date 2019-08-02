@@ -31,7 +31,7 @@ const setChainWebpack = config => {
 }
 
 const setConfigureWebpack = config => {
-  // 将 Vue & vue-grid-layout 设置为外部依赖
+  // 将 vue 设置为外部依赖
   let externals = [
     {
       vue: 'vue'
@@ -50,11 +50,12 @@ module.exports = {
   productionSourceMap: false,
   chainWebpack: config => setChainWebpack(config),
   configureWebpack: config => setConfigureWebpack(config),
-  css: {
-    extract: false
-  },
   devServer: {
     port: 8181,
-    open: true
+    open: true,
+    overlay: {
+      warnings: true,
+      errors: true
+    }
   }
 }
