@@ -38,12 +38,6 @@ import { SmartWidget } from 'vue-smart-widget'
 Vue.component('SmartWidget', SmartWidget)
 ```
 
-A css file is included when importing the package:
-
-```js
-import 'vue-smart-widget/lib/vue-smart-widget.css'
-```
-
 ## Usage
 
 The SmartWidget is heavily base on [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout), you can know about `vue-grid-layout` first, maybe you already use in your project.
@@ -61,6 +55,13 @@ The SmartWidget is heavily base on [vue-grid-layout](https://github.com/jbaysolu
 ```
 
 ### Use widget with grid
+
+```bash
+import Vue from 'vue'
+import { SmartWidgetGrid } from 'vue-smart-widget'
+
+Vue.component('SmartWidgetGrid', SmartWidgetGrid)
+```
 
 **Script**
 
