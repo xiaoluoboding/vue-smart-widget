@@ -35,7 +35,14 @@
     </div>
     <!-- widget body -->
     <collapse-transition>
-      <div v-show="!isCollapsed" :class="simple ? 'widget-body-simple' : 'widget-body'" ref="widgetBody">
+      <div
+        v-show="!isCollapsed"
+        :class="[
+          simple ? 'widget-body-simple': 'widget-body',
+          { 'is-collapse': isCollapsed }
+        ]"
+        ref="widgetBody"
+      >
         <!-- widget edit box -->
         <div class="widget-body__editbox" ref="widgetBodyEditbox">
           <slot name="editbox"></slot>
@@ -64,23 +71,20 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import screenfull from 'screenfull'
 
 import { generateUUID } from '../utils'
 
+// loading mask
 import LoadingMask from './LoadingMask'
-
-// collapse 展开折叠
-import 'element-ui/lib/theme-chalk/base.css'
-import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
-
-Vue.component('CollapseTransition', CollapseTransition)
+// collapse transition
+import CollapseTransition from './collapse-transition'
 
 export default {
   name: 'SmartWidget',
   components: {
-    LoadingMask
+    LoadingMask,
+    CollapseTransition
   },
   inject: {
     layout: {
@@ -369,6 +373,9 @@ body.no-overflow {
         bottom: 0;
         width: 100%;
       }
+    }
+    &.is-collapse {
+      transition: .3s height ease-in-out, .3s padding-top ease-in-out, .3s padding-bottom ease-in-out;
     }
   }
   // screenfull
