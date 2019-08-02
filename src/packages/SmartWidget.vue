@@ -20,15 +20,15 @@
       <div class="widget-header__toolbar">
         <!-- collapse icon -->
         <a href="#" v-if="!isHasGroup && collapse && !isFullScreen" @click="isCollapsed=!isCollapsed">
-          <img :src="isCollapsed ? require('../assets/img/expand.svg') : require('../assets/img/collapse.svg')">
+          <svg-icon :icon-name="isCollapsed ? 'expand' : 'collapse'" />
         </a>
         <!-- fullscreen icon -->
         <a href="#" v-if="fullscreen" @click="onChooseAction">
-          <img :src="isFullScreen ? require('../assets/img/unfullscreen.svg') : require('../assets/img/fullscreen.svg')">
+          <svg-icon :icon-name="isFullScreen ? 'unfullscreen' : 'fullscreen'" />
         </a>
         <!-- refresh icon -->
         <a href="#" v-if="refresh && !isFullScreen" @click="$emit('on-refresh')">
-          <img :src="require('../assets/img/refresh.svg')" alt="">
+          <svg-icon icon-name="refresh" />
         </a>
         <slot name="toolbar"></slot>
       </div>
@@ -76,15 +76,18 @@ import screenfull from 'screenfull'
 import { generateUUID } from '../utils'
 
 // loading mask
-import LoadingMask from './LoadingMask'
+import LoadingMask from '../components/LoadingMask'
 // collapse transition
-import CollapseTransition from './collapse-transition'
+import CollapseTransition from '../components/collapse-transition'
+// svg icon
+import SvgIcon from '../components/SvgIcon'
 
 export default {
   name: 'SmartWidget',
   components: {
     LoadingMask,
-    CollapseTransition
+    CollapseTransition,
+    SvgIcon
   },
   inject: {
     layout: {

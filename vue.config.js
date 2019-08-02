@@ -16,6 +16,24 @@ const setChainWebpack = config => {
       .end()
     .use('babel')
     .loader('babel-loader')
+  // 设置 svg-sprite-loader
+  config.module
+    .rule('svg')
+    .exclude
+      .add(resolve('src/assets/img'))
+      .end()
+  config.module
+    .rule('icons')
+    .test(/\.svg$/)
+    .include
+      .add(resolve('src/assets/img'))
+      .end()
+    .use('svg-sprite-loader')
+    .loader('svg-sprite-loader')
+    .options({
+      symbolId: 'icon-[name]'
+    })
+    .end()
   if (isProd) {
     /**
      * 清除性能警告
@@ -50,6 +68,9 @@ module.exports = {
   productionSourceMap: false,
   chainWebpack: config => setChainWebpack(config),
   configureWebpack: config => setConfigureWebpack(config),
+  css: {
+    extract: false
+  },
   devServer: {
     port: 8181,
     open: true,

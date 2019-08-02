@@ -1,5 +1,6 @@
-import SmartWidgetGrid from './components/SmartWidgetGrid'
-import SmartWidget from './components/SmartWidget'
+import './plugins/svg-icon'
+import SmartWidgetGrid from './packages/SmartWidgetGrid'
+import SmartWidget from './packages/SmartWidget'
 
 const components = [
   SmartWidgetGrid,
