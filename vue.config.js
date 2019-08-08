@@ -55,7 +55,7 @@ const setConfigureWebpack = config => {
       vue: 'vue'
     }
   ]
-  return isProd ? { externals } : {}
+  return isLib ? { externals } : {}
 }
 
 module.exports = {
