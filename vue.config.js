@@ -59,6 +59,7 @@ const setConfigureWebpack = config => {
 }
 
 module.exports = {
+  publicPath: './',
   pages: {
     index: {
       entry: resolve('app/main.js')  // 修改默认打包文件入口
