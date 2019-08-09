@@ -19,8 +19,7 @@
     "build:lib": "vue-cli-service build --mode lib --target lib --dest lib src/index.js",
     "report": "vue-cli-service build --mode lib --target lib --dest lib --report src/index.js",
     "lint": "vue-cli-service lint",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "deploy": "sh ./scripts/deploy.sh"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "peerDependencies": {
     "vue": "^2.5.0"
