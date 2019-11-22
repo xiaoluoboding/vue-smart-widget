@@ -21,7 +21,7 @@
   "dependencies": {
     "core-js": "^3.3.2",
     "screenfull": "^4.2.1",
-    "vue-grid-layout": "^2.3.4"
+    "vue-grid-layout": "^2.3.7"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.5",
@@ -33,6 +33,7 @@
     "echarts": "^4.2.1",
     "element-ui": "^2.11.1",
     "eslint": "^5.16.0",
+    "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
@@ -47,7 +48,7 @@
     "vuex": "^3.0.1"
   },
   "peerDependencies": {
-    "vue": "^2.5.0"
+    "vue": "^2.6.10"
   },
   "keywords": [
     "widget",
@@ -56,5 +57,14 @@
     "vue",
     "draggable",
     "resizable"
+  ],
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
   ]
 }
