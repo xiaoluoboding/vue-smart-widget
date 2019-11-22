@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 module.exports = {
   presets: [
-    '@vue/app'
+    "@vue/cli-plugin-babel/preset"
   ],
   plugins
 }
