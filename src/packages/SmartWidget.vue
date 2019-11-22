@@ -1,36 +1,31 @@
 <template>
   <div class="smartwidget"
     :class="smartWidgetClass"
-    :style="smartWidgetStyle"
+    :style="[smartWidgetStyle, dynamicStyle]"
     :id="smartWidgetId"
     @mouseover="handleMouseover"
-    @mouseout="smartWidgetStyle={}">
+    @mouseout="handleMouseout">
     <div class="widget-header" :style="widgetHeaderHeight" v-if="!simple">
-      <div v-if="$slots.title">
-        <slot name="title"></slot>
+      <slot v-if="$slots.title" name="title"></slot>
+      <div v-else class="widget-header__title ellis" :style="widgetTitleStyle" >
+        <span v-text="title"></span>
+        <span v-if="subTitle!==''" class="widget-header__subtitle" v-text="subTitle"></span>
       </div>
-      <template v-else>
-        <h2>
-          <span class="widget-header__title" :style="widgetTitleStyle" v-text="title"></span>
-        </h2>
-        <h4 v-if="subTitle!==''">
-          <span class="widget-header__subtitle" v-text="subTitle"></span>
-        </h4>
-      </template>
       <div class="widget-header__toolbar">
         <!-- collapse icon -->
-        <a href="#" v-if="!isHasGroup && collapse && !isFullScreen" @click="isCollapsed=!isCollapsed">
+        <a href="javascript:;" v-if="!isHasGroup && collapse && !isFullScreen" @click="isCollapsed=!isCollapsed">
           <svg-icon :icon-name="isCollapsed ? 'expand' : 'collapse'" />
         </a>
         <!-- fullscreen icon -->
-        <a href="#" v-if="fullscreen" @click="onChooseAction">
+        <a href="javascript:;" v-if="fullscreen" @click="onChooseAction">
           <svg-icon :icon-name="isFullScreen ? 'unfullscreen' : 'fullscreen'" />
         </a>
         <!-- refresh icon -->
-        <a href="#" v-if="refresh && !isFullScreen" @click="$emit('on-refresh')">
-          <svg-icon icon-name="refresh" />
+        <a href="javascript:;" v-if="refresh && !isFullScreen">
+          <svg-icon icon-name="loading" class="sw-loading" v-if="loading" />
+          <svg-icon icon-name="refresh" v-else @click="$emit('on-refresh')" />
         </a>
-        <slot name="toolbar"></slot>
+        <slot v-if="$slots.toolbar" name="toolbar"></slot>
       </div>
     </div>
     <!-- widget body -->
@@ -59,7 +54,7 @@
         <!-- end widget content -->
         <!-- widget footer -->
         <div class="widget-body__footer" :class="{'has-group': isHasGroup}" ref="widgetBodyFooter">
-          <slot name="footer"></slot>
+          <slot v-if="$slots.footer" name="footer"></slot>
         </div>
         <!-- end widget footer -->
         <loading-mask v-if="loading" />
@@ -71,8 +66,6 @@
 </template>
 
 <script>
-import screenfull from 'screenfull'
-
 import { generateUUID } from '../utils'
 
 // loading mask
@@ -89,14 +82,9 @@ export default {
     CollapseTransition,
     SvgIcon
   },
-  inject: {
-    layout: {
-      default: []
-    }
-  },
   props: {
-    title: String,
-    subTitle: String,
+    title: { type: String, default: '' },
+    subTitle: { type: String, default: '' },
     // set `widget-body__content` padding style
     padding: { type: [Number, Array], default: () => [12, 20] },
     // toggle widget mode
@@ -114,7 +102,11 @@ export default {
     // when to show card shadows
     shadow: { type: String, default: 'always' },
     // the card translateY style
-    translateY: { type: Number, default: 0 }
+    translateY: { type: Number, default: 0 },
+    // widget actived true/false
+    isActived: { type: Boolean, default: false },
+    // widget actived color
+    activedColor: { type: String, default: '#0076db' }
   },
   data () {
     return {
@@ -135,13 +127,19 @@ export default {
         'smartwidget-collapsed': this.isCollapsed,
         'is-always-shadow': this.shadow === 'always',
         'is-hover-shadow': this.shadow === 'hover',
-        'is-never-shadow': this.shadow === 'never'
+        'is-never-shadow': this.shadow === 'never',
+        'is-actived': this.isActived
       }
     },
     bodyContentPadding () {
       const padding = typeof (this.padding) === 'number' ? Array.of(this.padding) : this.padding
       const joinPadding = padding.join('px ')
       return joinPadding.padEnd(joinPadding.length + 2, 'px')
+    },
+    dynamicStyle () {
+      return this.isActived
+        ? { 'box-shadow': `0 0 0 2px ${this.activedColor}` }
+        : {}
     },
     widgetHeaderHeight () {
       return {
@@ -159,7 +157,7 @@ export default {
       const padding = typeof (this.padding) === 'number' ? Array.of(this.padding) : this.padding
       const offset = padding[padding.length - 1]
       return {
-        padding: `0 ${offset / 2}px 0 ${offset}px`
+        padding: `0 ${offset}px 0 ${offset}px`
       }
     },
     rowHeight () {
@@ -170,13 +168,21 @@ export default {
     isHasGroup: vm => Boolean(vm.$parent.i),
     contentH: vm => vm.getContentH()
   },
+  mounted () {
+    this.$nextTick(_ => {
+      this.widgetBodyOffsetHeight = this.$refs.widgetBody.offsetHeight
+      this.widgetBodyEditBoxH = this.$slots.editbox ? this.$refs.widgetBodyEditbox.offsetHeight : 0
+      this.widgetBodyFooterH = this.$slots.footer ? this.$refs.widgetBodyFooter.offsetHeight : 0
+    })
+  },
   methods: {
     onChooseAction () {
-      if (this.isHasGroup) {
-        this.handleScreenfull()
-      } else {
-        this.handlefullScreen()
-      }
+      // if (this.isHasGroup) {
+      //   this.handleScreenfull()
+      // } else {
+      //   this.handlefullScreen()
+      // }
+      this.handlefullScreen()
     },
     handlefullScreen () {
       // control collapsed state
@@ -188,11 +194,18 @@ export default {
         this.isCollapsed = this.isFullScreenCollapsed
       }
       this.isFullScreen = !this.isFullScreen
+
+      // grid-layout useCssTransforms
+      if (this.isHasGroup) {
+        this.$parent.useCssTransforms = !this.$parent.useCssTransforms
+      }
+
       // calculate widge-body height
       if (this.isFullScreen) {
         this.$nextTick(_ => {
           this.widgetBodyOldHeight = this.widgetBodyOffsetHeight
-          const widgetBodyOffsetHeight = document.getElementById(this.smartWidgetId).offsetHeight - 48
+          // console.log(document.body.offsetHeight)
+          const widgetBodyOffsetHeight = document.body.offsetHeight - this.rowHeight
           this.widgetBodyOffsetHeight = widgetBodyOffsetHeight
         })
         document.body.classList.add('no-overflow')
@@ -213,7 +226,6 @@ export default {
       if (this.isFullScreen && this.isFullScreenCollapsed) {
         this.isCollapsed = this.isFullScreenCollapsed
       }
-      screenfull.enabled && screenfull.toggle(this.$el)
     },
     getPaddingH () {
       let paddingH = 0
@@ -248,27 +260,19 @@ export default {
       return contentH > 0 ? contentH : this.$parent.rowHeight
     },
     handleMouseover () {
+      const smartWidgetStyle = this.smartWidgetStyle
       this.smartWidgetStyle = {
+        ...smartWidgetStyle,
         'transform': `translateY(${-this.translateY}px)`
       }
+    },
+    handleMouseout () {
+      const smartWidgetStyle = this.smartWidgetStyle
+      this.smartWidgetStyle = {
+        ...smartWidgetStyle,
+        'transform': `translateY(0px)`
+      }
     }
-  },
-  created () {
-    if (screenfull.enabled) {
-      screenfull.on('change', () => {
-        this.isFullScreen = screenfull.isFullscreen
-        if (!this.isFullScreen) {
-          this.isFullScreenCollapsed = this.isFullScreen
-        }
-      })
-    }
-  },
-  mounted () {
-    this.$nextTick(_ => {
-      this.widgetBodyOffsetHeight = this.$refs.widgetBody.offsetHeight
-      this.widgetBodyEditBoxH = this.$slots.editbox ? this.$refs.widgetBodyEditbox.offsetHeight : 0
-      this.widgetBodyFooterH = this.$slots.footer ? this.$refs.widgetBodyFooter.offsetHeight : 0
-    })
   }
 }
 </script>
@@ -307,29 +311,25 @@ body.no-overflow {
     display: flex;
     line-height: 48px;
     border-bottom: 1px solid #ebeef5;
-    h2,
-    h4 {
+    .widget-header__title {
       display: inline-block;
       position: relative;
       width: auto;
       margin: 0;
       font-weight: normal;
       letter-spacing: 0;
-    }
-    h2 {
-      display: flex;
       align-items: center;
       font-size: 16px;
-      .widget-header__title {
-        overflow: hidden;
-        word-break: break-all;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
     }
-    h4 {
+    .widget-header__subtitle {
       font-size: 12px;
       color: #777;
+      margin-left: 10px;
+    }
+    .ellis {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .widget-header__prefix {
       background: #0076db;
@@ -339,11 +339,12 @@ body.no-overflow {
     }
     .widget-header__toolbar {
       display: flex;
-      flex: 1;
-      align-items: center;
       justify-content: flex-end;
+      align-items: center;
+      flex: 1;
       padding: 0;
       margin: 0;
+      // margin-left: auto;
       a {
         display: inline-block;
         text-decoration: none;
@@ -361,12 +362,17 @@ body.no-overflow {
     }
   }
   .widget-body {
+    // display: flex;
+    // flex-direction: column;
     will-change: height;
     position: relative;
     overflow: hidden;
+    height: calc(100% - 48px);
     .widget-body__content {
+      // display: flex;
+      // flex: 1;
       &.fixed-height {
-        overflow-y: scroll
+        overflow-y: scroll;
       }
     }
     .widget-body__footer {
@@ -381,7 +387,7 @@ body.no-overflow {
       transition: .3s height ease-in-out, .3s padding-top ease-in-out, .3s padding-bottom ease-in-out;
     }
   }
-  // screenfull
+  // fullscreen
   &.smartwidget-fullscreen {
     position: fixed;
     height: 100%;
@@ -393,18 +399,9 @@ body.no-overflow {
       cursor: default;
     }
   }
-  // fullscreen
-  // &.smartwidget-fullscreen {
-  //   position: fixed;
-  //   top: 0;
-  //   left: 0;
-  //   right: 0;
-  //   bottom: 0;
-  //   margin: 0;
-  //   z-index: 1050;
-  //   .widget-header {
-  //     cursor: default;
-  //   }
-  // }
+  svg.sw-loading {
+    animation: rotating 2s linear infinite;
+    cursor: not-allowed;
+  }
 }
 </style>

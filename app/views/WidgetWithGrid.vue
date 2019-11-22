@@ -1,5 +1,9 @@
 <template>
-  <smart-widget-grid :layout="layout" :row-height="48" :margin="[15, 15]" @layout-updated="handleLayoutUpdated">
+  <smart-widget-grid
+    :layout="layout"
+    :row-height="48"
+    :margin="[15, 15]"
+    @layout-updated="handleLayoutUpdated">
     <smart-widget slot="0" simple>
       <div class="layout-center">
         <h3>Simple Widget Without Header</h3>
@@ -64,9 +68,7 @@
           <el-button type="success" size="mini" @click="$router.push('/widget-only')">Index</el-button>
         </div>
       </template>
-      <el-table
-        :data="tableData"
-        style="width: 100%">
+      <el-table style="width: 100%" :data="tableData">
         <el-table-column
           prop="date"
           label="日期"
@@ -85,13 +87,22 @@
     </smart-widget>
     <smart-widget slot="8" title="2017 Hotest Frontend Project"
       fullscreen
-      :loading="loading"
       refresh
+      is-actived
+      :loading="loading"
       @on-refresh="handleRefresh">
-      <ve-bar-chart :data="barData" :height="contentH" slot-scope="{contentH}" />
+      <template v-slot="{contentH}">
+        <ve-bar-chart :data="barData" :height="contentH" />
+      </template>
     </smart-widget>
     <smart-widget slot="9" title="Diffrent Platforms PV" fullscreen collapse>
-      <ve-donut-chart :data="donutData" :settings="donutSetting" :height="contentH" slot-scope="{contentH}" />
+      <template v-slot="{contentH}">
+        <ve-donut-chart
+          :data="donutData"
+          :settings="donutSetting"
+          :height="contentH"
+        />
+      </template>
     </smart-widget>
   </smart-widget-grid>
 </template>
@@ -113,20 +124,6 @@ export default {
         { x: 0, y: 3, w: 8, h: 6, i: '8' },
         { x: 8, y: 3, w: 4, h: 6, i: '9' }
       ]
-    }
-  },
-  methods: {
-    handleRefresh () {
-      this.loading = true
-      setTimeout(() => {
-        this.loading = false
-      }, 2000)
-    },
-    handleLayoutUpdated (newLayout) {
-      console.log(JSON.stringify(newLayout))
-    },
-    handleMove (params) {
-      console.log(params)
     }
   },
   created () {
@@ -190,6 +187,23 @@ export default {
     }]
     this.donutSetting = {
       offsetY: '60%'
+    }
+  },
+  methods: {
+    handleRefresh () {
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+      }, 2000)
+    },
+    handleLayoutUpdated (newLayout) {
+      console.log(JSON.stringify(newLayout))
+    },
+    handleMove (params) {
+      console.log(params)
+    },
+    handleResize (params) {
+      console.log(params)
     }
   }
 }
