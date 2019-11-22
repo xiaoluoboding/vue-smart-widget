@@ -1,13 +1,15 @@
 <template>
   <grid-layout
+    :layout.sync="layout"
+    :use-css-transforms="useCssTransforms"
     v-bind="layoutAttribute"
-    @layout-updated="layoutUpdatedEvent"
+    v-on="$listeners"
   >
     <grid-item
       v-for="item in layout"
+      drag-ignore-from=".widget-body"
       :key="item.i"
       v-bind="item"
-      dragIgnoreFrom=".widget-body"
       @move="moveEvent"
       @resize="resizeEvent"
       @moved="movedEvent"
@@ -29,6 +31,7 @@ export default {
   },
   provide () {
     return {
+      swg: this,
       layout: this.layout
     }
   },
@@ -37,6 +40,21 @@ export default {
       type: Array,
       required: true
     },
+    colNum: {
+      type: Number,
+      default: 12
+    },
+    maxRows: {
+      type: Number
+    },
+    rowHeight: {
+      type: Number,
+      default: 48
+    },
+    margin: {
+      type: Array,
+      default: () => [10, 10]
+    },
     draggable: {
       type: Boolean,
       default: true
@@ -44,40 +62,36 @@ export default {
     resizable: {
       type: Boolean,
       default: true
-    },
-    colNum: {
-      type: Number,
-      default: 12
-    },
-    margin: {
-      type: Array,
-      default: () => [10, 10]
-    },
-    rowHeight: {
-      type: Number,
-      default: 48
     }
   },
   data () {
     return {
-      layoutAttribute: {
-        autoSize: true,
-        layout: this.layout,
+      useCssTransforms: false
+    }
+  },
+  computed: {
+    layoutAttribute () {
+      return {
+        // layout: this.layout,
         colNum: this.colNum,
         rowHeight: this.rowHeight,
+        maxRows: this.maxRows,
         margin: this.margin,
         isDraggable: this.draggable,
         isResizable: this.resizable,
         isMirrored: false,
+        autoSize: true,
         verticalCompact: true,
-        useCssTransforms: true
+        responsive: false
       }
     }
   },
+  // mounted () {
+  //   console.log(this.$listeners)
+  //   console.log(this.$listeners.hasOwnProperty('layout-updated'))
+  //   console.log(this.$attrs)
+  // },
   methods: {
-    layoutUpdatedEvent (newLayout) {
-      this.$emit('layout-updated', newLayout)
-    },
     moveEvent (i, newX, newY) {
       this.$emit('move', { i, newX, newY })
     },
@@ -85,10 +99,10 @@ export default {
       this.$emit('resize', { i, newH, newW, newHPx, newWPx })
     },
     movedEvent (i, newX, newY) {
-      this.$emit('layout-updated', { i, newX, newY })
+      this.$emit('moved', { i, newX, newY })
     },
     resizedEvent (i, newH, newW, newHPx, newWPx) {
-      this.$emit('layout-updated', { i, newH, newW, newHPx, newWPx })
+      this.$emit('resized', { i, newH, newW, newHPx, newWPx })
     }
   }
 }
