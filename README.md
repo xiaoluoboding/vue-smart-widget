@@ -129,18 +129,14 @@ new Vue({
 | moved | Every time an item is finished being moved and changes position | `(i, newX, newY)` |
 | resize | Every time an item is being resized and changes size | `(i, newH, newW, newHPx, newWPx)` |
 | resized | Every time an item is finished being moved and changes position | `(i, newH, newW, newHPx, newWPx)` |
+| container-resized | Every time the grid item/layout container changes size (browser window or other) | `(i, newH, newW, newHPx, newWPx)` |
 
 ## CSS Selector in SmartWidget
 
 | Name | Description |
 |:--------:|--------|
 | `.smartwidget` | The main selector in SmartWidget |
-| `.is-always-shadow` | Every time an item is being moved and changes position |
-| `.is-hover-shadow` | Every time an item is being moved and changes position |
-| `.is-never-shadow` | Every time an item is being moved and changes position |
-| `.is-actived` | Every time an item is being moved and changes position |
-| `.smartwidget-fullscreen` | Every time an item is being moved and changes position |
-| `.smartwidget-collapsed` | Every time an item is being moved and changes position |
+| `.is-actived` | The state of widget is actived |
 
 ## SmartWidgetGrid Props
 
@@ -167,6 +163,10 @@ new Vue({
 
 | Name | Description | Parameters |
 |:--------|:--------|:--------:|
+| layout-created | Emited on the component created lifecycle hook | `newLayout` |
+| layout-before-mount | Emited on the component beforeMount lifecycle hook | `newLayout` |
+| layout-mounted | Emited on the component mounted lifecycle hook | `newLayout` |
+| layout-ready | Emited when all the operations on the mount hook finish | `newLayout` |
 | layout-updated | Every time the layout has finished updating and positions of all grid-items are recalculated | `newLayout` |
 
 ## License

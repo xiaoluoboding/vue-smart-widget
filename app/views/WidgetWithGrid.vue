@@ -3,7 +3,9 @@
     :layout="layout"
     :row-height="48"
     :margin="[15, 15]"
-    @layout-updated="handleLayoutUpdated">
+    @layout-updated="onLayoutUpdated"
+    @move="onMove"
+    @container-resized="onContainerResized">
     <smart-widget slot="0" simple>
       <div class="layout-center">
         <h3>Simple Widget Without Header</h3>
@@ -156,35 +158,37 @@ export default {
         data: [40000, 27800, 22000, 20200, 13600]
       }]
     }
-    this.tableData = [{
-      date: '2016-05-03',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-04',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-01',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-08',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-06',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-07',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }]
+    this.tableData = [
+      {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-02',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-08',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-06',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-07',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }
+    ]
     this.donutSetting = {
       offsetY: '60%'
     }
@@ -196,13 +200,16 @@ export default {
         this.loading = false
       }, 2000)
     },
-    handleLayoutUpdated (newLayout) {
+    onLayoutUpdated (newLayout) {
       console.log(JSON.stringify(newLayout))
     },
-    handleMove (params) {
+    onMove (params) {
       console.log(params)
     },
-    handleResize (params) {
+    onResize (params) {
+      console.log(params)
+    },
+    onContainerResized (params) {
       console.log(params)
     }
   }

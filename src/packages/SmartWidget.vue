@@ -247,15 +247,6 @@ export default {
       const paddingH = this.getPaddingH()
       const widgetBodyEditBoxH = this.widgetBodyEditBoxH
       const widgetBodyFooterH = this.widgetBodyFooterH
-      // console.log(this.$parent)
-      if (this.$parent.i === '5') {
-        console.group('getContentH')
-        console.log(widgetBodyH)
-        console.log(paddingH)
-        console.log(widgetBodyEditBoxH)
-        console.log(widgetBodyFooterH)
-        console.groupEnd()
-      }
       const contentH = widgetBodyH - paddingH - widgetBodyEditBoxH - widgetBodyFooterH - 1
       return contentH > 0 ? contentH : this.$parent.rowHeight
     },

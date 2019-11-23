@@ -3,7 +3,7 @@
     :layout.sync="layout"
     :use-css-transforms="useCssTransforms"
     v-bind="layoutAttribute"
-    v-on="$listeners"
+    v-on="gridLayoutEvents"
   >
     <grid-item
       v-for="item in layout"
@@ -14,6 +14,7 @@
       @resize="resizeEvent"
       @moved="movedEvent"
       @resized="resizedEvent"
+      @container-resized="containerResizedEvent"
     >
       <slot :name="item.i"></slot>
     </grid-item>
@@ -85,12 +86,26 @@ export default {
       }
     }
   },
-  // mounted () {
-  //   console.log(this.$listeners)
-  //   console.log(this.$listeners.hasOwnProperty('layout-updated'))
-  //   console.log(this.$attrs)
-  // },
+  created () {
+    const listeners = this.$listeners
+
+    const layoutEventList = [
+      'layout-created',
+      'layout-before-mount',
+      'layout-mounted',
+      'layout-ready',
+      'layout-updated'
+    ]
+
+    this.gridLayoutEvents = this.pick(listeners, layoutEventList)
+  },
   methods: {
+    // Picks the key-value pairs corresponding to the given keys from an object.
+    pick (obj, arr) {
+      return arr.reduce((acc, curr) => {
+        return (curr in obj && (acc[curr] = obj[curr]), acc)
+      }, {})
+    },
     moveEvent (i, newX, newY) {
       this.$emit('move', { i, newX, newY })
     },
@@ -102,6 +117,9 @@ export default {
     },
     resizedEvent (i, newH, newW, newHPx, newWPx) {
       this.$emit('resized', { i, newH, newW, newHPx, newWPx })
+    },
+    containerResizedEvent (i, newH, newW, newHPx, newWPx) {
+      this.$emit('container-resized', { i, newH, newW, newHPx, newWPx })
     }
   }
 }
