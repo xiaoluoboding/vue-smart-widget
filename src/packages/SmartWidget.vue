@@ -1,8 +1,8 @@
 <template>
-  <div class="smartwidget"
+  <div
+    class="smartwidget"
     :class="smartWidgetClass"
     :style="[smartWidgetStyle, dynamicStyle]"
-    :id="smartWidgetId"
     @mouseover="handleMouseover"
     @mouseout="handleMouseout">
     <div class="widget-header" :style="widgetHeaderHeight" v-if="!simple">
@@ -17,7 +17,7 @@
           <svg-icon :icon-name="isCollapsed ? 'expand' : 'collapse'" />
         </a>
         <!-- fullscreen icon -->
-        <a href="javascript:;" v-if="fullscreen" @click="onChooseAction">
+        <a href="javascript:;" v-if="fullscreen" @click="handlefullScreen">
           <svg-icon :icon-name="isFullScreen ? 'unfullscreen' : 'fullscreen'" />
         </a>
         <!-- refresh icon -->
@@ -36,6 +36,7 @@
           simple ? 'widget-body-simple': 'widget-body',
           { 'is-collapse': isCollapsed }
         ]"
+        :style="!simple ? widgetBodyStyle : {}"
         ref="widgetBody"
       >
         <!-- widget edit box -->
@@ -66,8 +67,6 @@
 </template>
 
 <script>
-import { generateUUID } from '../utils'
-
 // loading mask
 import LoadingMask from '../components/LoadingMask'
 // collapse transition
@@ -83,7 +82,9 @@ export default {
     SvgIcon
   },
   props: {
+    // set the widget main title
     title: { type: String, default: '' },
+    // set the widget secondary title
     subTitle: { type: String, default: '' },
     // set `widget-body__content` padding style
     padding: { type: [Number, Array], default: () => [12, 20] },
@@ -147,10 +148,15 @@ export default {
         'line-height': `${this.rowHeight}px`
       }
     },
+    widgetBodyStyle () {
+      return {
+        'height': `calc(100% - ${this.rowHeight}px)`
+      }
+    },
     widgetBodyContentStyle () {
       return {
-        padding: this.bodyContentPadding,
-        height: this.isHasGroup ? `${this.contentH}px` : ''
+        padding: this.bodyContentPadding
+        // height: this.isHasGroup ? `${this.contentH}px` : ''
       }
     },
     widgetTitleStyle () {
@@ -163,8 +169,6 @@ export default {
     rowHeight () {
       return this.isHasGroup ? this.$parent.rowHeight : 48
     },
-    smartWidgetId: _ => `smart-widget-${generateUUID()}`,
-    childLayout: vm => vm.layout.find(v => v.i === vm.$parent.i),
     isHasGroup: vm => Boolean(vm.$parent.i),
     contentH: vm => vm.getContentH()
   },
@@ -176,14 +180,6 @@ export default {
     })
   },
   methods: {
-    onChooseAction () {
-      // if (this.isHasGroup) {
-      //   this.handleScreenfull()
-      // } else {
-      //   this.handlefullScreen()
-      // }
-      this.handlefullScreen()
-    },
     handlefullScreen () {
       // control collapsed state
       if (this.isCollapsed) {
@@ -204,7 +200,7 @@ export default {
       if (this.isFullScreen) {
         this.$nextTick(_ => {
           this.widgetBodyOldHeight = this.widgetBodyOffsetHeight
-          // console.log(document.body.offsetHeight)
+          console.log(document.body.offsetHeight)
           const widgetBodyOffsetHeight = document.body.offsetHeight - this.rowHeight
           this.widgetBodyOffsetHeight = widgetBodyOffsetHeight
         })
@@ -217,15 +213,6 @@ export default {
         document.body.removeAttribute('class', 'no-overflow')
       }
       this.$emit('on-fullscreen', this.isFullScreen)
-    },
-    handleScreenfull () {
-      if (this.isCollapsed) {
-        this.isFullScreenCollapsed = this.isCollapsed
-        this.isCollapsed = !this.isCollapsed
-      }
-      if (this.isFullScreen && this.isFullScreenCollapsed) {
-        this.isCollapsed = this.isFullScreenCollapsed
-      }
     },
     getPaddingH () {
       let paddingH = 0
@@ -256,7 +243,20 @@ export default {
       return widgetBodyH
     },
     getContentH () {
-      const contentH = this.getWidgetBodyH() - this.getPaddingH() - this.widgetBodyEditBoxH - this.widgetBodyFooterH - 1
+      const widgetBodyH = this.widgetBodyOffsetHeight
+      const paddingH = this.getPaddingH()
+      const widgetBodyEditBoxH = this.widgetBodyEditBoxH
+      const widgetBodyFooterH = this.widgetBodyFooterH
+      // console.log(this.$parent)
+      if (this.$parent.i === '5') {
+        console.group('getContentH')
+        console.log(widgetBodyH)
+        console.log(paddingH)
+        console.log(widgetBodyEditBoxH)
+        console.log(widgetBodyFooterH)
+        console.groupEnd()
+      }
+      const contentH = widgetBodyH - paddingH - widgetBodyEditBoxH - widgetBodyFooterH - 1
       return contentH > 0 ? contentH : this.$parent.rowHeight
     },
     handleMouseover () {
@@ -293,6 +293,7 @@ body.no-overflow {
   width: 100%;
 }
 .smartwidget {
+  box-sizing: border-box;
   background: #fff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   border: 1px solid #ebeef5;
@@ -361,16 +362,22 @@ body.no-overflow {
       }
     }
   }
+  .widget-body-simple {
+    display: flex;
+    height: inherit;
+    width: inherit;
+    .widget-body__content {
+      width: 100%;
+    }
+  }
   .widget-body {
-    // display: flex;
-    // flex-direction: column;
+    display: flex;
+    flex-direction: column;
     will-change: height;
     position: relative;
     overflow: hidden;
-    height: calc(100% - 48px);
     .widget-body__content {
-      // display: flex;
-      // flex: 1;
+      flex: 1;
       &.fixed-height {
         overflow-y: scroll;
       }
@@ -394,7 +401,7 @@ body.no-overflow {
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 1050;
+    z-index: 6666;
     .widget-header {
       cursor: default;
     }

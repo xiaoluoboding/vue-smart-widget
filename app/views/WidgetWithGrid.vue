@@ -42,7 +42,26 @@
       </template>
       <p>Widget with Footer</p>
     </smart-widget>
-    <smart-widget slot="6" title="Widget body content's height is fixed" fixed-height>
+    <smart-widget slot="6" title="2017 Hotest Frontend Project"
+      fullscreen
+      refresh
+      is-actived
+      :loading="loading"
+      @on-refresh="handleRefresh">
+      <template v-slot="{contentH}">
+        <ve-bar-chart :data="barData" :height="contentH" />
+      </template>
+    </smart-widget>
+    <smart-widget slot="7" title="Diffrent Platforms PV" fullscreen collapse>
+      <template v-slot="{contentH}">
+        <ve-donut-chart
+          :data="donutData"
+          :settings="donutSetting"
+          :height="contentH"
+        />
+      </template>
+    </smart-widget>
+    <smart-widget slot="8" title="Widget body content's height is fixed" fixed-height>
       <el-table
         :data="tableData"
         style="width: 100%">
@@ -62,7 +81,7 @@
         </el-table-column>
       </el-table>
     </smart-widget>
-    <smart-widget slot="7" title="Widget with custom toolbar">
+    <smart-widget slot="9" title="Widget with custom toolbar">
       <template slot="toolbar">
         <div style="margin: 0 12px;">
           <el-button type="success" size="mini" @click="$router.push('/widget-only')">Index</el-button>
@@ -85,25 +104,6 @@
         </el-table-column>
       </el-table>
     </smart-widget>
-    <smart-widget slot="8" title="2017 Hotest Frontend Project"
-      fullscreen
-      refresh
-      is-actived
-      :loading="loading"
-      @on-refresh="handleRefresh">
-      <template v-slot="{contentH}">
-        <ve-bar-chart :data="barData" :height="contentH" />
-      </template>
-    </smart-widget>
-    <smart-widget slot="9" title="Diffrent Platforms PV" fullscreen collapse>
-      <template v-slot="{contentH}">
-        <ve-donut-chart
-          :data="donutData"
-          :settings="donutSetting"
-          :height="contentH"
-        />
-      </template>
-    </smart-widget>
   </smart-widget-grid>
 </template>
 
@@ -113,16 +113,16 @@ export default {
     return {
       loading: false,
       layout: [
-        { x: 0, y: 0, w: 2, h: 3, i: '0' },
-        { x: 2, y: 0, w: 2, h: 3, i: '1' },
-        { x: 4, y: 0, w: 2, h: 3, i: '2' },
-        { x: 6, y: 0, w: 2, h: 3, i: '3' },
-        { x: 8, y: 0, w: 2, h: 3, i: '4' },
-        { x: 10, y: 0, w: 2, h: 3, i: '5' },
-        { x: 0, y: 9, w: 6, h: 5, i: '6' },
-        { x: 6, y: 9, w: 6, h: 5, i: '7' },
-        { x: 0, y: 3, w: 8, h: 6, i: '8' },
-        { x: 8, y: 3, w: 4, h: 6, i: '9' }
+        { x: 0, y: 0, w: 4, h: 3, i: '0' },
+        { x: 4, y: 0, w: 4, h: 3, i: '1' },
+        { x: 8, y: 0, w: 4, h: 3, i: '2' },
+        { x: 0, y: 3, w: 4, h: 3, i: '3' },
+        { x: 4, y: 3, w: 4, h: 3, i: '4' },
+        { x: 8, y: 3, w: 4, h: 3, i: '5' },
+        { x: 0, y: 6, w: 8, h: 6, i: '6' },
+        { x: 8, y: 6, w: 4, h: 6, i: '7' },
+        { x: 0, y: 12, w: 6, h: 5, i: '8' },
+        { x: 6, y: 12, w: 6, h: 5, i: '9' }
       ]
     }
   },
@@ -216,6 +216,9 @@ export default {
   border-top: 1px solid #ebeef1;
 }
 .layout-center {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 </style>

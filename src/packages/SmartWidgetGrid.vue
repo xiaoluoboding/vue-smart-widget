@@ -31,7 +31,6 @@ export default {
   },
   provide () {
     return {
-      swg: this,
       layout: this.layout
     }
   },
