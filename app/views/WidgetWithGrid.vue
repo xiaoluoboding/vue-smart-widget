@@ -3,6 +3,7 @@
     :layout="layout"
     :row-height="48"
     :margin="[15, 15]"
+    :is-static="isStatic"
     @layout-updated="onLayoutUpdated"
     @move="onMove"
     @container-resized="onContainerResized">
@@ -49,6 +50,7 @@
       refresh
       is-actived
       :loading="loading"
+      @before-fullscreen="val => isStatic = val"
       @on-refresh="handleRefresh">
       <template v-slot="{contentH}">
         <ve-bar-chart :data="barData" :height="contentH" />
@@ -114,6 +116,7 @@ export default {
   data () {
     return {
       loading: false,
+      isStatic: false,
       layout: [
         { x: 0, y: 0, w: 4, h: 3, i: '0' },
         { x: 4, y: 0, w: 4, h: 3, i: '1' },

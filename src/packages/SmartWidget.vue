@@ -191,16 +191,15 @@ export default {
       }
       this.isFullScreen = !this.isFullScreen
 
-      // grid-layout useCssTransforms
+      // widget before fullscreen, change the widget to static, so it won't be draggable, resizable or moved
       if (this.isHasGroup) {
-        this.$parent.useCssTransforms = !this.$parent.useCssTransforms
+        this.$emit('before-fullscreen', this.isFullScreen)
       }
 
       // calculate widge-body height
       if (this.isFullScreen) {
         this.$nextTick(_ => {
           this.widgetBodyOldHeight = this.widgetBodyOffsetHeight
-          console.log(document.body.offsetHeight)
           const widgetBodyOffsetHeight = document.body.offsetHeight - this.rowHeight
           this.widgetBodyOffsetHeight = widgetBodyOffsetHeight
         })

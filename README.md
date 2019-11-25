@@ -124,12 +124,14 @@ new Vue({
 
 | Name | Description | Parameters |
 |:--------:|--------|:--------|
-| on-refresh | Used when the widget need fetching data from ajax methods, usually used with `loading` attribute | - |
 | move | Every time an item is being moved and changes position | `(i, newX, newY)` |
 | moved | Every time an item is finished being moved and changes position | `(i, newX, newY)` |
 | resize | Every time an item is being resized and changes size | `(i, newH, newW, newHPx, newWPx)` |
 | resized | Every time an item is finished being moved and changes position | `(i, newH, newW, newHPx, newWPx)` |
 | container-resized | Every time the grid item/layout container changes size (browser window or other) | `(i, newH, newW, newHPx, newWPx)` |
+| on-refresh | Used when the widget need fetching data from ajax methods, usually used with `loading` attribute | - |
+| before-fullscreen | Used when the widget before fullscreen, usually used with `fullscreen` attribute | `true` or `false` |
+| on-fullscreen | Used when the widget is already fullscreen, usually used with `fullscreen` attribute | `true` or `false` |
 
 ## CSS Selector in SmartWidget
 
@@ -150,6 +152,7 @@ new Vue({
 | margin | Says what are the margins of elements inside the grid. | Array | - | `[10, 10]` |
 | isDraggable | Says if the grids items are draggable. | Boolean | `true` or `false` | `true` |
 | isResizable | Says if the grids items are resizable. | Boolean | `true` or `false` | `true` |
+| static | control all widgets won't be draggable, resizable or moved | Boolean | `true` or `false` | `false` |
 
 ## Slot scopes
 

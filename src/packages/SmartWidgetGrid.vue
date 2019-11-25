@@ -1,14 +1,14 @@
 <template>
   <grid-layout
     :layout.sync="layout"
-    :use-css-transforms="useCssTransforms"
-    v-bind="layoutAttribute"
+    v-bind="layoutAttrs"
     v-on="gridLayoutEvents"
   >
     <grid-item
       v-for="item in layout"
       drag-ignore-from=".widget-body"
       :key="item.i"
+      :static="isStatic"
       v-bind="item"
       @move="moveEvent"
       @resize="resizeEvent"
@@ -62,16 +62,15 @@ export default {
     resizable: {
       type: Boolean,
       default: true
+    },
+    isStatic: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      useCssTransforms: false
-    }
-  },
-  computed: {
-    layoutAttribute () {
-      return {
+      layoutAttrs: {
         // layout: this.layout,
         colNum: this.colNum,
         rowHeight: this.rowHeight,
@@ -82,6 +81,7 @@ export default {
         isMirrored: false,
         autoSize: true,
         verticalCompact: true,
+        useCssTransforms: false,
         responsive: false
       }
     }
