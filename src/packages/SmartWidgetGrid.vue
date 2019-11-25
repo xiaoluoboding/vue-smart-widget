@@ -1,17 +1,20 @@
 <template>
   <grid-layout
-    v-bind="layoutAttribute"
-    @layout-updated="layoutUpdatedEvent"
+    :layout.sync="layout"
+    v-bind="layoutAttrs"
+    v-on="gridLayoutEvents"
   >
     <grid-item
       v-for="item in layout"
+      drag-ignore-from=".widget-body"
       :key="item.i"
+      :static="isStatic"
       v-bind="item"
-      dragIgnoreFrom=".widget-body"
       @move="moveEvent"
       @resize="resizeEvent"
       @moved="movedEvent"
       @resized="resizedEvent"
+      @container-resized="containerResizedEvent"
     >
       <slot :name="item.i"></slot>
     </grid-item>
@@ -37,6 +40,21 @@ export default {
       type: Array,
       required: true
     },
+    colNum: {
+      type: Number,
+      default: 12
+    },
+    maxRows: {
+      type: Number
+    },
+    rowHeight: {
+      type: Number,
+      default: 48
+    },
+    margin: {
+      type: Array,
+      default: () => [10, 10]
+    },
     draggable: {
       type: Boolean,
       default: true
@@ -45,38 +63,48 @@ export default {
       type: Boolean,
       default: true
     },
-    colNum: {
-      type: Number,
-      default: 12
-    },
-    margin: {
-      type: Array,
-      default: () => [10, 10]
-    },
-    rowHeight: {
-      type: Number,
-      default: 48
+    isStatic: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      layoutAttribute: {
-        autoSize: true,
-        layout: this.layout,
+      layoutAttrs: {
+        // layout: this.layout,
         colNum: this.colNum,
         rowHeight: this.rowHeight,
+        maxRows: this.maxRows,
         margin: this.margin,
         isDraggable: this.draggable,
         isResizable: this.resizable,
         isMirrored: false,
+        autoSize: true,
         verticalCompact: true,
-        useCssTransforms: true
+        useCssTransforms: false,
+        responsive: false
       }
     }
   },
+  created () {
+    const listeners = this.$listeners
+
+    const layoutEventList = [
+      'layout-created',
+      'layout-before-mount',
+      'layout-mounted',
+      'layout-ready',
+      'layout-updated'
+    ]
+
+    this.gridLayoutEvents = this.pick(listeners, layoutEventList)
+  },
   methods: {
-    layoutUpdatedEvent (newLayout) {
-      this.$emit('layout-updated', newLayout)
+    // Picks the key-value pairs corresponding to the given keys from an object.
+    pick (obj, arr) {
+      return arr.reduce((acc, curr) => {
+        return (curr in obj && (acc[curr] = obj[curr]), acc)
+      }, {})
     },
     moveEvent (i, newX, newY) {
       this.$emit('move', { i, newX, newY })
@@ -85,10 +113,13 @@ export default {
       this.$emit('resize', { i, newH, newW, newHPx, newWPx })
     },
     movedEvent (i, newX, newY) {
-      this.$emit('layout-updated', { i, newX, newY })
+      this.$emit('moved', { i, newX, newY })
     },
     resizedEvent (i, newH, newW, newHPx, newWPx) {
-      this.$emit('layout-updated', { i, newH, newW, newHPx, newWPx })
+      this.$emit('resized', { i, newH, newW, newHPx, newWPx })
+    },
+    containerResizedEvent (i, newH, newW, newHPx, newWPx) {
+      this.$emit('container-resized', { i, newH, newW, newHPx, newWPx })
     }
   }
 }

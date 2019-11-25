@@ -117,16 +117,28 @@ new Vue({
 | fixedHeight | determine whether widget body's height is fixed, only support `smart-widget` | Boolean | `true` or `false` | `false` |
 | shadow | when to show card shadows | String | `always`、`hover`、`never` | `always` |
 | translateY | the length of vertically transform | Number | - | 0 |
+| isActived | determine whether widget is actived | Boolean | `true` or `false` | `false` |
+| activedColor | the length of vertically transform | String | hex color | #0076db |
 
 ## SmartWidget Methods
 
 | Name | Description | Parameters |
 |:--------:|--------|:--------|
-| on-refresh | Used when the widget need fetching data from ajax methods, usually used with `loading` attribute | - |
 | move | Every time an item is being moved and changes position | `(i, newX, newY)` |
 | moved | Every time an item is finished being moved and changes position | `(i, newX, newY)` |
 | resize | Every time an item is being resized and changes size | `(i, newH, newW, newHPx, newWPx)` |
 | resized | Every time an item is finished being moved and changes position | `(i, newH, newW, newHPx, newWPx)` |
+| container-resized | Every time the grid item/layout container changes size (browser window or other) | `(i, newH, newW, newHPx, newWPx)` |
+| on-refresh | Used when the widget need fetching data from ajax methods, usually used with `loading` attribute | - |
+| before-fullscreen | Used when the widget before fullscreen, usually used with `fullscreen` attribute | `true` or `false` |
+| on-fullscreen | Used when the widget is already fullscreen, usually used with `fullscreen` attribute | `true` or `false` |
+
+## CSS Selector in SmartWidget
+
+| Name | Description |
+|:--------:|--------|
+| `.smartwidget` | The main selector in SmartWidget |
+| `.is-actived` | The state of widget is actived |
 
 ## SmartWidgetGrid Props
 
@@ -140,6 +152,7 @@ new Vue({
 | margin | Says what are the margins of elements inside the grid. | Array | - | `[10, 10]` |
 | isDraggable | Says if the grids items are draggable. | Boolean | `true` or `false` | `true` |
 | isResizable | Says if the grids items are resizable. | Boolean | `true` or `false` | `true` |
+| static | control all widgets won't be draggable, resizable or moved | Boolean | `true` or `false` | `false` |
 
 ## Slot scopes
 
@@ -153,6 +166,10 @@ new Vue({
 
 | Name | Description | Parameters |
 |:--------|:--------|:--------:|
+| layout-created | Emited on the component created lifecycle hook | `newLayout` |
+| layout-before-mount | Emited on the component beforeMount lifecycle hook | `newLayout` |
+| layout-mounted | Emited on the component mounted lifecycle hook | `newLayout` |
+| layout-ready | Emited when all the operations on the mount hook finish | `newLayout` |
 | layout-updated | Every time the layout has finished updating and positions of all grid-items are recalculated | `newLayout` |
 
 ## License

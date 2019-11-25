@@ -24,8 +24,8 @@
       </div>
       <div class="example-code">
         <div class="example-link">
-          <a href="https://jsfiddle.net/xiaoluoboding/u8yy1s5w/" target="_blank">
-            <img :src="require('@/assets/img/jsfiddle.svg')" alt="View On Jsfiddle" v-tooltip="tooltipOptions">
+          <a :href="defaultUrl" target="_blank">
+            <img :src="codesandboxIcon" alt="View On CodeSandbox" v-tooltip="tooltipOptions">
           </a>
         </div>
         <code-block lang="html" :sourcecode="defaultWidget" />
@@ -78,8 +78,8 @@
       </div>
       <div class="example-code">
         <div class="example-link">
-          <a href="https://jsfiddle.net/xiaoluoboding/g87pkf3s/" target="_blank">
-            <img :src="require('@/assets/img/jsfiddle.svg')" alt="View On Jsfiddle" v-tooltip="tooltipOptions">
+          <a :href="advanedUrl" target="_blank">
+            <img :src="codesandboxIcon" alt="View On Jsfiddle" v-tooltip="tooltipOptions">
           </a>
         </div>
         <code-block lang="html" :sourcecode="advanedWidget" />
@@ -113,8 +113,8 @@
       </div>
       <div class="example-code">
         <div class="example-link">
-          <a href="https://jsfiddle.net/xiaoluoboding/kuxq1fb8/" target="_blank">
-            <img :src="require('@/assets/img/jsfiddle.svg')" alt="View On Jsfiddle" v-tooltip="tooltipOptions">
+          <a :href="gridUrl" target="_blank">
+            <img :src="codesandboxIcon" alt="View On Jsfiddle" v-tooltip="tooltipOptions">
           </a>
         </div>
         <el-row>
@@ -136,6 +136,7 @@
 
 <script>
 import CodeBlock from '@/components/CodeBlock'
+import codesandboxIcon from '@/assets/img/codesandbox.svg'
 
 import {
   placeholder,
@@ -157,7 +158,7 @@ export default {
         { x: 8, y: 0, w: 4, h: 4, i: '2' }
       ],
       tooltipOptions: {
-        content: 'View On Jsfiddle',
+        content: 'View On CodeSandbox',
         placement: 'left-start',
         classes: ['stand'],
         offset: 6,
@@ -165,7 +166,11 @@ export default {
           show: 300,
           hide: 300
         }
-      }
+      },
+      codesandboxIcon,
+      defaultUrl: 'https://codesandbox.io/s/vuesmartwidget-default-2ghmi?autoresize=1&fontsize=14&hidenavigation=1&theme=dark&view=preview',
+      advanedUrl: 'https://codesandbox.io/s/vuesmartwidget-advanced-8i7x0?autoresize=1&fontsize=14&hidenavigation=1&theme=dark&view=preview',
+      gridUrl: 'https://codesandbox.io/s/vuesmartwidget-grid-dgf9d?autoresize=1&fontsize=14&hidenavigation=1&theme=dark&view=preview'
     }
   },
   created () {
@@ -221,7 +226,7 @@ export default {
         top: 0;
         right: 0;
         font-size: 14px;
-        padding: 4px 8px;
+        padding: 8px;
         z-index: 2;
         a {
           text-decoration: none;

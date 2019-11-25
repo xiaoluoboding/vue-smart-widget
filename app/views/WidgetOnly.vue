@@ -10,7 +10,11 @@
         </smart-widget>
       </el-col>
       <el-col :span="8">
-        <smart-widget title="Default Widget" shadow="hover" :translateY="10">
+        <smart-widget
+          title="Default Widget"
+          shadow="hover"
+          :translate-y="10"
+        >
           <p>
             {{placeholder}}
           </p>
@@ -31,6 +35,8 @@
           fullscreen
           collapse
           refresh
+          is-actived
+          actived-color="#f4a"
           :loading="loading"
           @on-refresh="handleRefresh"
           @on-fullscreen="handleFullscreen">

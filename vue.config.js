@@ -43,19 +43,12 @@ const setChainWebpack = config => {
     config.performance
       .set('maxEntrypointSize', 2500000)
       .set('maxAssetSize', 2000000)
-    // 压缩代码
-    config.optimization.minimize(true)
+    // drop console
+    config.optimization.minimizer('terser').tap((args) => {
+      args[0].terserOptions.compress.drop_console = true
+      return args
+    })
   }
-}
-
-const setConfigureWebpack = config => {
-  // 将 vue 设置为外部依赖
-  let externals = [
-    {
-      vue: 'vue'
-    }
-  ]
-  return isLib ? { externals } : {}
 }
 
 module.exports = {
@@ -68,7 +61,6 @@ module.exports = {
   lintOnSave: true,
   productionSourceMap: false,
   chainWebpack: config => setChainWebpack(config),
-  configureWebpack: config => setConfigureWebpack(config),
   css: {
     extract: false
   },

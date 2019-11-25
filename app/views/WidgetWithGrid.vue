@@ -1,5 +1,12 @@
 <template>
-  <smart-widget-grid :layout="layout" :row-height="48" :margin="[15, 15]" @layout-updated="handleLayoutUpdated">
+  <smart-widget-grid
+    :layout="layout"
+    :row-height="48"
+    :margin="[15, 15]"
+    :is-static="isStatic"
+    @layout-updated="onLayoutUpdated"
+    @move="onMove"
+    @container-resized="onContainerResized">
     <smart-widget slot="0" simple>
       <div class="layout-center">
         <h3>Simple Widget Without Header</h3>
@@ -38,7 +45,27 @@
       </template>
       <p>Widget with Footer</p>
     </smart-widget>
-    <smart-widget slot="6" title="Widget body content's height is fixed" fixed-height>
+    <smart-widget slot="6" title="2017 Hotest Frontend Project"
+      fullscreen
+      refresh
+      is-actived
+      :loading="loading"
+      @before-fullscreen="val => isStatic = val"
+      @on-refresh="handleRefresh">
+      <template v-slot="{contentH}">
+        <ve-bar-chart :data="barData" :height="contentH" />
+      </template>
+    </smart-widget>
+    <smart-widget slot="7" title="Diffrent Platforms PV" fullscreen collapse>
+      <template v-slot="{contentH}">
+        <ve-donut-chart
+          :data="donutData"
+          :settings="donutSetting"
+          :height="contentH"
+        />
+      </template>
+    </smart-widget>
+    <smart-widget slot="8" title="Widget body content's height is fixed" fixed-height>
       <el-table
         :data="tableData"
         style="width: 100%">
@@ -58,15 +85,13 @@
         </el-table-column>
       </el-table>
     </smart-widget>
-    <smart-widget slot="7" title="Widget with custom toolbar">
+    <smart-widget slot="9" title="Widget with custom toolbar">
       <template slot="toolbar">
         <div style="margin: 0 12px;">
           <el-button type="success" size="mini" @click="$router.push('/widget-only')">Index</el-button>
         </div>
       </template>
-      <el-table
-        :data="tableData"
-        style="width: 100%">
+      <el-table style="width: 100%" :data="tableData">
         <el-table-column
           prop="date"
           label="日期"
@@ -82,16 +107,6 @@
           label="地址">
         </el-table-column>
       </el-table>
-    </smart-widget>
-    <smart-widget slot="8" title="2017 Hotest Frontend Project"
-      fullscreen
-      :loading="loading"
-      refresh
-      @on-refresh="handleRefresh">
-      <ve-bar-chart :data="barData" :height="contentH" slot-scope="{contentH}" />
-    </smart-widget>
-    <smart-widget slot="9" title="Diffrent Platforms PV" fullscreen collapse>
-      <ve-donut-chart :data="donutData" :settings="donutSetting" :height="contentH" slot-scope="{contentH}" />
     </smart-widget>
   </smart-widget-grid>
 </template>
@@ -101,32 +116,19 @@ export default {
   data () {
     return {
       loading: false,
+      isStatic: false,
       layout: [
-        { x: 0, y: 0, w: 2, h: 3, i: '0' },
-        { x: 2, y: 0, w: 2, h: 3, i: '1' },
-        { x: 4, y: 0, w: 2, h: 3, i: '2' },
-        { x: 6, y: 0, w: 2, h: 3, i: '3' },
-        { x: 8, y: 0, w: 2, h: 3, i: '4' },
-        { x: 10, y: 0, w: 2, h: 3, i: '5' },
-        { x: 0, y: 9, w: 6, h: 5, i: '6' },
-        { x: 6, y: 9, w: 6, h: 5, i: '7' },
-        { x: 0, y: 3, w: 8, h: 6, i: '8' },
-        { x: 8, y: 3, w: 4, h: 6, i: '9' }
+        { x: 0, y: 0, w: 4, h: 3, i: '0' },
+        { x: 4, y: 0, w: 4, h: 3, i: '1' },
+        { x: 8, y: 0, w: 4, h: 3, i: '2' },
+        { x: 0, y: 3, w: 4, h: 3, i: '3' },
+        { x: 4, y: 3, w: 4, h: 3, i: '4' },
+        { x: 8, y: 3, w: 4, h: 3, i: '5' },
+        { x: 0, y: 6, w: 8, h: 6, i: '6' },
+        { x: 8, y: 6, w: 4, h: 6, i: '7' },
+        { x: 0, y: 12, w: 6, h: 5, i: '8' },
+        { x: 6, y: 12, w: 6, h: 5, i: '9' }
       ]
-    }
-  },
-  methods: {
-    handleRefresh () {
-      this.loading = true
-      setTimeout(() => {
-        this.loading = false
-      }, 2000)
-    },
-    handleLayoutUpdated (newLayout) {
-      console.log(JSON.stringify(newLayout))
-    },
-    handleMove (params) {
-      console.log(params)
     }
   },
   created () {
@@ -159,37 +161,59 @@ export default {
         data: [40000, 27800, 22000, 20200, 13600]
       }]
     }
-    this.tableData = [{
-      date: '2016-05-03',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-04',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-01',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-08',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-06',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-07',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }]
+    this.tableData = [
+      {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-02',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-08',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-06',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-07',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }
+    ]
     this.donutSetting = {
       offsetY: '60%'
+    }
+  },
+  methods: {
+    handleRefresh () {
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+      }, 2000)
+    },
+    onLayoutUpdated (newLayout) {
+      console.log(JSON.stringify(newLayout))
+    },
+    onMove (params) {
+      console.log(params)
+    },
+    onResize (params) {
+      console.log(params)
+    },
+    onContainerResized (params) {
+      console.log(params)
     }
   }
 }
@@ -202,6 +226,9 @@ export default {
   border-top: 1px solid #ebeef1;
 }
 .layout-center {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 </style>
