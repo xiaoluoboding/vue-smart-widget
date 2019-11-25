@@ -51,16 +51,6 @@ const setChainWebpack = config => {
   }
 }
 
-const setConfigureWebpack = config => {
-  // 将 vue 设置为外部依赖
-  let externals = [
-    {
-      vue: 'vue'
-    }
-  ]
-  config.externals = [ ...config.externals, ...externals ]
-}
-
 module.exports = {
   publicPath: './',
   pages: {
@@ -71,7 +61,6 @@ module.exports = {
   lintOnSave: true,
   productionSourceMap: false,
   chainWebpack: config => setChainWebpack(config),
-  configureWebpack: config => isLib ? setConfigureWebpack(config) : {},
   css: {
     extract: false
   },
