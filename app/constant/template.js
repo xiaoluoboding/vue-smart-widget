@@ -9,7 +9,7 @@ const defaultWidget = `<smart-widget title="Widget Title">
 </smart-widget>
 `
 
-const advanedWidget = `// 1. With additional fullscreen button
+const advanedWidget = `<!-- // 1. With additional fullscreen button -->
 <smart-widget title="With additional fullscreen button" fullscreen>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -18,7 +18,7 @@ const advanedWidget = `// 1. With additional fullscreen button
   </p>
 </smart-widget>
 
-// 2. Widget with Editbox & Footer
+<!-- 2. Widget with Editbox & Footer -->
 <smart-widget title="Widget with Editbox & Footer">
   <template slot="editbox">
     <div class="widget-alert">
@@ -37,7 +37,7 @@ const advanedWidget = `// 1. With additional fullscreen button
   </template>
 </smart-widget>
 
-// 3. Widget with custom toolbar
+<!-- 3. Widget with custom toolbar -->
 <smart-widget title="Widget with custom toolbar">
   <template slot="toolbar">
     <div style="margin: 0 12px;">
