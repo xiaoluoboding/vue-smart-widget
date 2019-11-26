@@ -242,7 +242,7 @@ export default {
       return widgetBodyH
     },
     getContentH () {
-      const widgetBodyH = this.widgetBodyOffsetHeight
+      const widgetBodyH = this.getWidgetBodyH()
       const paddingH = this.getPaddingH()
       const widgetBodyEditBoxH = this.widgetBodyEditBoxH
       const widgetBodyFooterH = this.widgetBodyFooterH
