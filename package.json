@@ -1,6 +1,6 @@
 {
   "name": "vue-smart-widget",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Smart widget component for Vue2.5+.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "scripts": {
@@ -8,6 +8,7 @@
     "build": "vue-cli-service build --dest docs",
     "lint": "vue-cli-service lint",
     "build:lib": "vue-cli-service build --mode lib --target lib --dest lib src/index.js",
+    "bundle": "npm run build && npm run build:lib",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "report": "vue-cli-service build --mode lib --target lib --dest lib --report src/index.js"
   },
