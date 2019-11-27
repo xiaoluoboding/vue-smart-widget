@@ -118,7 +118,8 @@ new Vue({
 | shadow | when to show card shadows | String | `always`、`hover`、`never` | `always` |
 | translateY | the length of vertically transform | Number | - | 0 |
 | isActived | determine whether widget is actived | Boolean | `true` or `false` | `false` |
-| activedColor | the length of vertically transform | String | hex color | #0076db |
+| activedColor | the actived widget `box-shadow` color, usually used with `isActived` attribute | String | hex color | #0076db |
+| headerHeight | Widget Header Height(px) | Number | - | 48 |
 
 ## SmartWidget Methods
 

@@ -1,6 +1,6 @@
 {
   "name": "vue-smart-widget",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Smart widget component for Vue2.5+.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "scripts": {
@@ -8,6 +8,7 @@
     "build": "vue-cli-service build --dest docs",
     "lint": "vue-cli-service lint",
     "build:lib": "vue-cli-service build --mode lib --target lib --dest lib src/index.js",
+    "bundle": "npm run build && npm run build:lib",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "report": "vue-cli-service build --mode lib --target lib --dest lib --report src/index.js"
   },
@@ -17,10 +18,22 @@
     "type": "git",
     "url": "git+https://github.com/xiaoluoboding/vue-smart-widget.git"
   },
+  "homepage": "https://xiaoluoboding.github.io/vue-smart-widget/",
+  "keywords": [
+    "widget",
+    "card",
+    "panel",
+    "vue",
+    "grid",
+    "drag",
+    "draggable",
+    "resize",
+    "resizable"
+  ],
   "license": "MIT",
   "dependencies": {
-    "vue": "^2.6.10",
     "core-js": "^3.4.2",
+    "vue": "^2.6.10",
     "vue-grid-layout": "^2.3.7"
   },
   "devDependencies": {
@@ -30,7 +43,7 @@
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
     "echarts": "^4.5.0",
-    "element-ui": "^2.12.0",
+    "element-ui": "^2.13.0",
     "eslint": "^5.16.0",
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-vue": "^5.0.0",
@@ -45,17 +58,6 @@
     "vue-template-compiler": "^2.6.10",
     "vuex": "^3.0.1"
   },
-  "keywords": [
-    "widget",
-    "card",
-    "panel",
-    "vue",
-    "grid",
-    "drag",
-    "draggable",
-    "resize",
-    "resizable"
-  ],
   "postcss": {
     "plugins": {
       "autoprefixer": {}

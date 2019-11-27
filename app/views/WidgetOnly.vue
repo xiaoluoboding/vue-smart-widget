@@ -78,7 +78,7 @@
         </smart-widget>
       </el-col>
       <el-col :span="8">
-        <smart-widget title="Widget with custom toolbar">
+        <smart-widget title="Widget with custom toolbar" :header-height="36">
           <template slot="toolbar">
             <div style="margin: 0 12px;">
               <el-button type="primary" size="mini" @click="$router.push('/widget-with-grid')">Grid</el-button>

@@ -107,7 +107,9 @@ export default {
     // widget actived true/false
     isActived: { type: Boolean, default: false },
     // widget actived color
-    activedColor: { type: String, default: '#0076db' }
+    activedColor: { type: String, default: '#0076db' },
+    // widget header height
+    headerHeight: { type: Number, default: 48 }
   },
   data () {
     return {
@@ -167,7 +169,7 @@ export default {
       }
     },
     rowHeight () {
-      return this.isHasGroup ? this.$parent.rowHeight : 48
+      return this.isHasGroup ? this.$parent.rowHeight : this.headerHeight
     },
     isHasGroup: vm => Boolean(vm.$parent.i),
     contentH: vm => vm.getContentH()
@@ -242,7 +244,10 @@ export default {
       return widgetBodyH
     },
     getContentH () {
-      const widgetBodyH = this.getWidgetBodyH()
+      // recalculate the widgetBodyH
+      const widgetBodyH = this.isFullScreen
+        ? this.widgetBodyOffsetHeight
+        : this.getWidgetBodyH()
       const paddingH = this.getPaddingH()
       const widgetBodyEditBoxH = this.widgetBodyEditBoxH
       const widgetBodyFooterH = this.widgetBodyFooterH
@@ -270,12 +275,15 @@ export default {
 <style lang="less">
 // overwirte vue-grid-layout styles
 .vue-grid-item.vue-grid-placeholder {
-  background: #7CBEFF !important;
+  background: #7CBEFF;
   opacity: .2;
   transition-duration: .1s;
   z-index: 2;
   user-select: none;
 }
+</style>
+
+<style lang="less" scoped>
 // vue-smartwidget styles
 body.no-overflow {
   overflow: hidden;
@@ -300,7 +308,6 @@ body.no-overflow {
   }
   .widget-header {
     display: flex;
-    line-height: 48px;
     border-bottom: 1px solid #ebeef5;
     .widget-header__title {
       display: inline-block;
