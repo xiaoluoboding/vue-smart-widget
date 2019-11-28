@@ -1,7 +1,7 @@
 # vue-smart-widget
 
 <p align="left">
-  <a href="https://travis-ci.org/xiaoluoboding/vue-smart-widget"><img src="https://travis-ci.org/xiaoluoboding/vue-smart-widget.svg?branch=dev"></a>
+  <a href="https://travis-ci.org/xiaoluoboding/vue-smart-widget"><img src="https://travis-ci.org/xiaoluoboding/vue-smart-widget.svg?branch=master"></a>
   <a href="https://www.npmjs.com/package/vue-smart-widget" target="_blank"><img src="https://img.shields.io/npm/v/vue-smart-widget.svg"></a>
   <a href="https://github.com/xiaoluoboding/vue-smart-widget"><img src="https://img.shields.io/github/stars/xiaoluoboding/vue-smart-widget.svg"></a>
   <a href="https://github.com/xiaoluoboding/vue-smart-widget"><img src="https://img.shields.io/github/license/xiaoluoboding/vue-smart-widget.svg"></a>
