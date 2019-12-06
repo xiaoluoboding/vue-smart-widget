@@ -1,6 +1,7 @@
 const path = require('path')
 
 const isProd = process.env.NODE_ENV === 'production'
+const isLib = process.env.VUE_APP_BUILD_MODE === 'lib'
 const resolve = dir => path.join(__dirname, dir)
 
 const setChainWebpack = config => {
@@ -19,13 +20,13 @@ const setChainWebpack = config => {
   config.module
     .rule('svg')
     .exclude
-      .add(resolve('src/assets/img'))
+      .add(resolve('src/assets/icons'))
       .end()
   config.module
     .rule('icons')
     .test(/\.svg$/)
     .include
-      .add(resolve('src/assets/img'))
+      .add(resolve('src/assets/icons'))
       .end()
     .use('svg-sprite-loader')
     .loader('svg-sprite-loader')
@@ -50,6 +51,17 @@ const setChainWebpack = config => {
   }
 }
 
+const setConfigureWebpack = config => {
+  if (isLib) {
+    // 将 vue & vue-grid-layout 设置为外部依赖
+    let externals = [{
+      'vue': 'vue',
+      'vue-grid-layout': 'vue-grid-layout'
+    }]
+    config.externals = externals
+  }
+}
+
 module.exports = {
   publicPath: './',
   pages: {
@@ -60,6 +72,7 @@ module.exports = {
   lintOnSave: true,
   productionSourceMap: false,
   chainWebpack: config => setChainWebpack(config),
+  configureWebpack: config => setConfigureWebpack(config),
   css: {
     extract: false
   },
