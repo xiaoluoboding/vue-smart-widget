@@ -53,12 +53,11 @@ const setChainWebpack = config => {
 
 const setConfigureWebpack = config => {
   if (isLib) {
-    // 将 vue & vue-grid-layout 设置为外部依赖
-    let externals = [{
-      'vue': 'vue',
-      'vue-grid-layout': 'vue-grid-layout'
-    }]
-    config.externals = externals
+    config.output = {
+      ...config.output,
+      library: 'VueSmartWidget',
+      libraryExport: 'default'
+    }
   }
 }
 
