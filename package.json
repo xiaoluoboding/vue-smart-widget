@@ -1,6 +1,6 @@
 {
   "name": "vue-smart-widget",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Smart widget is a flexible and extensible content container component for Vue2.5+.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "scripts": {
