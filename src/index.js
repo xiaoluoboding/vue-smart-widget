@@ -1,4 +1,3 @@
-import './plugins/svg-icon'
 import SmartWidgetGrid from './packages/SmartWidgetGrid'
 import SmartWidget from './packages/SmartWidget'
 
