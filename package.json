@@ -1,6 +1,6 @@
 {
   "name": "vue-smart-widget",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Smart widget is a flexible and extensible content container component for Vue2.5+.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "scripts": {
@@ -50,7 +50,6 @@
     "less-loader": "^4.1.0",
     "postcss-import": "^12.0.1",
     "postcss-url": "^8.0.0",
-    "svg-sprite-loader": "^4.1.6",
     "v-tooltip": "^2.0.2",
     "vue": "^2.6.10",
     "ve-charts": "^0.8.3",

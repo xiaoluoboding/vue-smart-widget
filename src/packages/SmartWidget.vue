@@ -14,16 +14,45 @@
       <div class="widget-header__toolbar">
         <!-- collapse icon -->
         <a href="javascript:;" v-if="!isHasGroup && collapse && !isFullScreen" @click="isCollapsed=!isCollapsed">
-          <svg-icon :icon-name="isCollapsed ? 'expand' : 'collapse'" />
+          <template v-if="isCollapsed">
+            <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+              <path d="M917.333 364.8L851.2 298.667 512 637.867l-339.2-339.2-66.133 66.133L512 768z" fill="#666"/>
+            </svg>
+          </template>
+          <template v-else>
+            <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+              <path d="M106.667 659.2l66.133 66.133 339.2-339.2 339.2 339.2 66.133-66.133L512 256z" fill="#666"/>
+            </svg>
+          </template>
         </a>
         <!-- fullscreen icon -->
         <a href="javascript:;" v-if="fullscreen" @click="handlefullScreen">
-          <svg-icon :icon-name="isFullScreen ? 'unfullscreen' : 'fullscreen'" />
+          <template v-if="isFullScreen">
+            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 10.704V13.5a.5.5 0 1 0 1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 0 0 1h2.79l-3.144 3.147a.5.5 0 1 0 .708.706L6 10.703zm4-5.411V2.5a.5.5 0 0 0-1 0v4a.5.5 0 0 0 .5.5h4a.5.5 0 1 0 0-1h-2.793l3.147-3.146a.5.5 0 0 0-.708-.708L10 5.293zM13 9.5a.5.5 0 1 1 1 0v4a.5.5 0 0 1-.5.5h-4a.5.5 0 1 1 0-1H13V9.5zm-10-3a.5.5 0 0 1-1 0v-4a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H3v3.5z" fill="#666" fill-rule="evenodd"/>
+            </svg>
+          </template>
+          <template v-else>
+            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 12.293V9.5a.5.5 0 0 0-1 0v4a.5.5 0 0 0 .5.5h4a.5.5 0 1 0 0-1H3.707l3.147-3.146a.5.5 0 1 0-.708-.708L3 12.293zm10-8.586V6.5a.5.5 0 1 0 1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 0 0 1h2.793L9.147 6.146a.5.5 0 1 0 .707.708L13 3.707zM13 9.5a.5.5 0 1 1 1 0v4a.5.5 0 0 1-.5.5h-4a.5.5 0 1 1 0-1H13V9.5zm-10-3a.5.5 0 0 1-1 0v-4a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H3v3.5z" fill="#666" fill-rule="evenodd"/>
+            </svg>
+          </template>
         </a>
         <!-- refresh icon -->
         <a href="javascript:;" v-if="refresh && !isFullScreen">
-          <svg-icon icon-name="loading" class="sw-loading" v-if="loading" />
-          <svg-icon icon-name="refresh" v-else @click="$emit('on-refresh')" />
+          <template v-if="loading">
+            <svg class="icon sw-loading" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+              <path d="M910.222 455.111V512H682.667v-56.889h227.555zm-625.778 0V512H56.89v-56.889h227.555zm170.667 227.556H512v227.555h-56.889V682.667zm0-625.778H512v227.555h-56.889V56.89zm341.333 699.733l-39.822 39.822-159.289-159.288 39.823-39.823 159.288 159.29zM369.778 329.956l-39.822 39.822-159.29-159.29 39.823-39.821 159.289 159.289zm-39.822 267.377l39.822 39.823-159.29 159.288-39.821-39.822 159.289-159.289zm426.666-426.666l39.822 39.822-159.288 159.289-39.823-39.822 159.29-159.29z" fill="#666"/>
+            </svg>
+          </template>
+          <template v-else>
+            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" @click="$emit('on-refresh')">
+              <g fill="#666">
+                <path d="M14 8A6 6 0 0 0 3.372 4.18a.5.5 0 1 0 .771.638A5 5 0 0 1 13 8a.5.5 0 1 0 1 0zM2 8a6 6 0 0 0 10.549 3.912.5.5 0 1 0-.758-.652A5 5 0 0 1 3 8a.5.5 0 0 0-1 0z"/>
+                <path d="M4 1.5V4h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 1 0zm8 13v-2.502H9.5a.5.5 0 0 1 0-1h3a.5.5 0 0 1 .5.5V14.5a.5.5 0 1 1-1 0z"/>
+              </g>
+            </svg>
+          </template>
         </a>
         <slot v-if="$slots.toolbar" name="toolbar"></slot>
       </div>
@@ -71,15 +100,12 @@
 import LoadingMask from '../components/LoadingMask'
 // collapse transition
 import CollapseTransition from '../components/collapse-transition'
-// svg icon
-import SvgIcon from '../components/SvgIcon'
 
 export default {
   name: 'SmartWidget',
   components: {
     LoadingMask,
-    CollapseTransition,
-    SvgIcon
+    CollapseTransition
   },
   props: {
     // set the widget main title
