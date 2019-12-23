@@ -237,7 +237,7 @@ export default {
         this.widgetBodyOffsetHeight = this.widgetBodyOldHeight
         // restore collapsed state
         this.isFullScreenCollapsed = this.isFullScreen
-        document.body.removeAttribute('class', 'no-overflow')
+        document.body.classList.remove('no-overflow')
       }
       this.$emit('on-fullscreen', this.isFullScreen)
     },
