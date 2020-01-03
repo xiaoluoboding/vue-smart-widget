@@ -1,8 +1,9 @@
-## 0.5.1 (2019-11-27)
+## [0.5.5](https://github.com/xiaoluoboding/vue-smart-widget/compare/v0.5.2...v0.5.5) (2020-01-03)
 
 
 ### Bug Fixes
 
+* document.body.removeAttribute will remove the class attribute bug ([b72d725](https://github.com/xiaoluoboding/vue-smart-widget/commit/b72d7254208d4eefeebcaf6d5d21fd6c83c253e3))
 * fix the bug of slot param contentH is wrong ([bcb00c0](https://github.com/xiaoluoboding/vue-smart-widget/commit/bcb00c0c267c80a5fdab4035964e1ae6efdb0e29))
 * fullscreen widget contentH calculate wrong problem ([686c665](https://github.com/xiaoluoboding/vue-smart-widget/commit/686c6656bd453d2f269eb757ae054e06ddd57322))
 
