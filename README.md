@@ -151,9 +151,9 @@ new Vue({
 | colNum | Says how many columns the grid has. | Number | - | `12` |
 | rowHeight | Says what is a height of a single row in pixels. | Number | - | `48` |
 | margin | Says what are the margins of elements inside the grid. | Array | - | `[10, 10]` |
-| isDraggable | Says if the grids items are draggable. | Boolean | `true` or `false` | `true` |
-| isResizable | Says if the grids items are resizable. | Boolean | `true` or `false` | `true` |
-| static | control all widgets won't be draggable, resizable or moved | Boolean | `true` or `false` | `false` |
+| draggable | Says if the grids items are draggable. | Boolean | `true` or `false` | `true` |
+| resizable | Says if the grids items are resizable. | Boolean | `true` or `false` | `true` |
+| isStatic | Control all widgets won't be draggable, resizable or moved | Boolean | `true` or `false` | `false` |
 
 ## Slot scopes
 
