@@ -49,7 +49,7 @@ The SmartWidget is heavily base on [vue-grid-layout](https://github.com/jbaysolu
 ```html
 <smart-widget title="Default Widget">
   <p>
-    It's defalut widget.
+    It's default widget.
   </p>
 </smart-widget>
 ```
