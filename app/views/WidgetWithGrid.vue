@@ -4,7 +4,9 @@
     :row-height="48"
     :margin="[15, 15]"
     :is-static="isStatic"
-    @layout-updated="onLayoutUpdated">
+    @layout-updated="onLayoutUpdated"
+    @move="onMove"
+  >
     <smart-widget slot="0" simple>
       <div class="layout-center">
         <h3>Simple Widget Without Header</h3>

@@ -10,11 +10,7 @@
       :key="item.i"
       :static="isStatic"
       v-bind="item"
-      @move="moveEvent"
-      @resize="resizeEvent"
-      @moved="movedEvent"
-      @resized="resizedEvent"
-      @container-resized="containerResizedEvent"
+      v-on="gridLayoutItemEvents"
     >
       <slot :name="item.i"></slot>
     </grid-item>
@@ -23,6 +19,7 @@
 
 <script>
 import { GridLayout, GridItem } from 'vue-grid-layout'
+import { pick } from '../utils/index'
 
 export default {
   name: 'SmartWidgetGrid',
@@ -78,49 +75,46 @@ export default {
         margin: this.margin,
         isDraggable: this.draggable,
         isResizable: this.resizable,
-        isMirrored: false,
-        autoSize: true,
-        verticalCompact: true,
         useCssTransforms: false,
-        responsive: false
+        // isMirrored: false,
+        // autoSize: true,
+        // verticalCompact: true,
+        // responsive: false,
+        // preventCollision: false,
+        // responsiveLayouts: {},
+        // breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
+        ...this.$attrs
       }
     }
   },
   created () {
     const listeners = this.$listeners
+    this.gridLayoutItemEvents = {}
 
     const layoutEventList = [
       'layout-created',
       'layout-before-mount',
       'layout-mounted',
       'layout-ready',
-      'layout-updated'
+      'layout-updated',
+      'breakpoint-changed'
     ]
 
-    this.gridLayoutEvents = this.pick(listeners, layoutEventList)
-  },
-  methods: {
-    // Picks the key-value pairs corresponding to the given keys from an object.
-    pick (obj, arr) {
-      return arr.reduce((acc, curr) => {
-        return (curr in obj && (acc[curr] = obj[curr]), acc)
-      }, {})
-    },
-    moveEvent (i, newX, newY) {
-      this.$emit('move', { i, newX, newY })
-    },
-    resizeEvent (i, newH, newW, newHPx, newWPx) {
-      this.$emit('resize', { i, newH, newW, newHPx, newWPx })
-    },
-    movedEvent (i, newX, newY) {
-      this.$emit('moved', { i, newX, newY })
-    },
-    resizedEvent (i, newH, newW, newHPx, newWPx) {
-      this.$emit('resized', { i, newH, newW, newHPx, newWPx })
-    },
-    containerResizedEvent (i, newH, newW, newHPx, newWPx) {
-      this.$emit('container-resized', { i, newH, newW, newHPx, newWPx })
-    }
+    const layoutItemEventList = [
+      'move',
+      'resize',
+      'moved',
+      'resized',
+      'container-resized'
+    ]
+
+    this.gridLayoutEvents = pick(listeners, layoutEventList)
+
+    layoutItemEventList.forEach(item => {
+      this.gridLayoutItemEvents = Object.assign(this.gridLayoutItemEvents, {
+        [item]: (...args) => this.$emit(item, { ...args })
+      })
+    })
   }
 }
 </script>
@@ -128,7 +122,6 @@ export default {
 <style lang="less">
 .vue-grid-layout {
   background: transparent;
-  // .vue-grid-item {}
   .smartwidget {
     height: inherit;
     width: inherit;

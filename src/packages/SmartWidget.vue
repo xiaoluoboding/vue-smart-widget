@@ -172,13 +172,13 @@ export default {
     },
     widgetHeaderHeight () {
       return {
-        'height': `${this.rowHeight}px`,
+        height: `${this.rowHeight}px`,
         'line-height': `${this.rowHeight}px`
       }
     },
     widgetBodyStyle () {
       return {
-        'height': `calc(100% - ${this.rowHeight}px)`
+        height: `calc(100% - ${this.rowHeight}px)`
       }
     },
     widgetBodyContentStyle () {
@@ -284,14 +284,14 @@ export default {
       const smartWidgetStyle = this.smartWidgetStyle
       this.smartWidgetStyle = {
         ...smartWidgetStyle,
-        'transform': `translateY(${-this.translateY}px)`
+        transform: `translateY(${-this.translateY}px)`
       }
     },
     handleMouseout () {
       const smartWidgetStyle = this.smartWidgetStyle
       this.smartWidgetStyle = {
         ...smartWidgetStyle,
-        'transform': `translateY(0px)`
+        transform: 'translateY(0px)'
       }
     }
   }
@@ -300,6 +300,9 @@ export default {
 
 <style lang="less">
 // overwirte vue-grid-layout styles
+.vue-grid-item {
+  touch-action: none;
+}
 .vue-grid-item.vue-grid-placeholder {
   background: #7CBEFF;
   opacity: .2;
