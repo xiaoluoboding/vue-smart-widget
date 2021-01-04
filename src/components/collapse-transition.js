@@ -18,11 +18,11 @@ function hasClass (el, cls) {
 
 function addClass (el, cls) {
   if (!el) return
-  var curClass = el.className
-  var classes = (cls || '').split(' ')
+  let curClass = el.className
+  const classes = (cls || '').split(' ')
 
-  for (var i = 0, j = classes.length; i < j; i++) {
-    var clsName = classes[i]
+  for (let i = 0, j = classes.length; i < j; i++) {
+    const clsName = classes[i]
     if (!clsName) continue
 
     if (el.classList) {
@@ -38,11 +38,11 @@ function addClass (el, cls) {
 
 function removeClass (el, cls) {
   if (!el || !cls) return
-  var classes = cls.split(' ')
-  var curClass = ' ' + el.className + ' '
+  const classes = cls.split(' ')
+  let curClass = ' ' + el.className + ' '
 
-  for (var i = 0, j = classes.length; i < j; i++) {
-    var clsName = classes[i]
+  for (let i = 0, j = classes.length; i < j; i++) {
+    const clsName = classes[i]
     if (!clsName) continue
 
     if (el.classList) {
@@ -58,7 +58,7 @@ function removeClass (el, cls) {
 
 function _classCallCheck (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function') } }
 
-var Transition = (function () {
+const Transition = (function () {
   function Transition () {
     _classCallCheck(this, Transition)
   }
@@ -132,9 +132,9 @@ exports.default = {
   name: 'ElCollapseTransition',
   functional: true,
   render: function render (h, _ref) {
-    var children = _ref.children
+    const children = _ref.children
 
-    var data = {
+    const data = {
       on: new Transition()
     }
 
