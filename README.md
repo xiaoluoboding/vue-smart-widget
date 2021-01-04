@@ -137,22 +137,32 @@ new Vue({
 ## CSS Selector in SmartWidget
 
 | Name | Description |
-|:--------:|--------|
+|:--------|--------|
 | `.smartwidget` | The main selector in SmartWidget |
 | `.is-actived` | The state of widget is actived |
+| `.vue-grid-item.vue-grid-placeholder` | The default css for the placeholder |
 
 ## SmartWidgetGrid Props
 
-> it's similar with [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout). Care about the attribute `layout`, The value of layout must be an Array of Object items. Each item must have i, x, y, w and h proprties. especially, the i proprties, it's the unique identifier of the widget item, euqal with widget slot.
+> It's similar with [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout). Care about the attribute `layout`, The value of layout must be an Array of Object items. Each item must have i, x, y, w and h proprties. especially, the i proprties, it's the unique identifier of the widget item, euqal with widget slot.
 
 | Attribute | Description | Type | Accepted values | Default |
-|:--------:|--------|:--------:|:--------:|:--------:|
+|:--------|--------|:--------:|:--------:|:--------:|
 | layout | This is the initial layout of the grid. | Array | - | `required` |
+| responsiveLayouts | This is the initial layouts of the grid per breakpoint if responsive is set to true. | Object | - | `{}` |
 | colNum | Says how many columns the grid has. | Number | - | `12` |
 | rowHeight | Says what is a height of a single row in pixels. | Number | - | `48` |
+| maxRows | Says what is a maximal number of rows in the grid. | Number | - | `Infinity` |
 | margin | Says what are the margins of elements inside the grid. | Array | - | `[10, 10]` |
 | draggable | Says if the grids items are draggable. | Boolean | `true` or `false` | `true` |
 | resizable | Says if the grids items are resizable. | Boolean | `true` or `false` | `true` |
+| isMirrored | Says if the RTL/LTR should be reversed. | Boolean | `true` or `false` | `false` |
+| autoSize | Says if the container height should swells and contracts to fit contents. | Boolean | `true` or `false` | `true` |
+| verticalCompact | Says if the layout should be compact vertically. | Boolean | `true` or `false` | `true` |
+| preventCollision | Says if grid items will move when being dragged over. | Boolean | `true` or `false` | `false` |
+| responsive | Says if the layout should be responsive to window width. | Boolean | `true` or `false` | `false` |
+| breakpoints | Breakpoints defined for responsive layout. Sets widths on wich column number changes. | Object | - | `{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }` |
+| cols | Defines number of columns for each breakpoint. | Object | - | `{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }` |
 | isStatic | Control all widgets won't be draggable, resizable or moved | Boolean | `true` or `false` | `false` |
 
 ## Slot scopes
@@ -172,7 +182,8 @@ new Vue({
 | layout-mounted | Emited on the component mounted lifecycle hook | `newLayout` |
 | layout-ready | Emited when all the operations on the mount hook finish | `newLayout` |
 | layout-updated | Every time the layout has finished updating and positions of all grid-items are recalculated | `newLayout` |
+| breakpoint-changed | Every time the breakpoint value changes due to window resize | `(newBreakpoint, newLayout)` |
 
 ## License
 
-MIT
+MIT [@xiaoluoboding](https://github.com/xiaoluoboding)

@@ -1,4 +1,4 @@
-## [0.5.5](https://github.com/xiaoluoboding/vue-smart-widget/compare/v0.5.2...v0.5.5) (2020-01-03)
+# [0.6.0](https://github.com/xiaoluoboding/vue-smart-widget/compare/v0.5.5...v0.6.0) (2021-01-04)
 
 
 ### Bug Fixes
@@ -11,6 +11,7 @@
 ### Features
 
 * add loading.svg ([5b926e3](https://github.com/xiaoluoboding/vue-smart-widget/commit/5b926e31ed3f575b62383cf9606523340acb0f6b))
+* add new properties & events on smart-widget-grid ([46a73c8](https://github.com/xiaoluoboding/vue-smart-widget/commit/46a73c8e28b610f13660eca71b16986341d29777))
 * add new props for smart-widget-grid ([390b751](https://github.com/xiaoluoboding/vue-smart-widget/commit/390b75175d77d1f41f9a07359e23ee6ce9acd059))
 * add static property on smart-widget-grid ([6e12f5d](https://github.com/xiaoluoboding/vue-smart-widget/commit/6e12f5d3e99091925b84c206c3a878c793b3c5ef))
 * add the widget headerHeight property ([1bbe378](https://github.com/xiaoluoboding/vue-smart-widget/commit/1bbe378fe5b06ab95efe16bec76ceb38ab8e3ce7))
