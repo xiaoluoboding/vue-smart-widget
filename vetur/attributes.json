@@ -8,7 +8,8 @@
     "type": "string"
   },
   "smart-widget/padding": {
-    "description": "set `widget-body__content` padding style, type: number | number[], default: [12, 20]"
+    "description": "set `widget-body__content` padding style, type: number | number[], default: [12, 20]",
+    "type": "number | array<number>"
   },
   "smart-widget/simple": {
     "description": "whether show widget header, default: false",
@@ -130,5 +131,16 @@
   "smart-widget-grid/isStatic": {
     "description": "Says if all grid item is static (won't be draggable, resizable or moved by other items), Default: false",
     "type": "boolean"
-  }
+  },
+  "smart-widget-grid/layout-created": { "type": "methods" },
+  "smart-widget-grid/layout-before-mount": { "type": "methods" },
+  "smart-widget-grid/layout-mounted": { "type": "methods" },
+  "smart-widget-grid/layout-ready": { "type": "methods" },
+  "smart-widget-grid/layout-updated": { "type": "methods" },
+  "smart-widget-grid/breakpoint-changed": { "type": "methods" },
+  "smart-widget-grid/move": { "type": "methods" },
+  "smart-widget-grid/moved": { "type": "methods" },
+  "smart-widget-grid/resize": { "type": "methods" },
+  "smart-widget-grid/resized": { "type": "methods" },
+  "smart-widget-grid/container-resized": { "type": "methods" }
 }
