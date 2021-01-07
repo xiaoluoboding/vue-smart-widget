@@ -1,3 +1,17 @@
+## [0.6.1](https://github.com/xiaoluoboding/vue-smart-widget/compare/v0.6.0...v0.6.1) (2021-01-07)
+
+
+### Bug Fixes
+
+* map grid item event params ([194a09a](https://github.com/xiaoluoboding/vue-smart-widget/commit/194a09aee31dbb3ce73ddca8d958392e429e8485))
+
+
+### Features
+
+* add vetur support in vscode ([9aa150b](https://github.com/xiaoluoboding/vue-smart-widget/commit/9aa150ba2ac1871aa98cfec7be0c3547214841fe))
+
+
+
 # [0.6.0](https://github.com/xiaoluoboding/vue-smart-widget/compare/v0.5.5...v0.6.0) (2021-01-04)
 
 

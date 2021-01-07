@@ -1,6 +1,6 @@
 {
   "name": "vue-smart-widget",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Smart widget is a flexible and extensible content container component for Vue2.5+.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "scripts": {
@@ -19,6 +19,12 @@
     "url": "git+https://github.com/xiaoluoboding/vue-smart-widget.git"
   },
   "homepage": "https://github.com/xiaoluoboding/vue-smart-widget",
+  "files": [
+    "lib/*.js",
+    "vetur/*.json",
+    "LICENSE",
+    "README.md"
+  ],
   "keywords": [
     "widget",
     "card",
