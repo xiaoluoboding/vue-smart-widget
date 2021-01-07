@@ -19,7 +19,7 @@
 
 <script>
 import { GridLayout, GridItem } from 'vue-grid-layout'
-import { pick } from '../utils/index'
+import { pick, mapObject } from '../utils/index'
 
 export default {
   name: 'SmartWidgetGrid',
@@ -84,7 +84,8 @@ export default {
         // responsiveLayouts: {},
         // breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
         ...this.$attrs
-      }
+      },
+      gridLayoutItemEvents: {}
     }
   },
   created () {
@@ -100,19 +101,23 @@ export default {
       'breakpoint-changed'
     ]
 
-    const layoutItemEventList = [
-      'move',
-      'resize',
-      'moved',
-      'resized',
-      'container-resized'
-    ]
+    const layoutItemEventMap = {
+      move: ['i', 'newX', 'newY'],
+      resize: ['i', 'newH', 'newW', 'newHPx', 'newWPx'],
+      moved: ['i', 'newX', 'newY'],
+      resized: ['i', 'newH', 'newW', 'newHPx', 'newWPx'],
+      'container-resized': ['i', 'newH', 'newW', 'newHPx', 'newWPx']
+    }
 
     this.gridLayoutEvents = pick(listeners, layoutEventList)
 
-    layoutItemEventList.forEach(item => {
+    Object.keys(layoutItemEventMap).forEach(event => {
+      const eventParams = layoutItemEventMap[event]
       this.gridLayoutItemEvents = Object.assign(this.gridLayoutItemEvents, {
-        [item]: (...args) => this.$emit(item, { ...args })
+        [event]: (...args) => {
+          const params = mapObject(eventParams, (key, idx) => args[idx])
+          this.$emit(event, params)
+        }
       })
     })
   }

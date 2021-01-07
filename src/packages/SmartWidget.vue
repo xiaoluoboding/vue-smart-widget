@@ -302,6 +302,7 @@ export default {
 // overwirte vue-grid-layout styles
 .vue-grid-item {
   touch-action: none;
+  box-sizing: border-box;
 }
 .vue-grid-item.vue-grid-placeholder {
   background: #7CBEFF;

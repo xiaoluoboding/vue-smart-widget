@@ -5,7 +5,8 @@
     :margin="[15, 15]"
     :is-static="isStatic"
     @layout-updated="onLayoutUpdated"
-    @move="onMove"
+    @moved="onMove"
+    @resized="onResize"
   >
     <smart-widget slot="0" simple>
       <div class="layout-center">
