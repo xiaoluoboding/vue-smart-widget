@@ -1,0 +1,134 @@
+{
+  "smart-widget/title": {
+    "description": "set the widget main title",
+    "type": "string"
+  },
+  "smart-widget/subTitle": {
+    "description": "set the widget secondary title",
+    "type": "string"
+  },
+  "smart-widget/padding": {
+    "description": "set `widget-body__content` padding style, type: number | number[], default: [12, 20]"
+  },
+  "smart-widget/simple": {
+    "description": "whether show widget header, default: false",
+    "type": "boolean"
+  },
+  "smart-widget/loading": {
+    "description": "toggle loading mask, default: false",
+    "type": "boolean"
+  },
+  "smart-widget/fullscreen": {
+    "description": "toggle fullscreen button, default: false",
+    "type": "boolean"
+  },
+  "smart-widget/collapse": {
+    "description": "toggle collapse button, default: false",
+    "type": "boolean"
+  },
+  "smart-widget/refresh": {
+    "description": "toggle refresh button, default: false",
+    "type": "boolean"
+  },
+  "smart-widget/fixedHeight": {
+    "description": "toggle `widget-body__content` fixed height, default: false",
+    "type": "boolean"
+  },
+  "smart-widget/shadow": {
+    "description": "when to show card shadows, default: 'always'",
+    "type": "string"
+  },
+  "smart-widget/translateY": {
+    "description": "when to show card shadows, default: 0",
+    "type": "number"
+  },
+  "smart-widget/isActived": {
+    "description": "whether widget actived, default: false",
+    "type": "boolean"
+  },
+  "smart-widget/activedColor": {
+    "description": "widget actived color, default: #0076db",
+    "type": "string"
+  },
+  "smart-widget/headerHeight": {
+    "description": "widget header height, the value should be a natural number. default: 48",
+    "type": "number"
+  },
+  "smart-widget-grid/layout": {
+    "description": "This is the initial layout of the grid. Required. The value must be an Array of Object items. Each item must have i, x, y, w and h properties.",
+    "type": "array"
+  },
+  "smart-widget-grid/responsiveLayouts": {
+    "version": ">=0.6.0",
+    "description": "Says how many columns the grid has. The value should be a natural number. Default: {}",
+    "type": "object"
+  },
+  "smart-widget-grid/colNum": {
+    "description": "This is the initial layouts of the grid per breakpoint if responsive is set to true. Default: 12",
+    "type": "number"
+  },
+  "smart-widget-grid/rowHeight": {
+    "description": "Says what is a height of a single row in pixels. Default: 48",
+    "type": "number"
+  },
+  "smart-widget-grid/maxRows": {
+    "description": "Says what is a maximal number of rows in the grid. Default: Infinity",
+    "type": "number"
+  },
+  "smart-widget-grid/margin": {
+    "description": "Says what are the margins of elements inside the grid. The value must be a two-element Array of Number. Each value is expressed in pixels. The first element is a margin horizontally, the second element is a vertical margin.",
+    "type": "array"
+  },
+  "smart-widget-grid/draggable": {
+    "description": "Says if the grids items are draggable. Default: true",
+    "type": "boolean"
+  },
+  "smart-widget-grid/resizable": {
+    "description": "Says if the grids items are resizable. Default: true",
+    "type": "boolean"
+  },
+  "smart-widget-grid/isMirrored": {
+    "description": "Says if the RTL/LTR should be reversed. Default: false",
+    "type": "boolean"
+  },
+  "smart-widget-grid/autoSize": {
+    "description": "Says if the container height should swells and contracts to fit contents. Default: true",
+    "type": "boolean"
+  },
+  "smart-widget-grid/verticalCompact": {
+    "description": "Says if the layout should be compact vertically. Default: true",
+    "type": "boolean"
+  },
+  "smart-widget-grid/preventCollision": {
+    "version": ">=0.6.0",
+    "description": "Says if grid items will move when being dragged over. Default: false",
+    "type": "boolean"
+  },
+  "smart-widget-grid/useCssTransforms": {
+    "description": "Says if the CSS transition-property: transform; should be used. Default: false",
+    "type": "boolean"
+  },
+  "smart-widget-grid/responsive": {
+    "description": "Says if the layout should be responsive to window width. Default: false",
+    "type": "boolean"
+  },
+  "smart-widget-grid/breakpoints": {
+    "version": ">=0.6.0",
+    "description": "Breakpoints defined for responsive layout. Sets widths on wich column number changes. Default: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }",
+    "type": "object"
+  },
+  "smart-widget-grid/cols": {
+    "version": ">=0.6.0",
+    "description": "Defines number of columns for each breakpoint. Default: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }",
+    "type": "object"
+  },
+  "smart-widget-grid/useStyleCursor": {
+    "version": ">=0.6.0",
+    "description": "Says if set the styleCursor option to true. When dragging freezes, setting this value to false may alleviate problems. This property is not reactive. Default: true",
+    "type": "boolean"
+  },
+  "smart-widget-grid/isStatic": {
+    "description": "Says if all grid item is static (won't be draggable, resizable or moved by other items), Default: false",
+    "type": "boolean"
+  }
+}

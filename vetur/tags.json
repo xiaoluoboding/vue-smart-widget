@@ -1,0 +1,46 @@
+{
+  "smart-widget": {
+    "description": "Smart widget is a flexible and extensible content container component.",
+    "attributes": [
+      "title",
+      "subTitle",
+      "padding",
+      "simple",
+      "loading",
+      "fullscreen",
+      "collapse",
+      "refresh",
+      "fixedHeight",
+      "shadow",
+      "translateY",
+      "isActived",
+      "activedColor",
+      "headerHeight"
+    ],
+    "defaults": ["title"]
+  },
+  "smart-widget-grid": {
+    "description": "<SmartWidgetGrid> is a draggable and resizable grid layout using <SmartWidget> component.",
+    "attributes": [
+      "layout",
+      "responsiveLayouts",
+      "colNum",
+      "rowHeight",
+      "maxRows",
+      "margin",
+      "draggable",
+      "resizable",
+      "isMirrored",
+      "autoSize",
+      "verticalCompact",
+      "preventCollision",
+      "useCssTransforms",
+      "responsive",
+      "breakpoints",
+      "cols",
+      "useStyleCursor",
+      "isStatic"
+    ],
+    "defaults": ["layout"]
+  }
+}

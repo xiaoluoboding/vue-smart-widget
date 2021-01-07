@@ -18,7 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/xiaoluoboding/vue-smart-widget.git"
   },
-  "homepage": "https://xiaoluoboding.github.io/vue-smart-widget/",
+  "homepage": "https://github.com/xiaoluoboding/vue-smart-widget",
   "keywords": [
     "widget",
     "card",
@@ -30,6 +30,10 @@
     "resize",
     "resizable"
   ],
+  "vetur": {
+    "tags": "vetur/tags.json",
+    "attributes": "vetur/attributes.json"
+  },
   "license": "MIT",
   "dependencies": {
     "vue-grid-layout": "^2.3.11"
