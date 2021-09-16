@@ -3,47 +3,50 @@
     <el-container class="app-container">
       <el-header class="app-header" height="61px">
         <el-container class="sub-container sub-header">
-          <h1 @click="activeIndex='home'">
-            <router-link to="/home"><span style="color: #40b883">vue-smart-widget</span></router-link>
+          <h1 @click="activeIndex = 'home'">
+            <router-link to="/home"
+              ><span style="color: #40b883">vue-smart-widget</span></router-link
+            >
           </h1>
-          <el-menu :default-active="activeIndex" class="app-menu" mode="horizontal" router @select="key => activeIndex = key">
-            <el-menu-item index="widget-only">
-              Use Widget Only
-            </el-menu-item>
+          <el-menu
+            :default-active="activeIndex"
+            class="app-menu"
+            mode="horizontal"
+            router
+            @select="(key) => (activeIndex = key)"
+          >
+            <el-menu-item index="widget-only"> Use Widget Only </el-menu-item>
             <el-menu-item index="widget-with-grid">
               Use Widget with Grid
             </el-menu-item>
           </el-menu>
           <div class="open-in-github">
-            <a href="https://github.com/xiaoluoboding/vue-smart-widget" target="_blank">
-              <img :src="require('./assets/img/github.svg')" alt="github">
+            <a
+              href="https://github.com/xiaoluoboding/vue-smart-widget/tree/next"
+              target="_blank"
+            >
+              <img :src="githubIcon" alt="github" />
             </a>
           </div>
         </el-container>
       </el-header>
       <el-container class="sub-container sub-content">
         <el-main class="app-main">
-          <keep-alive>
-            <router-view />
-          </keep-alive>
+          <!-- <keep-alive>
+          </keep-alive> -->
+          <router-view />
         </el-main>
       </el-container>
     </el-container>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'App',
-  data () {
-    return {
-      activeIndex: 'home'
-    }
-  }
-}
+<script setup>
+import githubIcon from '@/assets/icons/github.svg'
+const activeIndex = 'home'
 </script>
 
-<style lang="less">
+<style lang="scss">
 html,
 body {
   margin: 0;
@@ -58,7 +61,7 @@ body {
 
 .el-menu--horizontal {
   border: 0;
-  >.el-menu-item.is-active {
+  > .el-menu-item.is-active {
     border-bottom-color: #40b883;
   }
 }
@@ -86,6 +89,7 @@ body {
       text-decoration: none;
     }
     .app-menu {
+      width: 560px;
       border-bottom: none;
     }
     .el-menu.el-menu--horizontal {

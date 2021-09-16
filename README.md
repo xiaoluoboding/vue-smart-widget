@@ -10,37 +10,49 @@
 > Smart widget is a flexible and extensible content container component.
 It includes header and body part, and widget body includes <em>editbox</em>、<em>content</em>、<em>footer</em>.
 If you use with grid, it also have a draggable and resizable grid layout,
-base on <strong>Vue2.5.+</strong> & <strong>[vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout)</strong>.
+base on <strong>Vue 3.x</strong> & <strong>[vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout/tree/vue3)</strong>.
 
 ## Installation
 
 ```bash
-npm i vue-smart-widget -S
+npm i vue-smart-widget@next -S
+// or
+yarn add vue-smart-widget@next -S
 ```
 
-## Import
+## Using components
 
-Install all the components:
+### Full Import
 
-```bash
-import Vue from 'vue'
+```js
+// main.ts
+import { createApp } from 'vue'
 import VueSmartWidget from 'vue-smart-widget'
+import App from './App.vue'
 
-Vue.use(VueSmartWidget)
+const app = createApp(App)
+
+app.use(VueSmartWidget)
+app.mount('#app')
 ```
 
-Use widget only:
+### Import on demand
 
-```bash
-import Vue from 'vue'
-import { SmartWidget } from 'vue-smart-widget'
+```js
+// main.ts
+import { createApp } from 'vue'
+import { SmartWidget, SmartWidgetGrid } from 'vue-smart-widget'
+import App from './App.vue'
 
-Vue.component('SmartWidget', SmartWidget)
+const app = createApp(App)
+app.component(SmartWidget.name, SmartWidget)
+app.component(SmartWidgetGrid.name, SmartWidgetGrid)
+app.mount('#app')
 ```
 
 ## Usage
 
-The SmartWidget is heavily base on [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout), you can know about `vue-grid-layout` first, maybe you already use in your project.
+The SmartWidget is heavily base on [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout), you can learn about `vue-grid-layout` first, maybe you already use in your project.
 
 ### Use widget only
 
@@ -56,48 +68,44 @@ The SmartWidget is heavily base on [vue-grid-layout](https://github.com/jbaysolu
 
 ### Use widget with grid
 
-```bash
-import Vue from 'vue'
-import { SmartWidgetGrid } from 'vue-smart-widget'
-
-Vue.component('SmartWidgetGrid', SmartWidgetGrid)
-```
-
 **Script**
 
 ```js
-new Vue({
-  data () {
-    return {
-      layout: [
-        { x: 0, y: 0, w: 4, h: 4, i: '0' },
-        { x: 4, y: 0, w: 4, h: 4, i: '1' },
-        { x: 8, y: 0, w: 4, h: 4, i: '2' }
-      ]
-    }
-  }
-})
+<script setup>
+const layout = [
+  { x: 0, y: 0, w: 4, h: 4, i: '0' },
+  { x: 4, y: 0, w: 4, h: 4, i: '1' },
+  { x: 8, y: 0, w: 4, h: 4, i: '2' }
+]
+</script>
 ```
 
 **Html**
 
 ```html
 <smart-widget-grid :layout="layout">
-  <smart-widget slot="0" simple>
-    <div class="layout-center">
-      <h3>Simple Widget Without Header</h3>
-    </div>
-  </smart-widget>
-  <smart-widget slot="1" title="Default Widget">
-    <div class="layout-center">
-      <h3>Default Widget With Header</h3>
-    </div>
-  </smart-widget>
-  <smart-widget slot="2" title="Full Screen" fullscreen>
-    <div class="layout-center">
-      <h3>Make any widget full screen</h3>
-    </div>
-  </smart-widget>
+  <!-- layout[$].i as slot name -->
+  <template #0>
+    <smart-widget simple>
+      <div class="layout-center">
+        <h3>Simple Widget Without Header</h3>
+      </div>
+    </smart-widget>
+  </template>
+  <template #1>
+    <smart-widget title="Default Widget">
+      <div class="layout-center">
+        <h3>Default Widget With Header</h3>
+      </div>
+    </smart-widget>
+  </template>
+  <template #2>
+    <smart-widget title="Full Screen" fullscreen>
+      <div class="layout-center">
+        <h3>Make any widget full screen</h3>
+      </div>
+    </smart-widget>
+  </template>
 </smart-widget-grid>
 ```
 
