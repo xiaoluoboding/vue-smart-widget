@@ -51,8 +51,8 @@
 
 "@juggle/resize-observer@^3.3.0":
   version "3.3.1"
-  resolved "http://registry.m.jd.com/@juggle/resize-observer/download/@juggle/resize-observer-3.3.1.tgz#b50a781709c81e10701004214340f25475a171a0"
-  integrity sha1-tQp4FwnIHhBwEAQhQ0DyVHWhcaA=
+  resolved "https://registry.yarnpkg.com/@juggle/resize-observer/-/resize-observer-3.3.1.tgz#b50a781709c81e10701004214340f25475a171a0"
+  integrity sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==
 
 "@popperjs/core@^2.10.1":
   version "2.10.1"
@@ -1059,18 +1059,18 @@ util-deprecate@^1.0.2:
   resolved "http://registry.m.jd.com/util-deprecate/download/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
 
-ve-charts@^1.0.0-alpha.8:
-  version "1.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/ve-charts/-/ve-charts-1.0.0-alpha.8.tgz#1bd19699081a3e31348eccaed4ae83b0948a22a9"
-  integrity sha512-LewYQpFEX+ft8/r8dGfll8P3JEfqTQiJInsvctas5ZvdAM/Tm/GQFUwlp/hbsQWYlMjub64plzZRo/j54Qj1PQ==
+ve-charts@1.0.0-alpha.9:
+  version "1.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/ve-charts/-/ve-charts-1.0.0-alpha.9.tgz#862e3a7229e346706058dac57a4faaea4a834ed9"
+  integrity sha512-5shl6fogclFj7EKaj69lOynHGwZH8YPoiDnAJZEgneGs4E2m7g9FSPSI+9o/dO5xRX2sxpiJjKfV56Tc2jBjoQ==
   dependencies:
     "@juggle/resize-observer" "^3.3.0"
     lodash-es "^4.17.21"
 
-vite@^2.5.4:
-  version "2.5.7"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.5.7.tgz#e495be9d8bcbf9d30c7141efdccacde746ee0125"
-  integrity sha512-hyUoWmRPhjN1aI+ZSBqDINKdIq7aokHE2ZXiztOg4YlmtpeQtMwMeyxv6X9YxHZmvGzg/js/eATM9Z1nwyakxg==
+vite@^2.5.1:
+  version "2.5.8"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.5.8.tgz#e2da21540411e91cb1c4a62e133c652a787cf116"
+  integrity sha512-2GRsLrmMsFI0u31WTtkGbKvEIJO4I9qDltma3QiyDJEk14IzjM35OCElAFHFs2VlL7h2qX5AdHbwfEhnmwhQgw==
   dependencies:
     esbuild "^0.12.17"
     postcss "^8.3.6"

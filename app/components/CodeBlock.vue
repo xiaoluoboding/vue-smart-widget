@@ -4,7 +4,7 @@
   </pre>
 </template>
 
-<script>
+<script lang="ts">
 import 'highlight.js/styles/github.css'
 
 export default {
