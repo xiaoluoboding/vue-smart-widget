@@ -123,11 +123,12 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue'
 
 import { use } from 'echarts'
 import { LegendComponent, TooltipComponent } from 'echarts/components'
+
 use([LegendComponent, TooltipComponent])
 
 import {
@@ -147,7 +148,7 @@ const handleRefresh = () => {
     loading.value = false
   }, 2000)
 }
-const handleFullscreen = (val: any) => {
+const handleFullscreen = (val) => {
   if (val) {
     console.log(val)
   }

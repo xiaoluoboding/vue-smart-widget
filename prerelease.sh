@@ -2,6 +2,6 @@
 
 npm version prerelease --preid=alpha
 
-npm run build
+npm run build:lib
 
 npm run changelog

@@ -109,7 +109,7 @@
   </smart-widget-grid>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue'
 
 import { use } from 'echarts'
@@ -146,21 +146,21 @@ const handleRefresh = () => {
     loading.value = false
   }, 2000)
 }
-const handleFullscreen = (val: any) => {
+const handleFullscreen = (val) => {
   if (val) {
     console.log(val)
   }
 }
-function onLayoutUpdated(newLayout: any) {
+function onLayoutUpdated(newLayout) {
   console.log(JSON.stringify(newLayout))
 }
-function onMove(params: any) {
+function onMove(params) {
   console.log(params)
 }
-function onResize(params: any) {
+function onResize(params) {
   console.log(params)
 }
-function onContainerResized(params: any) {
+function onContainerResized(params) {
   console.log(params)
 }
 </script>

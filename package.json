@@ -1,13 +1,21 @@
 {
   "name": "vue-smart-widget",
+  "description": "Smart widget is a flexible and extensible content container component for Vue3.x.",
   "displayName": "VueSmartWidget",
   "version": "1.0.0-alpha.0",
+  "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "build:lib": "vue-tsc --noEmit && vite build --mode lib",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "prerelease": "sh prerelease.sh"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaoluoboding/vue-smart-widget.git"
+  },
+  "homepage": "https://github.com/xiaoluoboding/vue-smart-widget",
   "files": [
     "lib"
   ],
@@ -19,6 +27,22 @@
       "require": "./lib/vue-smart-widget.umd.js"
     }
   },
+  "keywords": [
+    "widget",
+    "card",
+    "panel",
+    "vue",
+    "grid",
+    "drag",
+    "draggable",
+    "resize",
+    "resizable"
+  ],
+  "vetur": {
+    "tags": "vetur/tags.json",
+    "attributes": "vetur/attributes.json"
+  },
+  "license": "MIT",
   "dependencies": {
     "element-resize-detector": "^1.2.3",
     "interactjs": "^1.10.11",
