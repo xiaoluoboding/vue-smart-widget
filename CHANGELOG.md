@@ -1,3 +1,12 @@
+# [1.0.0-alpha.1](https://github.com/xiaoluoboding/vue-smart-widget/compare/v0.6.1...v1.0.0-alpha.1) (2021-09-17)
+
+
+### Features
+
+* support vue 3 ([245c4cd](https://github.com/xiaoluoboding/vue-smart-widget/commit/245c4cd6b2bad6e771cb155d9a9a8ad95dba1ffe))
+
+
+
 ## [0.6.1](https://github.com/xiaoluoboding/vue-smart-widget/compare/v0.6.0...v0.6.1) (2021-01-07)
 
 
