@@ -12,6 +12,10 @@ It includes header and body part, and widget body includes <em>editbox</em>、<e
 If you use with grid, it also have a draggable and resizable grid layout,
 base on <strong>Vue2.5.+</strong> & <strong>[vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout)</strong>.
 
+## Both Support Vue 2/Vue 3
+
+[Vue 2](https://github.com/xiaoluoboding/vue-smart-widget) | [Vue 3](https://github.com/xiaoluoboding/vue-smart-widget/tree/next)
+
 ## Installation
 
 ```bash
