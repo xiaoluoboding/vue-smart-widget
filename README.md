@@ -18,9 +18,18 @@ base on <strong>Vue2.5.+</strong> & <strong>[vue-grid-layout](https://github.com
 
 ## Installation
 
+### Vue 2
+
 ```bash
 npm i vue-smart-widget -S
 ```
+
+### Vue 3
+
+```bash
+npm i vue-smart-widget@next -S
+```
+
 
 ## Import
 
