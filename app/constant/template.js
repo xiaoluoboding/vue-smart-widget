@@ -69,6 +69,11 @@ const widgetWithGridHTML = `
       <h3>Make any widget full screen</h3>
     </div>
   </smart-widget>
+  <smart-widget slot="3" title="static" sub-title="Won't be draggable and resizable">
+    <div class="layout-center">
+      <h3>Make any widget static</h3>
+    </div>
+  </smart-widget>
 </smart-widget-grid>
 `
 
@@ -79,7 +84,8 @@ new Vue({
       layout: [
         { x: 0, y: 0, w: 4, h: 4, i: '0' },
         { x: 4, y: 0, w: 4, h: 4, i: '1' },
-        { x: 8, y: 0, w: 4, h: 4, i: '2' }
+        { x: 8, y: 0, w: 4, h: 4, i: '2' },
+        { x: 0, y: 4, w: 4, h: 4, i: '3', static: true }
       ]
     }
   }
