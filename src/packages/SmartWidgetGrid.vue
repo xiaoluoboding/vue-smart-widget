@@ -8,7 +8,7 @@
       v-for="item in layout"
       drag-ignore-from=".widget-body"
       :key="item.i"
-      :static="isStatic"
+      :static="item.static || isStatic"
       v-bind="item"
       v-on="gridLayoutItemEvents"
     >
