@@ -1,3 +1,12 @@
+## [0.6.2](https://github.com/xiaoluoboding/vue-smart-widget/compare/v0.6.1...v0.6.2) (2022-04-25)
+
+
+### Features
+
+* add grid-item static ([873e2e4](https://github.com/xiaoluoboding/vue-smart-widget/commit/873e2e4427552421f1ae71d3b7cfce0dddf75b64))
+
+
+
 ## [0.6.1](https://github.com/xiaoluoboding/vue-smart-widget/compare/v0.6.0...v0.6.1) (2021-01-07)
 
 
