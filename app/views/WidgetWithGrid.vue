@@ -1,27 +1,125 @@
 <template>
-  <smart-widget-grid :layout="layout" :row-height="48" :colNum="4">
-    <smart-widget simple v-for="item in layout" :key="item.i" :slot="item.i">
+  <smart-widget-grid
+    :layout="layout"
+    :row-height="48"
+    :margin="[15, 15]"
+    :is-static="isStatic"
+    @layout-updated="onLayoutUpdated"
+    @moved="onMove"
+    @resized="onResize"
+  >
+    <smart-widget slot="0" simple>
       <div class="layout-center">
-        <smart-widget-grid v-if="item.child" :layout="item.child" :resizable="false" :colNum="item.w">
-          <smart-widget v-for="child in item.child" :key="child.id" :slot="child.i" :title="child.i">
-            {{ item.i }}
-          </smart-widget>
-        </smart-widget-grid>
+        <h3>Simple Widget Without Header</h3>
       </div>
+    </smart-widget>
+    <smart-widget slot="1" title="Default Widget">
+      <div class="layout-center">
+        <h3>Widget with Header</h3>
+      </div>
+    </smart-widget>
+    <smart-widget slot="2" title="Full Screen" fullscreen>
+      <div class="layout-center">
+        <h3>Make any widget full screen</h3>
+      </div>
+    </smart-widget>
+    <smart-widget slot="3" title="Widget with Loader" :loading="true">
+      <div class="layout-center">
+        <h3>Widget with loading mask</h3>
+      </div>
+    </smart-widget>
+    <smart-widget slot="4" title="Editbox">
+      <template slot="editbox">
+        <el-alert
+          title="I am Editbox slot"
+          type="success">
+        </el-alert>
+      </template>
+      <p>Widget with Editbox</p>
+    </smart-widget>
+    <smart-widget slot="5" title="Footer">
+      <template slot="footer">
+        <el-alert
+          title="I am Footer slot"
+          type="success">
+        </el-alert>
+      </template>
+      <p>Widget with Footer</p>
+    </smart-widget>
+    <smart-widget slot="6" title="2017 Hotest Frontend Project"
+      fullscreen
+      refresh
+      is-actived
+      :loading="loading"
+      @before-fullscreen="val => isStatic = val"
+      @on-refresh="handleRefresh">
+      <template v-slot="{contentH}">
+        <ve-bar-chart :data="barData" :height="contentH" />
+      </template>
+    </smart-widget>
+    <smart-widget slot="7" title="Diffrent Platforms PV" fullscreen collapse>
+      <template v-slot="{contentH}">
+        <ve-donut-chart
+          :data="donutData"
+          :settings="donutSetting"
+          :height="contentH"
+        />
+      </template>
+    </smart-widget>
+    <smart-widget slot="8" title="Widget body content's height is fixed" fixed-height>
+      <el-table
+        :data="tableData"
+        style="width: 100%">
+        <el-table-column
+          prop="date"
+          label="日期"
+          width="150">
+        </el-table-column>
+        <el-table-column
+          prop="name"
+          label="姓名"
+          width="180">
+        </el-table-column>
+        <el-table-column
+          prop="address"
+          label="地址">
+        </el-table-column>
+      </el-table>
+    </smart-widget>
+    <smart-widget slot="9" title="Widget with custom toolbar">
+      <template slot="toolbar">
+        <div style="margin: 0 12px;">
+          <el-button type="success" size="mini" @click="$router.push('/widget-only')">Index</el-button>
+        </div>
+      </template>
+      <el-table style="width: 100%" :data="tableData">
+        <el-table-column
+          prop="date"
+          label="日期"
+          width="150">
+        </el-table-column>
+        <el-table-column
+          prop="name"
+          label="姓名"
+          width="180">
+        </el-table-column>
+        <el-table-column
+          prop="address"
+          label="地址">
+        </el-table-column>
+      </el-table>
     </smart-widget>
   </smart-widget-grid>
 </template>
 
 <script>
-import SmartWidget from '../../src/packages/SmartWidget.vue'
 export default {
-  components: { SmartWidget },
   data () {
     return {
       loading: false,
       isStatic: false,
       layout: [
-        { x: 0, y: 0, w: 2, h: 3, i: '0', child: [{ x: 0, y: 0, w: 4, h: 2, i: 'A01' }, { x: 5, y: 0, w: 4, h: 2, i: 'A02' }] },
+        { x: 0, y: 0, w: 4, h: 3, i: '0' },
         { x: 4, y: 0, w: 4, h: 3, i: '1' },
         { x: 8, y: 0, w: 4, h: 3, i: '2' },
         { x: 0, y: 3, w: 4, h: 3, i: '3' },
