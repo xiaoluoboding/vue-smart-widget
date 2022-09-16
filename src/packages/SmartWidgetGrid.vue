@@ -1,20 +1,23 @@
 <template>
-  <grid-layout
-    :layout.sync="layout"
-    v-bind="layoutAttrs"
-    v-on="gridLayoutEvents"
-  >
-    <grid-item
-      v-for="item in layout"
-      drag-ignore-from=".widget-body"
-      :key="item.i"
-      :static="isStatic"
-      v-bind="item"
-      v-on="gridLayoutItemEvents"
+  <div>
+    <grid-layout
+      :layout.sync="layout"
+      :colNum = "colNum"
+      v-bind="layoutAttrs"
+      v-on="gridLayoutEvents"
     >
-      <slot :name="item.i"></slot>
-    </grid-item>
-  </grid-layout>
+      <grid-item
+        v-for="item in layout"
+        drag-ignore-from=".widget-body"
+        :key="item.i"
+        :static="isStatic"
+        v-bind="item"
+        v-on="gridLayoutItemEvents"
+      >
+        <slot :name="item.i"></slot>
+      </grid-item>
+    </grid-layout>
+  </div>
 </template>
 
 <script>
