@@ -1,7 +1,7 @@
 <template>
   <grid-layout
     :layout.sync="layout"
-    :colNum="colNum"
+    :col-num="colNum"
     v-bind="layoutAttrs"
     v-on="gridLayoutEvents"
   >
