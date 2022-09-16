@@ -1,5 +1,5 @@
 {
-  "name": "@mukiwu/vue-smart-widget",
+  "name": "vue-smart-widget",
   "version": "0.7.1",
   "description": "Smart widget is a flexible and extensible content container component for Vue2.5+.",
   "author": "xiaoluoboding <xiaoluoboding@gmail.com>",
