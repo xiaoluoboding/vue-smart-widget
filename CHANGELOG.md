@@ -1,3 +1,13 @@
+## [0.6.2](https://github.com/xiaoluoboding/vue-smart-widget/compare/v0.6.1...v0.6.2) (2022-09-19)
+
+
+### Features
+
+* ✨ 調整尺寸時，colNum 會更新 ([0ac0c7b](https://github.com/xiaoluoboding/vue-smart-widget/commit/0ac0c7bcaafc60ec9c1f0bb10a53e6c7d5cbd0dd))
+* ✨ 移除多餘的 div ([07eeeb4](https://github.com/xiaoluoboding/vue-smart-widget/commit/07eeeb415bbfc82a0dd0a584d357266c1270a1d8))
+
+
+
 ## [0.6.1](https://github.com/xiaoluoboding/vue-smart-widget/compare/v0.6.0...v0.6.1) (2021-01-07)
 
 
