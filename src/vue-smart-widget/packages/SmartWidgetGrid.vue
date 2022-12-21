@@ -1,6 +1,7 @@
 <template>
   <grid-layout
     v-model:layout="layout"
+    v-model:col-num="colNum"
     v-bind="layoutAttrs"
     v-on="gridLayoutEvents"
   >
