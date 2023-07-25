@@ -19,7 +19,7 @@ export {
   SmartWidget
 }
 
-if (typeof window !== 'undefined' && window.Vue) {
+if (typeof window !== 'undefined' && window.Vue && window.Vue.use) {
   window.Vue.use(install)
   if (install.installed) {
     install.installed = false
